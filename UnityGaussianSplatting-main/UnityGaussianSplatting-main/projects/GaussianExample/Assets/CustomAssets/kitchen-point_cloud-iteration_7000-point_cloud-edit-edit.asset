@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b71fae31e6c7d438e8566dc713e666, type: 3}
+  m_Name: kitchen-point_cloud-iteration_7000-point_cloud-edit-edit
+  m_EditorClassIdentifier: 
+  m_FormatVersion: 20231020
+  m_SplatCount: 123876
+  m_BoundsMin: {x: -1.0250161, y: 0.08690356, z: 0.6614928}
+  m_BoundsMax: {x: 0.3246658, y: 3.5652416, z: 2.222776}
+  m_DataHash:
+    serializedVersion: 2
+    Hash: bbf8b2a4f5d86c3ef450731ec19fc655
+  m_PosFormat: 0
+  m_ScaleFormat: 0
+  m_SHFormat: 0
+  m_ColorFormat: 0
+  m_PosData: {fileID: 4900000, guid: bd5530c8e680220429a3b198c7159ae6, type: 3}
+  m_ColorData: {fileID: 4900000, guid: ec1c7fb4ff71ed34389a03684947efa6, type: 3}
+  m_OtherData: {fileID: 4900000, guid: 42acbab3cde55b844aa6b37312697e39, type: 3}
+  m_SHData: {fileID: 4900000, guid: aea8f9e5fee25f4418a72f46b2e5a827, type: 3}
+  m_ChunkData: {fileID: 0}
+  m_Cameras: []
