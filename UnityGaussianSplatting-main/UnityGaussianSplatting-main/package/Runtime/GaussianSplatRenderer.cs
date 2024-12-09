@@ -86,14 +86,27 @@ namespace GaussianSplatting.Runtime
                 return false;
 
             // sort them by depth from camera
-            var camTr = cam.transform;
+            var camPos = cam.transform.position;
             m_ActiveSplats.Sort((a, b) =>
             {
                 var trA = a.Item1.transform;
                 var trB = b.Item1.transform;
-                var posA = camTr.InverseTransformPoint(trA.position);
-                var posB = camTr.InverseTransformPoint(trB.position);
-                return posA.z.CompareTo(posB.z);
+                Vector3 APos = trA.position;
+                Vector3 BPos = trB.position;
+                float ratio = 0.999f;
+                // If splat A is basically the parent of splat B
+                if (trA.parent == trB.parent.parent)
+                {
+                    APos = APos * (1 - ratio) + BPos * ratio;
+                }else if (trB.parent == trA.parent.parent)
+                {
+                    BPos = BPos * (1 - ratio) + APos * ratio;
+                }
+                // Calculate squared distance from the camera to the object (no square root)
+                float sqrDistanceA = (camPos - APos).sqrMagnitude;
+                float sqrDistanceB = (camPos - BPos).sqrMagnitude;
+
+                return sqrDistanceA.CompareTo(sqrDistanceB);  // Sort by squared distance, nearest first
             });
            //Debug.Log("0");
            //Debug.Log(m_ActiveSplats[0].Item1.transform.position.x);

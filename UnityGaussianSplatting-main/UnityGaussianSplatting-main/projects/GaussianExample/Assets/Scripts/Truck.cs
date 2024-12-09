@@ -9,12 +9,18 @@ public class Truck : MonoBehaviour
     public Animator armAnimator;      // Reference to the Animator
     public Animator handleAnimator;      // Reference to the Animator
     private bool _isAnimating = false;  // Prevent input while animating
+    bool toggle = false;
 
     void Update()
     {
         // Move the car forward
         float move = speed * Time.deltaTime;
-        transform.Translate(Vector3.back * move);
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            toggle = !toggle;
+        }
+        if(toggle)
+            transform.Translate(Vector3.back * move);
 
         // Get player input for steering
         float steerInput = Input.GetAxis("Horizontal"); // A/D or Left/Right Arrow Keys

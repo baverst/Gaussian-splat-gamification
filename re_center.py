@@ -11,14 +11,15 @@ def main():
     path_name = "UnityGaussianSplatting-main/UnityGaussianSplatting-main/projects/GaussianExample/Assets/CustomAssets/Truck/"
     filename = path_name +"left_wheel_centered"
     original_file_path =  filename +'.ply'
-    copy_file_path = filename + '01.ply'
+    copy_file_path = filename + '_and_unlit04.ply'
     
     offset_x = 0.023
     offset_y = -0.027
     offset_z = -0.011
 
     ply_content = PlyData.read(original_file_path)
-    
+    for i in range(0,44):
+        ply_content.elements[0].data["f_rest_"+str(i)] = 0
     recenter_axis(ply_content, 'x', offset_x)
     recenter_axis(ply_content, 'y', offset_y)
     recenter_axis(ply_content, 'z', offset_z)
