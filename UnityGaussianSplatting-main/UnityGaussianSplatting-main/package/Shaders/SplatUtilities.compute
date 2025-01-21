@@ -3,6 +3,8 @@
 
 #pragma kernel CSSetIndices
 #pragma kernel CSCalcDistances
+#pragma kernel CSCalcViewDataAndCombine
+#pragma kernel CSSortDistances
 #pragma kernel CSCalcViewData
 #pragma kernel CSUpdateEditData
 #pragma kernel CSInitEditData
@@ -78,11 +80,14 @@ void CSCalcDistances (uint3 id : SV_DispatchThreadID)
 }
 
 RWStructuredBuffer<SplatViewData> _SplatViewData;
+RWStructuredBuffer<float4> _SplatCamData;
+RWStructuredBuffer<uint> _SplatDistData;
 
 float _SplatScale;
 float _SplatOpacityScale;
 uint _SHOrder;
 uint _SHOnly;
+uint _Offset;
 
 uint _SplatCutoutsCount;
 
@@ -180,6 +185,86 @@ bool IsSplatCut(float3 pos)
         finalCut |= !invert;
     }
     return finalCut;
+}
+
+
+
+[numthreads(GROUP_SIZE,1,1)]
+void CSCalcViewDataAndCombine (uint3 id : SV_DispatchThreadID)
+{
+    uint idx = id.x;
+    if (idx >= _SplatCount)
+        return;
+
+    SplatData splat = LoadSplatData(idx);
+    SplatViewData view = (SplatViewData)0;
+    float3 centerWorldPos = mul(_MatrixObjectToWorld, float4(splat.pos,1)).xyz;
+    float4 centerClipPos = mul(_MatrixVP, float4(centerWorldPos, 1));
+    half opacityScale = _SplatOpacityScale;
+    float splatScale = _SplatScale;
+
+    // deleted?
+    if (_SplatBitsValid)
+    {
+        uint wordIdx = idx / 32;
+        uint bitIdx = idx & 31;
+        uint wordVal = _SplatDeletedBits.Load(wordIdx * 4);
+        if (wordVal & (1 << bitIdx))
+        {
+            centerClipPos.w = 0;
+        }
+    }
+
+    // cutouts
+    if (IsSplatCut(splat.pos))
+    {
+        centerClipPos.w = 0;
+    }
+
+    view.pos = centerClipPos;
+    bool behindCam = centerClipPos.w <= 0;
+    if (!behindCam)
+    {
+        float4 boxRot = splat.rot;
+        float3 boxSize = splat.scale;
+
+        float3x3 splatRotScaleMat = CalcMatrixFromRotationScale(boxRot, boxSize);
+
+        float3 cov3d0, cov3d1;
+        CalcCovariance3D(splatRotScaleMat, cov3d0, cov3d1);
+        float splatScale2 = splatScale * splatScale;
+        cov3d0 *= splatScale2;
+        cov3d1 *= splatScale2;
+        float3 cov2d = CalcCovariance2D(splat.pos, cov3d0, cov3d1, _MatrixMV, _MatrixP, _VecScreenParams);
+        
+        DecomposeCovariance(cov2d, view.axis1, view.axis2);
+
+        float3 worldViewDir = _VecWorldSpaceCameraPos.xyz - centerWorldPos;
+        float3 objViewDir = mul((float3x3)_MatrixWorldToObject, worldViewDir);
+        objViewDir = normalize(objViewDir);
+
+        half4 col;
+        col.rgb = ShadeSH(splat.sh, objViewDir, _SHOrder, _SHOnly != 0);
+        col.a = min(splat.opacity * opacityScale, 65000);
+        view.color.x = (f32tof16(col.r) << 16) | f32tof16(col.g);
+        view.color.y = (f32tof16(col.b) << 16) | f32tof16(col.a);
+    }
+    
+    _SplatViewData[idx + _Offset] = view;
+}
+
+
+[numthreads(GROUP_SIZE,1,1)]
+void CSSortDistances (uint3 id : SV_DispatchThreadID)
+{
+    uint idx = id.x;
+    if (idx >= _SplatCount)
+        return;
+
+    uint origIdx = _SplatSortKeys[idx];
+
+    float4 pos = _SplatViewData[origIdx].pos;
+    _SplatSortDistances[idx] = FloatToSortableUint(pos.w);
 }
 
 [numthreads(GROUP_SIZE,1,1)]

@@ -23,10 +23,10 @@ public class CameraMovement : MonoBehaviour
         // Movement (WASD)
         float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right Arrow
         float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down Arrow
-        float moveY = 0;
-
-        if (Input.GetKey(KeyCode.E)) moveY = 1; // E for upward movement
-        if (Input.GetKey(KeyCode.Q)) moveY = -1; // Q for downward movement
+        //float moveY = 0;
+//
+        //if (Input.GetKey(KeyCode.E)) moveY = 1; // E for upward movement
+        //if (Input.GetKey(KeyCode.Q)) moveY = -1; // Q for downward movement
 
         Vector3 move = new Vector3(0, 0, moveZ) * moveSpeed * Time.deltaTime;
         transform.Translate(move);
