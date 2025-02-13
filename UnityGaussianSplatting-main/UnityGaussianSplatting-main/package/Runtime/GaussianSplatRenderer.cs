@@ -10,6 +10,7 @@ using Unity.Profiling.LowLevel;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
+using System.Linq;
 
 namespace GaussianSplatting.Runtime
 {
@@ -25,6 +26,7 @@ namespace GaussianSplatting.Runtime
         static GaussianSplatRenderSystem ms_Instance;
 
         readonly Dictionary<GaussianSplatRenderer, (MaterialPropertyBlock, int)> m_Splats = new();
+
         readonly HashSet<Camera> m_CameraCommandBuffersDone = new();
         readonly List<(GaussianSplatRenderer, (MaterialPropertyBlock, int))> m_ActiveSplats = new();
 
@@ -67,7 +69,15 @@ namespace GaussianSplatting.Runtime
         {
             if (!m_Splats.ContainsKey(r))
                 return;
+
+			int removedOffset = m_Splats[r].Item2;
             m_Splats.Remove(r);
+			foreach (var key in m_Splats.Keys.ToList())
+            {
+				var value = m_Splats[key];
+				if(value.Item2 > removedOffset)
+                	m_Splats[key] = (value.Item1,value.Item2 - r.asset.splatCount);
+			}
             totalSplatCount -= r.asset.splatCount;
 
             m_GpuViewCombined?.Dispose();
