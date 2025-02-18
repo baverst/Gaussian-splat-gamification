@@ -43,25 +43,43 @@
 \abx@aux@segm{0}{0}{ArasRecc1}
 \abx@aux@cite{0}{ArasRecc2}
 \abx@aux@segm{0}{0}{ArasRecc2}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Unity Extension Pipeline}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Unity Extension}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.2.1}Introduction}{5}{}\protected@file@percent }
 \abx@aux@page{13}{5}
 \abx@aux@page{14}{5}
 \abx@aux@page{15}{5}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Experiments and Development}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Preparing the scene}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Initial Workarounds and Approximate Solutions}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Towards a Correct Rendering Pipeline}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{6}{}\protected@file@percent }
-\abx@aux@page{16}{6}
-\abx@aux@page{17}{6}
-\abx@aux@page{18}{6}
-\abx@aux@page{19}{6}
-\abx@aux@page{20}{6}
-\abx@aux@page{21}{6}
-\abx@aux@page{22}{6}
-\abx@aux@page{23}{7}
-\abx@aux@page{24}{7}
-\abx@aux@read@bbl@mdfivesum{AF11B83C2E3EA9656ACE284FF3D83EB7}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.2.2}Adding a Gaussian Splat to the Scene}{5}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The Unity Editor extension included in the project for converting PLY files into the required compressed format}}{6}{}\protected@file@percent }
+\newlabel{fig:creator}{{4}{6}{}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.2.3}Initializing the Rendering Process: The Role of \texttt  {OnEnable}}{6}{}\protected@file@percent }
+\newlabel{code:rendereronenable}{{1}{7}{}{lstlisting.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}\texttt  {onEnable} of \texttt  {GaussianSplatRenderer}}{7}{}\protected@file@percent }
+\newlabel{code:systemregister}{{2}{7}{}{lstlisting.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}\texttt  {RegisterSplat} of \texttt  {GaussianSplatRenderSystem}}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.2.4}The Rendering Pipeline}{8}{}\protected@file@percent }
+\newlabel{code:systemprecull}{{3}{8}{}{lstlisting.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}\texttt  {OnPreCullCamera} of \texttt  {GaussianSplatRenderSystem}}{8}{}\protected@file@percent }
+\newlabel{code:systemsortrender}{{4}{10}{}{lstlisting.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}\texttt  {SortAndRenderSplats} of \texttt  {GaussianSplatRenderSystem}}{10}{}\protected@file@percent }
+\abx@aux@cite{0}{Sorting}
+\abx@aux@segm{0}{0}{Sorting}
+\abx@aux@page{16}{13}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Experiments and Development}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Preparing the scene}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Initial Workarounds and Approximate Solutions}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Towards a Correct Rendering Pipeline}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{14}{}\protected@file@percent }
+\abx@aux@page{17}{14}
+\abx@aux@page{18}{14}
+\abx@aux@page{19}{15}
+\abx@aux@page{20}{15}
+\abx@aux@page{21}{15}
+\abx@aux@page{22}{15}
+\abx@aux@page{23}{15}
+\abx@aux@page{24}{15}
+\abx@aux@page{25}{15}
+\abx@aux@page{26}{15}
+\abx@aux@read@bbl@mdfivesum{C30DDABA22C06A28037BEB63AB92C3E9}
 \abx@aux@defaultrefcontext{0}{3DGaussian}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{OriginalSplatting}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Nerf}{nyt/global//global/global/global}
@@ -71,4 +89,5 @@
 \abx@aux@defaultrefcontext{0}{2DGaussian}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{ArasRecc1}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Mesh}{nyt/global//global/global/global}
-\gdef \@abspage@last{10}
+\abx@aux@defaultrefcontext{0}{Sorting}{nyt/global//global/global/global}
+\gdef \@abspage@last{18}

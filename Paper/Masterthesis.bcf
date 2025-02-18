@@ -2388,6 +2388,7 @@
     <bcf:citekey order="13" intorder="1">Aras</bcf:citekey>
     <bcf:citekey order="14" intorder="1">ArasRecc1</bcf:citekey>
     <bcf:citekey order="15" intorder="1">ArasRecc2</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">Sorting</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

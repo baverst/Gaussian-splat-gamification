@@ -426,6 +426,39 @@
       \endverb
       \keyw{Topology;Surface cracks;Data mining;Sampling methods;Feature extraction;Magnetic resonance imaging;X-ray tomography;Level set;Chromium;Geometry}
     \endentry
+    \entry{Sorting}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=be8287076101e244d3b27831a7b490c3}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{be8287076101e244d3b27831a7b490c3}
+      \strng{fullhash}{be8287076101e244d3b27831a7b490c3}
+      \strng{fullhashraw}{be8287076101e244d3b27831a7b490c3}
+      \strng{bibnamehash}{be8287076101e244d3b27831a7b490c3}
+      \strng{authorbibnamehash}{be8287076101e244d3b27831a7b490c3}
+      \strng{authornamehash}{be8287076101e244d3b27831a7b490c3}
+      \strng{authorfullhash}{be8287076101e244d3b27831a7b490c3}
+      \strng{authorfullhashraw}{be8287076101e244d3b27831a7b490c3}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2025-02-18}
+      \field{title}{GPUSorting}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://github.com/b0nes164/GPUSorting
+      \endverb
+      \verb{url}
+      \verb https://github.com/b0nes164/GPUSorting
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
