@@ -1,0 +1,3 @@
+[submodule "SAGS/gaussiansplatting/dependencies/sam_ckpt/segment-anything"]
+	path = SAGS/gaussiansplatting/dependencies/sam_ckpt/segment-anything
+	url = https://github.com/facebookresearch/segment-anything
