@@ -8,8 +8,10 @@
 \contentsline {subsubsection}{\numberline {1.2.2}Adding a Gaussian Splat to the Scene}{5}{}%
 \contentsline {subsubsection}{\numberline {1.2.3}Initializing the Rendering Process: The Role of \texttt {OnEnable}}{6}{}%
 \contentsline {subsubsection}{\numberline {1.2.4}The Rendering Pipeline}{8}{}%
-\contentsline {section}{\numberline {2}Experiments and Development}{15}{}%
-\contentsline {subsection}{\numberline {2.1}Preparing the scene}{15}{}%
-\contentsline {subsection}{\numberline {2.2}Initial Workarounds and Approximate Solutions}{15}{}%
-\contentsline {subsection}{\numberline {2.3}Towards a Correct Rendering Pipeline}{15}{}%
-\contentsline {section}{References}{15}{}%
+\contentsline {section}{\numberline {2}Part 1: Correcting the Rendering Order}{14}{}%
+\contentsline {subsection}{\numberline {2.1}Introduction}{14}{}%
+\contentsline {subsection}{\numberline {2.2}Preparing the scene}{14}{}%
+\contentsline {subsection}{\numberline {2.3}Initial Workarounds and Approximate Solutions}{17}{}%
+\contentsline {subsection}{\numberline {2.4}Towards a Correct Rendering Pipeline}{17}{}%
+\contentsline {section}{\numberline {3}Part 2: Hierarchical Segmentation}{17}{}%
+\contentsline {section}{References}{17}{}%

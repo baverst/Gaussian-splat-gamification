@@ -16,7 +16,7 @@
 	\centering
 	
 	%opening
-	\title{Gamification of Gaussian Splats \\ {\large Rendering and Animating multiple Gaussian Splats in a Unity scene}}
+	\title{Multi-Splat Representations \\ {\large Segmentation and Object Manipulation in Gaussian Splatting}}
 	
 	\author{Bavo Verstraeten}
 	
@@ -26,7 +26,13 @@
 \end{titlepage}
 	
 \begin{abstract}
-Gaussian splatting has emerged as a powerful technique for real-time rendering of complex 3D scenes. While existing implementations focus on efficient rendering, their integration into interactive applications such as games remains underexplored. This thesis investigates the gamification of Gaussian Splats in Unity, enabling multiple Gaussian Splat GameObjects to coexist within a scene, each with its own transform and animation. A key challenge is ensuring correct rendering while maintaining real-time performance. A current popular approach, a widely used Unity extension, processes splats in a per-GameObject order rather than achieving a globally correct sorting of individual splats. This work aims to overcome these limitations by adapting its rendering pipeline.
+Gaussian splatting is a novel technique for real-time rendering of complex scenes, but integrating this approach seamlessly into game engines remains a challenge. This thesis focuses on improving the usability and accuracy of Gaussian splats within the Unity engine, building upon an existing open-source Unity extension.
+\\\\
+The work is divided into two main parts. The first addresses a core rendering limitation of the current Unity extension, which performs Gaussian splat sorting and rendering on a per-GameObject basis. This results in incorrect visual output when multiple splat objects are placed close together. To resolve this, the rendering pipeline was adapted to implement global per-splat sorting. The result is a fully correct and visually consistent rendering of overlapping Gaussian splat GameObjects.
+\\\\
+The second part tackles the challenge of preparing Gaussian Splats for animation and interaction within Unity. Animating splats effectively requires a segmented, hierarchical structure — typically represented by nested GameObjects. However, manual segmentation of Gaussian Splats is tedious and error-prone. This thesis proposes a semi-automatic segmentation pipeline, combining three existing tools — SAM, SAM2, and SAGS — to allow user-guided segmentation of Gaussian Splat data. The system accepts user-defined points to guide segmentation and automatically produces a hierarchically structured GameObject, enabling easier manipulation and animation workflows within Unity.
+\\\\
+Together, these contributions form a streamlined pipeline that improves both the visual fidelity and usability of Gaussian Splats in game development contexts, bringing this cutting-edge technique closer to practical deployment in real-time interactive applications.
 \end{abstract}
 
 \begin{titlepage}
@@ -84,7 +90,7 @@ The selected project does not implement the training of Gaussian Splats but inst
 	\label{fig:creator}
 \end{figure}
 \subsubsection{Initializing the Rendering Process: The Role of \texttt{OnEnable}}
-When no GameObjects with an attached \texttt{GaussianSplatRenderer} script are present, the renderer follows the standard rendering pipeline. However, once such a GameObject is enabled, its \texttt{OnEnable} method is executed, performing several initialization tasks. The method is outlined in the following code snippet:
+When no GameObjects with an attached \texttt{GaussianSplatRenderer} script are present, the renderer follows the standard rendering pipeline. However, once such a GameObject is enabled, its \texttt{OnEnable} method is executed, performing several initialization tasks. The method is outlined in the following code fragment:
 \lstset{style=sharpc}
 \begin{lstlisting}[tabsize=2,caption=\texttt{onEnable} of \texttt{GaussianSplatRenderer}, label=code:rendereronenable,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
 public void OnEnable()
@@ -166,16 +172,8 @@ public Material SortAndRenderSplats(Camera cam, CommandBuffer cmb)
 		++gs.m_FrameCounter;
 		
 		kvp.Item2.Clear();
-		Material displayMat = gs.m_RenderMode switch
-		{
-			GaussianSplatRenderer.RenderMode.DebugPoints => gs.m_MatDebugPoints,
-			GaussianSplatRenderer.RenderMode.DebugPointIndices => gs.m_MatDebugPoints,
-			GaussianSplatRenderer.RenderMode.DebugBoxes => gs.m_MatDebugBoxes,
-			GaussianSplatRenderer.RenderMode.DebugChunkBounds => gs.m_MatDebugBoxes,
-			_ => gs.m_MatSplats
-		};
-		if (displayMat == null)
-		continue;
+		
+		// [Omitted: Set some variables related to debugging]
 		
 		gs.SetAssetDataOnMaterial(mpb);
 		mpb.SetBuffer(GaussianSplatRenderer.Props.SplatChunks, gs.m_GpuChunks);
@@ -195,14 +193,7 @@ public Material SortAndRenderSplats(Camera cam, CommandBuffer cmb)
 		gs.CalcViewData(cmb, cam, matrix);
 		cmb.EndSample(s_ProfCalcView);
 		
-		// draw
-		int indexCount = 6;
-		int instanceCount = gs.splatCount;
-		MeshTopology topology = MeshTopology.Triangles;
-		if (gs.m_RenderMode is GaussianSplatRenderer.RenderMode.DebugBoxes or GaussianSplatRenderer.RenderMode.DebugChunkBounds)
-		indexCount = 36;
-		if (gs.m_RenderMode == GaussianSplatRenderer.RenderMode.DebugChunkBounds)
-		instanceCount = gs.m_GpuChunksValid ? gs.m_GpuChunks.count : 0;
+		// [Omitted: Set some variables related to debugging]
 		
 		cmb.BeginSample(s_ProfDraw);
 		cmb.DrawProcedural(gs.m_GpuIndexBuffer, matrix, displayMat, 0, topology, indexCount, instanceCount, mpb);
@@ -211,20 +202,40 @@ public Material SortAndRenderSplats(Camera cam, CommandBuffer cmb)
 	return matComposite;
 }
 \end{lstlisting}
-This code block is extensive and encompasses multiple operations. To facilitate a clearer understanding, we will analyze it step by step, breaking it down into its fundamental components. Additionally, certain sections of the code are dedicated to debugging or timing purposes, which are not essential for understanding the main rendering pipeline.\\\\
+This code block is extensive and encompasses multiple operations. To facilitate a clearer understanding, it will be analyzed step by step, broken down into its fundamental components. Additionally, certain sections of the code are dedicated to debugging or timing purposes, which are not essential for understanding the main rendering pipeline.\\\\
 The function iterates over all \texttt{GaussianSplatRenderer} objects stored and ordered in the \texttt{m\textunderscore ActiveSplats} list by \texttt{GatherSplatsForCamera}. It is important to emphasize that within this function, all subsequent operations are performed on a single \texttt{GaussianSplatRenderer} object at a time, as each iteration of the loop processes one individual \texttt{GaussianSplatRenderer}.\\\\
 At regular intervals, specifically every set number of frames, the splats undergo sorting. This operation is managed by a custom sorter class, which was initialized during the \texttt{OnEnable} method. The class implements a specialized sorting algorithm known as "Device Radix Sort," leveraging the full potential of the GPU to ensure optimal performance. According to the comments in that class, this algorithm was adapted from another GitHub project \parencite{Sorting}. As with the sorting of the \texttt{GaussianSplatRenderer} objects, the depth of each splat relative to the camera’s coordinate space is used as the key for sorting.
 \\\\
-Similar to the final \texttt{DrawProcedural} invocation of the previous function, a material shader is employed at the end of each iteration of the loop to render the splats. Many of the operations within this loop are dedicated to populating graphics buffers with the necessary data for these shader computations. The most significant step in this process is the invocation of \texttt{CalcViewData}, which dispatches splat-related information to a compute shader. This compute shader determines the screen-space position of each splat using the object's transform matrix, the \texttt{cam.worldToCameraMatrix}, and the \texttt{cam.projectionMatrix}. Additionally, it calculates its independent horizontal and vertical extents, and derives its color and transparency based on the viewing angle and spherical harmonics. The computed results are then stored in a graphics buffer for subsequent use, \\\\
+Similar to the final \texttt{DrawProcedural} invocation of the previous function, a material shader is employed at the end of each iteration of the loop to render the splats. Many of the operations within this loop are dedicated to populating graphics buffers with the necessary data for these shader computations. The most significant step in this process is the invocation of \texttt{CalcViewData}, which dispatches splat-related information to a compute shader. This compute shader determines the screen-space position of each splat using the object's transform matrix, the \texttt{cam.worldToCameraMatrix}, and the \texttt{cam.projectionMatrix}. Additionally, it calculates its independent horizontal and vertical extents, and derives its color and transparency based on the viewing angle and spherical harmonics. The computed results are then stored in a graphics buffer for subsequent use. \\\\
 Finally, \texttt{DrawProcedural} is called, enqueueing the rendering of this data for execution later in the rendering pipeline. As before, this rendering is performed using a material shader, a different one from the material shader used in \texttt{OnPreCullCamera}. Each splat is represented as two triangles, with the vertex shader transforming the computed screen position and stretch extents into appropriate triangle coordinates.
 \\\\
 As a brief reminder, as stated earlier, this \texttt{DrawProcedural} invocation does not render directly to the camera’s output but instead to the temporary render target \texttt{GaussianSplatRT}. Additionally, due to the sorting performed at the beginning of the loop, splats farther from the camera are rendered before those closer to it, ensuring correct per-object rendering order.\\\\
 With these steps described, the overall structure of the rendering pipeline for the Gaussian Splats becomes clear. The coordination between sorting, compute shaders, and material shaders ensures that the splats are accurately positioned, stretched, and rendered according to the camera’s view.
-\section{Experiments and Development}
+\section{Part 1: Correcting the Rendering Order}    
+\subsection{Introduction}   
+At the outset of this research, no specific focus or predefined problem statement had been established. The initial objective was exploratory in nature: to experiment with the existing Unity extension and investigate the process of importing and animating a Gaussian Splat within the engine.\\
+Throughout this exploratory process, particular attention was given to identifying tasks that were difficult to perform, as well as outputs that appeared incorrect or inconsistent. These observations served as the basis for defining the core focus areas of the thesis.
 \subsection{Preparing the scene}
+To initiate this phase of the research, it was necessary to select a suitable pre-trained Gaussian splat model. Ideally, the chosen model would consist of multiple visually distinct segments, making it intuitive and practical for experimentation with segmentation and animation. The primary models considered were those released by the authors of the original Gaussian Splatting paper. Among them, the Kitchen scene includes a small LEGO bulldozer—an object that is compact, easily recognizable, and composed of several clearly separable parts. These characteristics made it an ideal candidate for the intended use case.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/Kitchen.png}
+	\caption{The Kitchen scene from the official Gaussian Splatting dataset, featuring a small LEGO bulldozer. This object was selected for its compact structure and clearly defined components, making it well-suited for segmentation and animation experiments.}
+	\label{fig:kitchen}
+\end{figure}
+Obviously, not the entire scene is necessary for these purposes; only the LEGO bulldozer is required. Fortunately, the Unity extension being used includes a tool designed specifically for this type of task: cutouts. Within the GaussianSplatRenderer component of the relevant GameObject in the Unity Editor, a cutout can be added to the Gaussian Splat. This tool creates a cutout GameObject (either a box or an ellipsoid) as a child of the selected object. The cutout can be translated, rotated, and scaled like any other GameObject. Any splats of the selected object outside of the cutout are excluded from rendering. Additionally, there is an invert option that reverses the effect, making only the splats within the cutout invisible. A button allows the Gaussian Splat to be saved as a PLY file, accounting for all cutout modifications. This functionality was used to generate a PLY file and associated asset containing only the bulldozer, omitting the rest of the scene.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/WholeTruck.png}
+	\caption{The LEGO bulldozer extracted from the Kitchen scene using the cutout tool of the Unity extension for Gaussian splatting. This tool isolates the bulldozer by excluding all other parts of the scene.}
+	\label{fig:wholetruck}
+\end{figure}
+\newpage \noindent
+The next step towards animating the bulldozer involved segmenting multiple parts of the model into individual GameObjects, each parented to the main bulldozer GameObject. This was achieved using the same method as before. As a result, the two rear wheels and the bulldozer's arm were isolated as separate GameObjects, with the arm further subdivided into a subsegment for the bucket. These parts provided a sufficient basis for testing basic animations.\\
+However, before even considering animating the subsegments, a significant issue became apparent: there was a clear problem with the rendering of these segments.
 \subsection{Initial Workarounds and Approximate Solutions}
 \subsection{Towards a Correct Rendering Pipeline}
-
+\section{Part 2: Hierarchical Segmentation}         
 \addcontentsline{toc}{section}{References}
 \printbibliography
 \end{document}
