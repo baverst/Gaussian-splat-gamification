@@ -1,17 +1,25 @@
-\contentsline {section}{\numberline {1}Background}{1}{}%
-\contentsline {subsection}{\numberline {1.1}From Meshes to Gaussian Splatting}{1}{}%
-\contentsline {subsubsection}{\numberline {1.1.1}Triangle Meshes}{1}{}%
-\contentsline {subsubsection}{\numberline {1.1.2}Neural Radiance Fields}{2}{}%
-\contentsline {subsubsection}{\numberline {1.1.3}Gaussian Splatting}{3}{}%
-\contentsline {subsection}{\numberline {1.2}Unity Extension}{5}{}%
-\contentsline {subsubsection}{\numberline {1.2.1}Introduction}{5}{}%
-\contentsline {subsubsection}{\numberline {1.2.2}Adding a Gaussian Splat to the Scene}{5}{}%
-\contentsline {subsubsection}{\numberline {1.2.3}Initializing the Rendering Process: The Role of \texttt {OnEnable}}{6}{}%
-\contentsline {subsubsection}{\numberline {1.2.4}The Rendering Pipeline}{8}{}%
-\contentsline {section}{\numberline {2}Part 1: Correcting the Rendering Order}{14}{}%
-\contentsline {subsection}{\numberline {2.1}Introduction}{14}{}%
-\contentsline {subsection}{\numberline {2.2}Preparing the scene}{14}{}%
-\contentsline {subsection}{\numberline {2.3}Initial Workarounds and Approximate Solutions}{17}{}%
-\contentsline {subsection}{\numberline {2.4}Towards a Correct Rendering Pipeline}{17}{}%
-\contentsline {section}{\numberline {3}Part 2: Hierarchical Segmentation}{17}{}%
-\contentsline {section}{References}{17}{}%
+\contentsline {section}{\numberline {1}Introduction}{1}{}%
+\contentsline {section}{\numberline {2}Background}{2}{}%
+\contentsline {subsection}{\numberline {2.1}From Meshes to Gaussian Splatting}{2}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}Triangle Meshes}{2}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}Neural Radiance Fields}{4}{}%
+\contentsline {subsubsection}{\numberline {2.1.3}Gaussian Splatting}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Unity Extension}{6}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}Introduction}{6}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}Adding a Gaussian Splat to the Scene}{7}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}Initializing the Rendering Process: The Role of \texttt {OnEnable}}{8}{}%
+\contentsline {subsubsection}{\numberline {2.2.4}The Rendering Pipeline}{10}{}%
+\contentsline {section}{\numberline {3}Part 1: Correcting the Rendering Order}{15}{}%
+\contentsline {subsection}{\numberline {3.1}Introduction}{15}{}%
+\contentsline {subsection}{\numberline {3.2}Preparing the scene}{16}{}%
+\contentsline {subsection}{\numberline {3.3}Animating a segment}{18}{}%
+\contentsline {subsection}{\numberline {3.4}Moving the camera}{24}{}%
+\contentsline {subsection}{\numberline {3.5}Global per-splat sorting}{28}{}%
+\contentsline {subsection}{\numberline {3.6}Conclusion}{36}{}%
+\contentsline {section}{\numberline {4}Part 2: Hierarchical Segmentation}{36}{}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{36}{}%
+\contentsline {subsection}{\numberline {4.2}Relevant work}{38}{}%
+\contentsline {subsection}{\numberline {4.3}SAM}{40}{}%
+\contentsline {subsection}{\numberline {4.4}SAGD}{41}{}%
+\contentsline {subsection}{\numberline {4.5}SAM 2}{48}{}%
+\contentsline {section}{References}{49}{}%

@@ -238,7 +238,6 @@ namespace GaussianSplatting.Editor
         unsafe void CreateAsset(GameObject parent, string folderPath)
         {
             m_ErrorMessage = null;
-
             var m_InputFile = Path.Combine(folderPath, "point_cloud_seg.ply");
 
             Directory.CreateDirectory(m_OutputFolder);
@@ -248,7 +247,12 @@ namespace GaussianSplatting.Editor
             using NativeArray<InputSplatData> inputSplats = LoadPLYSplatFile(m_InputFile);
             if (inputSplats.Length == 0)
             {
-                EditorUtility.ClearProgressBar();
+				EditorUtility.ClearProgressBar();
+                foreach (string subfolder in Directory.GetDirectories(folderPath))
+            	{
+					
+                	CreateAsset(parent, subfolder);
+            	}
                 return;
             }
 

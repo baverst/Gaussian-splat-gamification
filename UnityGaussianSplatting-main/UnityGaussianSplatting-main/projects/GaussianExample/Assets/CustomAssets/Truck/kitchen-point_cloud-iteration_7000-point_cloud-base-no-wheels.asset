@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b71fae31e6c7d438e8566dc713e666, type: 3}
+  m_Name: kitchen-point_cloud-iteration_7000-point_cloud-base-no-wheels
+  m_EditorClassIdentifier: 
+  m_FormatVersion: 20231020
+  m_SplatCount: 112560
+  m_BoundsMin: {x: -1.0727205, y: 0.65568465, z: 0.64957726}
+  m_BoundsMax: {x: 0.28431988, y: 2.5171137, z: 2.1441143}
+  m_DataHash:
+    serializedVersion: 2
+    Hash: 84fcc74f90224bd451ce0b93db968f6d
+  m_PosFormat: 0
+  m_ScaleFormat: 0
+  m_SHFormat: 0
+  m_ColorFormat: 0
+  m_PosData: {fileID: 4900000, guid: 2daefc36f6d21c1429cc1a464c2b9f78, type: 3}
+  m_ColorData: {fileID: 4900000, guid: e56be0411081ecf4bba93e0b79162368, type: 3}
+  m_OtherData: {fileID: 4900000, guid: 9b0cbcb5981e7b44cbaa93be6ed509a7, type: 3}
+  m_SHData: {fileID: 4900000, guid: 72d836b7d24256e4c9cd2e3c6e83c92b, type: 3}
+  m_ChunkData: {fileID: 0}
+  m_Cameras: []

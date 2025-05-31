@@ -25,9 +25,10 @@ SamOnePredictor = SamPredictor(sam)
 
 import cv2
 
-input_point = np.array([[400,250],[400,300]]
+input_point = np.array([[413.015625, 400.96875]]
+
 )
-input_label = np.array([1,0])
+input_label = np.array([1])
 image = cv2.imread("../../../Downloads/tandt_db/tandt/truck/images/000001.jpg")
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 SamOnePredictor.set_image(image)
