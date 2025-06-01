@@ -1368,6 +1368,145 @@
       \verb https://github.com/dranjan/python-plyfile
       \endverb
     \endentry
+    \entry{SAM2}{misc}{}{}
+      \name{author}{18}{}{%
+        {{un=0,uniquepart=base,hash=29e72fba9e2b3c5537682a7be7bc14e4}{%
+           family={Ravi},
+           familyi={R\bibinitperiod},
+           given={Nikhila},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e8045f6960cde077294b85eff849d8e1}{%
+           family={Gabeur},
+           familyi={G\bibinitperiod},
+           given={Valentin},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2746f6639cf6eeca31796efb752d3143}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Yuan-Ting},
+           giveni={Y\bibinithyphendelim T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9f2c3c903f2037997ff0d834aca07fe8}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Ronghang},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=83e13f54ab022aa655b26c9010b1d40a}{%
+           family={Ryali},
+           familyi={R\bibinitperiod},
+           given={Chaitanya},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5bd4a91e09b499d15e82bc929acf1e34}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Tengyu},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ef266bf11aefb1b744d9c035c88f8c07}{%
+           family={Khedr},
+           familyi={K\bibinitperiod},
+           given={Haitham},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b21f962ef4fde8d206b12240b5fc4eb9}{%
+           family={Rädle},
+           familyi={R\bibinitperiod},
+           given={Roman},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=026df7884d750eef80a162ac4d80a24d}{%
+           family={Rolland},
+           familyi={R\bibinitperiod},
+           given={Chloe},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=34706d6f5a4acd2ebc4ccdc87ff94abf}{%
+           family={Gustafson},
+           familyi={G\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=190ac13c22d694c31877cdf31c0db652}{%
+           family={Mintun},
+           familyi={M\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6156d68b681040705ec43c7902c9f197}{%
+           family={Pan},
+           familyi={P\bibinitperiod},
+           given={Junting},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=31b49c6a8ac57b864a8f786dbd352066}{%
+           family={Alwala},
+           familyi={A\bibinitperiod},
+           given={Kalyan\bibnamedelima Vasudev},
+           giveni={K\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0cb223da593b5653feac6f6eabcbe82d}{%
+           family={Carion},
+           familyi={C\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0616e6c3dae5ba93fee86f3d88778be4}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Chao-Yuan},
+           giveni={C\bibinithyphendelim Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bd5dadbe57bedc5957c19a3154c4d424}{%
+           family={Girshick},
+           familyi={G\bibinitperiod},
+           given={Ross},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ecd149fdcb3e0503881d49e545744c3d}{%
+           family={Dollár},
+           familyi={D\bibinitperiod},
+           given={Piotr},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bd2fff33d3a5433188d2662695e79eb5}{%
+           family={Feichtenhofer},
+           familyi={F\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{122b0c0c258a2e9f0862d559d3369d99}
+      \strng{fullhash}{1d075f09ffd1d1e0ac0f2e0e502b680f}
+      \strng{fullhashraw}{1d075f09ffd1d1e0ac0f2e0e502b680f}
+      \strng{bibnamehash}{122b0c0c258a2e9f0862d559d3369d99}
+      \strng{authorbibnamehash}{122b0c0c258a2e9f0862d559d3369d99}
+      \strng{authornamehash}{122b0c0c258a2e9f0862d559d3369d99}
+      \strng{authorfullhash}{1d075f09ffd1d1e0ac0f2e0e502b680f}
+      \strng{authorfullhashraw}{1d075f09ffd1d1e0ac0f2e0e502b680f}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CV}
+      \field{eprinttype}{arXiv}
+      \field{title}{SAM 2: Segment Anything in Images and Videos}
+      \field{year}{2024}
+      \verb{eprint}
+      \verb 2408.00714
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2408.00714
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2408.00714
+      \endverb
+    \endentry
     \entry{ArasRecc2}{online}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=799cba6994731ba7521e0b057d3bd004}{%

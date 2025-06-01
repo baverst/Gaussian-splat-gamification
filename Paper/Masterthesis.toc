@@ -21,5 +21,7 @@
 \contentsline {subsection}{\numberline {4.2}Relevant work}{38}{}%
 \contentsline {subsection}{\numberline {4.3}SAM}{40}{}%
 \contentsline {subsection}{\numberline {4.4}SAGD}{41}{}%
-\contentsline {subsection}{\numberline {4.5}SAM 2}{48}{}%
-\contentsline {section}{References}{49}{}%
+\contentsline {subsection}{\numberline {4.5}SAM2}{48}{}%
+\contentsline {subsection}{\numberline {4.6}Hierarchy}{55}{}%
+\contentsline {subsection}{\numberline {4.7}Multimask Automation}{58}{}%
+\contentsline {section}{References}{60}{}%

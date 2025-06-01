@@ -39,6 +39,8 @@ namespace GaussianSplatting.Runtime
         
         public void RegisterSplat(GaussianSplatRenderer r)
         {
+            if(r.m_Asset == null)
+                return;
             if (m_Splats.Count == 0)
             {
                 m_FrameCounter = 0;
@@ -67,11 +69,12 @@ namespace GaussianSplatting.Runtime
 
         public void UnregisterSplat(GaussianSplatRenderer r, int splatCount = -1)
         {
+            if (!m_Splats.ContainsKey(r))
+                return;
+
 			if(splatCount == -1){
 				splatCount = r.asset.splatCount;
 			}	
-            if (!m_Splats.ContainsKey(r))
-                return;
 
 			int removedOffset = m_Splats[r].Item2;
             m_Splats.Remove(r);
@@ -589,6 +592,12 @@ namespace GaussianSplatting.Runtime
                 return;
             if (!SystemInfo.supportsComputeShaders)
                 return;
+            if (m_Asset != null)
+            {
+                m_PrevAsset = m_Asset;
+                m_PrevHash = m_Asset.dataHash;
+            }
+
 
             m_MatSplats = new Material(m_ShaderSplats) {name = "GaussianSplats"};
             m_MatComposite = new Material(m_ShaderComposite) {name = "GaussianClearDstAlpha"};
@@ -793,15 +802,23 @@ namespace GaussianSplatting.Runtime
             cmd.EndSample(s_ProfSort);
         }
 
+        public void Start()
+        {
+            if(m_Sorter == null)
+                OnEnable();
+        }
+
         public void Update()
         {
             var curHash = m_Asset ? m_Asset.dataHash : new Hash128();
             if (m_PrevAsset != m_Asset || m_PrevHash != curHash)
             {
+
 				if(m_PrevAsset != null){
 					GaussianSplatRenderSystem.instance.UnregisterSplat(this,m_PrevAsset.splatCount);
-					GaussianSplatRenderSystem.instance.RegisterSplat(this);
 				}
+                GaussianSplatRenderSystem.instance.RegisterSplat(this);
+
                 m_PrevAsset = m_Asset;
                 m_PrevHash = curHash;
                 DisposeResourcesForAsset();

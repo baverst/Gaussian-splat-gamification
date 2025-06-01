@@ -44,7 +44,7 @@ These contributions enhance both rendering fidelity and workflow usability, adva
 \section{Introduction}
 Recent advances in 3D scene representation have shifted from traditional mesh-based models to point-based approaches. Among these, Gaussian splatting \parencite{OriginalSplatting} has emerged as a promising technique for real-time rendering of photorealistic scenes, leveraging a collection of 3D Gaussians to represent surfaces without relying on explicit geometry. This method achieves high visual fidelity while maintaining interactive frame rates, making it an attractive alternative to neural radiance fields (NeRF) and triangle meshes for real-time applications.
 \\\\
-This thesis began not with a formal hypothesis or a narrowly defined research question, but with a practical goal: to explore what it would take to animate a Gaussian Splat inside Unity, even if through improvised or non-standard means, to enable their use in interactive applications. The idea was to try to get something working, and to let the problems encountered along the way guide the direction of the project.
+This thesis began not with a formal hypothesis or a narrowly defined research question, but with a practical goal: to explore what it would take to animate a Gaussian Splat inside Unity, even if through improvised or non-standard means, to enable their use in interactive applications. The initial objective was to implement a functioning system, and to let the problems encountered along the way guide the direction of the project.
 \\\\
 This hands-on approach quickly revealed limitations in the widely referenced Unity Gaussian Splatting extension \parencite{Aras} that adopts a per-object rendering pipeline. In this approach, each splat object is sorted and rendered independently, leading to incorrect visual results when multiple splat objects overlap in a scene.
 \\\\
@@ -60,7 +60,7 @@ In the field of computer graphics, the efficient rendering of complex 3D scenes 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/TriangleMesh.png}
-	\caption{Example of a triangle mesh, the most commonly used method for representing 3D objects in computer graphics. Image is taken from \cite{Mesh}}
+	\caption{Example of a triangle mesh, the most commonly used method for representing 3D objects in computer graphics. Image is taken from \cite{Mesh}.}
 	\label{fig:trianglemesh}
 \end{figure}
 \newpage
@@ -69,7 +69,7 @@ One popular approach to addressing these challenges is Neural Radiance Fields (N
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/Nerf.png}
-	\caption{Rendering a scene using Neural Radiance Fields. Image is taken from \cite{Nerf}}
+	\caption{Rendering a scene using Neural Radiance Fields. Image is taken from \cite{Nerf}.}
 	\label{fig:nerf}
 \end{figure}
 \subsubsection{Gaussian Splatting}
@@ -77,7 +77,7 @@ In 2023, a method was introduced that retained the advantages of Neural Radiance
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/GaussianForm.png}
-	\caption{Illustration of Gaussian functions in different dimensions, shown left to right: 1D Gaussian \parencite{1DGaussian}, 2D Gaussian \parencite{2DGaussian}, and 3D Gaussian \parencite{3DGaussian}}
+	\caption{Illustration of Gaussian functions in different dimensions, shown left to right: 1D Gaussian \parencite{1DGaussian}, 2D Gaussian \parencite{2DGaussian}, and 3D Gaussian \parencite{3DGaussian}.}
 	\label{fig:Form}
 \end{figure}
 \newpage  \noindent
@@ -101,7 +101,7 @@ The selected project does not implement the training of Gaussian Splats but inst
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Images/SplatCreator.png}
-	\caption{The Unity Editor extension included in the project for converting PLY files into the required compressed format}
+	\caption{The Unity Editor extension included in the project for converting PLY files into the required compressed format.}
 	\label{fig:creator}
 \end{figure}
 \subsubsection{Initializing the Rendering Process: The Role of \texttt{OnEnable}}
@@ -121,7 +121,7 @@ public void OnEnable()
 	// Initialize all the graphics buffers
 }
 \end{lstlisting}
-As demonstrated in the code segment, the \texttt{OnEnable} method calls the \linebreak\texttt{RegisterSplat} function of \texttt{GaussianSplatRenderSystem}, a singleton class. This class plays a pivotal role in managing the multiple \linebreak\texttt{GaussianSplatRenderer} objects within the scene and is responsible for executing the changes that modify the rendering process. The implementation of the \texttt{RegisterSplat} function is as follows:
+As demonstrated in the code segment, the \texttt{OnEnable} method calls the \linebreak\texttt{RegisterSplat} function of \texttt{GaussianSplatRenderSystem}, a singleton class. This class plays a pivotal role in managing the multiple \linebreak\texttt{GaussianSplatRenderer} objects within the scene and is responsible for executing the changes that modify the rendering process. The implementation of the \texttt{RegisterSplat} function is as follows
 \begin{lstlisting}[tabsize=2,caption=\texttt{RegisterSplat} of \texttt{GaussianSplatRenderSystem}, label=code:systemregister,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
 public void RegisterSplat(GaussianSplatRenderer r)
 {
@@ -254,7 +254,7 @@ To animate the LEGO bulldozer, the next step was to segment it into multiple par
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Images/first_wheel.png}
-	\caption{A rendering error when loading the separate wheel-GameObject}
+	\caption{A rendering error when loading the separate wheel-GameObject.}
 	\label{fig:firstwheel}
 \end{figure}
 \FloatBarrier
@@ -411,7 +411,7 @@ Ideally, the renderer would instead issue a single \texttt{DrawProcedural} call 
 \\\\
 The proposed solution is to employ a large, global graphics buffer that consolidates the processed splat data for all objects. Rather than merging the individual per-GameObject buffers into this global buffer at the end of each computation—a process that would introduce additional complexity and runtime overhead—the system is designed so that all compute shaders write directly into the shared buffer. Specifically, the buffer stores the computed screen positions, stretching factors, and color data for the splats, just as was done in the per-GameObject buffers, but now combined into a single structure. To facilitate this, the shader must be informed of the specific location within the global buffer where its output should be written. This is accomplished by associating each \texttt{GaussianSplatRenderer} instance with an offset value that specifies its starting position in the buffer. Conveniently, a dictionary that maps \texttt{GaussianSplatRenderer} instances to metadata already exists, making it an ideal structure for storing these offsets. The size of the global buffer is dynamically determined and set to exactly match the total number of splats across all enabled \texttt{GaussianSplatRenderer} instances\\\\
 To implement this global system, much of the logic previously contained within \texttt{GaussianSplatRenderer} is transferred to the \linebreak \texttt{GaussianSplatRenderSystem}, which now manages the shared global buffer. Each time a \texttt{GaussianSplatRenderer} is enabled or disabled, the system creates a new global buffer of the appropriate size, and the offsets are updated accordingly. When a new \texttt{GaussianSplatRenderer} is enabled, its offset is set to the size of the buffer prior to its addition, effectively placing its data at the end. When a \texttt{GaussianSplatRenderer} is disabled, the system accounts for the possibility that the removed splats are positioned anywhere within the buffer. To maintain a contiguous structure, the offsets of all \texttt{GaussianSplatRenderer} instances whose offsets are greater than that of the disabled segment are decreased by the number of splats in the disabled segment. This ensures that the global buffer remains correctly partitioned at all times. The code is provided below. Note that this approach does increase complexity, but importantly, this complexity is incurred only when a \texttt{GaussianSplatRenderer} is enabled or disabled, rather than every frame. If such events occur frequently, the new pipeline could indeed introduce additional performance overhead. However, this trade-off is limited to the frequency of structural changes in the scene, and its impact should be considered in the context of the specific application’s dynamics.
-\begin{lstlisting}[tabsize=2,caption=New RegisterSplat and UnregisterSplat, label=code:sort_ratio,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[tabsize=2,caption=New RegisterSplat and UnregisterSplat, label=code:register,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
 public void RegisterSplat(GaussianSplatRenderer r)
 {
 	if (m_Splats.Count == 0)
@@ -491,7 +491,7 @@ The solution is almost trivial. Each \texttt{GaussianSplatRenderer} already stor
 To resolve the resulting issues with the global buffer size and offset management, the simplest solution is to call \texttt{UnregisterSplat} followed by
 \linebreak 
 \texttt{RegisterSplat} for the affected \texttt{GaussianSplatRenderer}. Additionally, the number of splats associated with the current asset is stored in a local variable. This is essential because once the asset is changed, the previous splat count is no longer directly accessible, making it impossible to properly adjust the global buffer size and offsets during unregistration. To accommodate \texttt{UnregisterSplat} for this case, it can now take an optional \texttt{splatCount} argument, which by default uses the size of the current asset, as shown in the code below:
-\begin{lstlisting}[tabsize=2,caption=A small adjustment to UnregisterSplat, label=code:sort_ratio,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[tabsize=2,caption=A small adjustment to UnregisterSplat, label=code:unregister,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
 public void UnregisterSplat(GaussianSplatRenderer r, int splatCount = -1)
 {
 	if(splatCount == -1){
@@ -573,8 +573,8 @@ With the recreated example from the paper showing promising results, additional 
 \noindent
 First, it should be noted that the frames shown in Figure~\ref{fig:issues} have been selectively chosen to illustrate the limitations observed. While a substantial number of frames yielded correct segmentations, there were several additional frames beyond the three presented that displayed issues. These issues can be categorized into two core limitations of the implementation:
 \begin{itemize}
-	\item Convergence: In some cases, input points that are far apart in the original frame provide strong information for segmentation. However, under different viewing angles, these points may appear much closer together, reducing the specificity of the segmentation prompt. This convergence makes it more difficult for SAM to determine the intended segment, as observed in the top-right frame of Figure~\ref{fig:issues}.
-	\item Occlusion: In the original frame, the input points are clearly located on a specific, unobstructed part of the object. However, when these points are projected into other views, changes in perspective or camera angle can cause parts of the object to become occluded by other elements of the scene. This means the projected points may land on areas of the image that visually correspond to different objects or regions, which SAM interprets as valid parts of the segment. As a result, the mask generated in these frames includes unintended areas. This issue is evident in the bottom two frames of Figure~\ref{fig:issues}.
+	\item Convergence: In some cases, input points that are far apart in the original frame provide strong information for segmentation. However, under different viewing angles, these points may appear much closer together, reducing the specificity of the segmentation prompt. This convergence makes it more difficult for SAM to determine the intended segment, as observed in the top-right frame of Figure~\ref{fig:issues}. While this issue can be somewhat mitigated by adding additional positive points, it is possible for all available points to fall on the same plane in 3D space. In such cases, certain viewing angles may still cause clumping of the projected points, resulting in reduced prompt effectiveness.
+	\item Occlusion: In the original frame, the input points are clearly located on a specific, unobstructed part of the object. However, when these points are projected into other views, changes in perspective or camera angle can cause parts of the object to become occluded by other elements of the scene. This means the projected points may land on areas of the image that visually correspond to different objects or regions, which SAM interprets as valid parts of the segment. As a result, the mask generated in these frames includes unintended areas. This issue is evident in the bottom two frames of Figure~\ref{fig:issues}. Notably, in this scenario, adding additional positive or negative points cannot resolve the issue. Regardless of the other prompts, SAM will consistently attempt to generate a mask that includes the incorrectly placed point due to its interpretation of the user’s intention.
 \end{itemize}
 Before exploring alternative methods of generating masks from other camera standpoints, it is both useful and logical to continue testing the remaining key components of SAGD: the voting system and the Gaussian Decomposition process. To evaluate these, the example will be revisited that was provided in the original SAGD paper—the segment that consistently produced accurate results. Figure~\ref{fig:sagdwithout} illustrates the output generated by the voting system alone, while Figure~\ref{fig:sagdwith} shows the same output after Gaussian Decomposition has been applied.
 \begin{figure}[h!]
@@ -593,14 +593,124 @@ Before exploring alternative methods of generating masks from other camera stand
 \noindent
 The absence of the front of the truck in the segmentation is an undesirable outcome. While this issue is correctable, it will be addressed after the challenges identified earlier are resolved. Regarding the Gaussian Decomposition process, it performs its intended role of cleaning up boundary splats. The errors introduced are likely due to a combination of factors: imperfect initial segmentation data and the need for further fine-tuning of the decomposition frequency (as decomposition is not applied to every frame). However, refining this frequency is not a primary focus of this thesis.
 \subsection{SAM2}
-Throughout this thesis, it has been emphasized that an ideal implementation would accept a single SAM mask as input and automatically generate corresponding masks from different camera angles. This approach strikes an optimal balance between user control and automation: it enables the user to define a precise sub-object, while eliminating the need to manually create multiple masks from different perspectives—a process that would be nearly as cumbersome as the original method of extracting segments.
+Throughout this section, it has been emphasized that an ideal implementation would accept a single SAM mask as input and automatically generate corresponding masks from different camera angles. This approach strikes an optimal balance between user control and automation: it enables the user to define a precise sub-object, while eliminating the need to manually create multiple masks from different perspectives—a process that would be nearly as cumbersome as the original method of extracting segments.
 \\\\
 To reiterate, the ideal algorithm would transform a single SAM mask into multiple masks from different angles, without encountering the same issues as the original SAGD projection approach. This approach would enable the user to define just one mask while allowing SAGD to propagate it into a complete segmentation across the Gaussian Splat. This process would ultimately result in a perfectly smooth separation of the subsegment from the rest of the scene.\\
-During the exploration of methods to generate these additional 2D masks, a promising development was discovered through the SAM documentation: SAM2. This extension of SAM introduces video segmentation capabilities. Its input structure is similar to that of image segmentation, with the key difference being that prompt points must be provided for a specific frame. SAM2 can then generalize these points to produce a segmentation mask for every frame in the video.
-\\\\
+During the exploration of methods to generate these additional 2D masks, a promising development was discovered through the SAM documentation: SAM2 \parencite{SAM2}. This extension of SAM introduces video segmentation capabilities. Its input structure is similar to that of image segmentation, with the key difference being that prompts can be placed on specific frames, guiding segmentation in those particular frames. SAM2 can then generalize these prompts to produce a segmentation mask for every frame in the video (see Figure~\ref{fig:children}).
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/children.png}
+	\caption{Result of SAM2 on a sample video provided by the SAM2 repository. Top-left: input frame with a single positive prompt point and the generated segmentation mask. The remaining images show the masks generated by SAM2 on other frames of the video, illustrating the model's ability to propagate the segmentation across frames. Note that in the top-right frame, the pants are almost entirely obstructed, yet the model still returns the correct mask—highlighting a clear improvement over the occlusion issues encountered in the original SAGD algorithm.}
+	\label{fig:children}
+\end{figure}
+\FloatBarrier
+\noindent
 SAM2 builds upon SAM’s image segmentation capabilities by extending them to video sequences. The user can provide segmentation prompts—such as points or bounding boxes—on any frame of the video. What sets SAM2 apart is its use of a memory mechanism that tracks and refines segmentation across frames. As the video progresses, SAM2 stores information from previous frames, including embeddings of both the frame features and the provided prompts. When processing a new frame, SAM2 retrieves this memory and integrates it with the current frame’s features to predict the segmentation mask. This enables SAM2 to maintain segmentation consistency even in the presence of occlusion, changes in object appearance, or movement.
 \\\\
-To leverage the capabilities of SAM2, it is necessary to provide a continuous video as input. One theoretical approach to generate such a video involves defining a continuous camera path around the object, with the camera oriented toward the object, rendering each frame to a file, and recording the corresponding world position of the camera in a separate file. However, a more straightforward approach is often available: the images used to train the Gaussian Splat model are frequently captured as a continuous video sequence, rather than as a collection of images from random camera positions. When access to these training images is available, as is the case for the truck scene used in this project, the task of creating a continuous video is effectively simplified. By merging these images sequentially, a continuous video suitable for SAM2 input can be readily constructed. This approach was chosen as it provided a practical and efficient means to integrate SAM2, allowing the focus to remain on addressing the core issues of SAGD without introducing the additional overhead
+To leverage the capabilities of SAM2, it is necessary to provide a continuous sequence of frames as input. One theoretical approach to generate such a sequence involves defining a continuous camera path around the object, with the camera oriented toward the object, rendering each frame to a file, and recording the corresponding world position of the camera in a separate file. However, a more straightforward approach is often available: the images used to train the Gaussian Splat model are frequently captured as a continuous video sequence, rather than as a collection of images from random camera positions. When access to these training images is available, as is the case for the truck scene used in this project, the task of creating a continuous sequence of frames is effectively simplified. By using these ordered images directly as input for SAM2, the system can treat them as a continuous video sequence without additional processing. This approach was chosen as it provided a practical and efficient means to integrate SAM2, allowing the focus to remain on addressing the core issues of SAGD without introducing the additional overhead of generating synthetic sequences.
+\\\\
+To verify that the images form a continuous sequence, and to potentially aid in debugging, the separate images can be merged into a video by executing the following command in a Bash environment:
+\begin{verbatim}
+	ffmpeg -framerate 30 -i %06d.jpg -c:v mpeg4 -q:v 5 output.mp4
+\end{verbatim}
+The most straightforward approach to prompting a SAM2 video is to begin with the first frame and incrementally add positive and negative points to that frame until the generated mask closely aligns with the intended segment. However, SAM2 is not without its limitations. Due to its more sophisticated architecture compared to standard SAM, a greater number of points may be required to obtain a satisfactory mask for the first frame alone (see Figure~\ref{fig:sam2struggle}). Furthermore, while the masks generated for most frames may be acceptable, certain frames can still produce entirely inaccurate segmentations (see Figure~\ref{fig:sam2adapt}). Unlike the projection-related issues encountered in SAGD, these problems can generally be resolved by adding more input points—either to the initial frame or directly to the problematic frames.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/sam2struggle.png}
+	\caption{Progress of prompting the first frame in SAM2 to segment the wooden platform. Top-left: initial mask generated with two positive points. Subsequent images illustrate the addition of negative points, progressively refining the mask. The final frame (bottom-right) shows a mask that, while not perfect, achieves a satisfactory result across the video.}
+	\label{fig:sam2struggle}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/sam2adapt.png}
+	\caption{Segmentation of the entire truck using SAM2. Left: initial mask generated with only two positive points. Middle: a frame where the front of the truck is excluded from the mask due to its absence in some frames. Right: adding a single additional positive point to the problematic frame effectively resolves the issue.}
+	\label{fig:sam2adapt}
+\end{figure}
+\FloatBarrier
+\noindent
+SAM2’s advantage lies in its ability to maintain temporal consistency and integrate contextual information from both the prompts and the sequence of frames. This enables it to produce reliable masks across the video with minimal additional input, contrasting with projection-based approaches where prompt points can easily shift to unrelated areas. As a result, the number of supplementary points required per segment remains limited, keeping the process significantly more efficient and user-friendly than manual segmentation or per-frame projection methods.
+\\\\
+To demonstrate the reliability of SAM2, Figures~\ref{fig:sam2whole} and~\ref{fig:sam2wood} replicate the same experiment conducted with the projection-based approach. Starting from the same mask (requiring slightly more prompt points), the same frames were inspected. While some degree of selective framing has been used to highlight the contrast more effectively, it is important to note that any frame yielding an incorrect mask can be readily corrected by adding additional prompts.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/sam2whole.png}
+	\caption{Replication of the experiment from Figure~\ref{fig:goodsagd}, using SAM2 instead of projection.}
+	\label{fig:sam2whole}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/sam2wood.png}
+	\caption{Replication of the experiment from Figure~\ref{fig:issues}, using SAM2 instead of projection.}
+	\label{fig:sam2wood}
+\end{figure}
+\FloatBarrier
+\noindent
+Having demonstrated the potential of SAM2 to produce consistent and efficient segmentation masks across multiple viewing angles, the next logical step was to integrate these results with the SAGD pipeline. Instead of relying on per-frame projection methods to generate masks, the output of SAM2 was leveraged directly. To facilitate this integration and streamline debugging, the generated masks were serialized into a pickle file—a standard Python format for storing and retrieving data structures such as dictionaries. In this case, the pickle file contained a mapping from each frame index to its corresponding segmentation mask. The SAGD implementation was then modified to read this file and use the precomputed masks as input for its downstream processing stages.\\\\
+To validate this approach, the Gaussian Splat of the wooden platform was extracted using the same prompt points as in the earlier example. The resulting segmentation is illustrated in Figure~\ref{fig:sagdwoodply}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/sagdwoodply.png}
+	\caption{Resulting Gaussian Splat of the wooden platform, generated using SAM2-based masks as input for the SAGD pipeline. The extracted segment accurately captures the platform’s structure while excluding surrounding elements, illustrating the reliability of SAM2-generated masks for segmentation tasks.
+	}
+	\label{fig:sagdwoodply}
+\end{figure}
+\FloatBarrier
+\noindent
+\subsection{Hierarchy}
+While the separation of a single segment is advantageous, the intended use case of this thesis involves interactive applications where both the subsegment and its parent object must coexist within the scene. Therefore, it is necessary to implement an intuitive and efficient method for segmenting a subcomponent while retaining both the isolated segment and the remainder of the object as distinct, non-overlapping entities.
+\\\\
+The process of first segmenting the wooden platform of the truck and then performing a separate segmentation of the truck without the platform is not only impractical, but also prone to errors. This approach introduces the risk of including certain splats in both segments, resulting in incorrect visual artifacts. A hierarchical segmentation method, which preserves a clear parent-child relationship between the segments, is thus essential for maintaining both visual fidelity and workflow efficiency.
+\\\\
+The most straightforward approach to achieve hierarchical segmentation, while also providing maximal control to the user, is to employ a layered data structure. Specifically, this thesis defines the following recursive structure:
+\begin{lstlisting}[tabsize=2,caption=Definition of the recursive data structure used to represent hierarchical segmentation prompts and their relationships in SAM2, label=code:recursivedata,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
+@dataclass
+class framePrompt:
+	points: np.ndarray
+	labels: np.ndarray
+	frame_number: int
+
+@dataclass
+class LayeredMaskPrompt:
+	frameprompts: list[framePrompt]
+	subobjects: list['LayeredMaskPrompt']
+\end{lstlisting}
+This structure enables the user to define high-level parent objects, using SAM2 prompt points and labels, and to specify subordinate child objects by nesting additional LayeredMaskPrompt entries. This recursive arrangement naturally supports hierarchical parent-child relationships, allowing for flexible and precise segmentation.
+\\
+To compute the segmentation masks for each frame, SAM2 processes this hierarchical prompt structure and generates frame-wise masks for each node in the hierarchy. These masks are stored in a similarly recursive format using a pickle file: each dictionary contains a masks key, holding the mask information for the respective frames, and a subobjects key containing a list of child dictionaries structured identically.
+\\\\
+SAGD can directly process these recursive structures to generate the desired segmentation. To ensure that splats do not appear redundantly in both parent and child segments—and to enforce a clean hierarchical split—the algorithm operates recursively. First, for a given node in the hierarchy, it computes the mask over the 3D splats of the object using standard techniques. It then iterates over each subobject (child node), invoking the same recursive procedure on each. Each recursive call returns the complete set of splats associated with the child, regardless of whether those splats are unique to the child or shared with its descendants. The parent node aggregates these returned splat sets to identify which of its own splats have been claimed by its subobjects. After processing all children, the parent writes to the output PLY file only those splats that were not claimed by any child, ensuring exclusivity. Finally, the parent returns the complete set of splats assigned to itself—including those shared with its subobjects—allowing this information to propagate upward through the recursion.
+\\\\
+While this approach offers substantial control to the user, it also places significant responsibility on them to ensure that the defined hierarchy is coherent and meaningful. For instance, the user could define two entirely separate nodes with substantial overlap in their segmentation regions, resulting in duplicated splats in the overlapping areas. However, due to the intuitive interface and real-time visual feedback provided by SAM2, the risk of such errors can be mitigated without imposing a significant burden on the user.
+\\\\
+To validate the correctness of the new hierarchical algorithm, a straightforward test configuration was devised: two prompts were defined—one describing the entire truck and one describing the wooden platform. The platform prompt was specified as a child node of the truck prompt, both utilizing the same prompt points as in the earlier experiments. The resulting segmentation is illustrated in Figure~\ref{fig:woodpair}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/woodpair.png}
+	\caption{Hierarchical segmentation of the truck and wooden platform. Left: both segments are shown in their original positions, appearing as a single cohesive object. Right: the wooden platform has been translated slightly to visually demonstrate its separation from the truck and to highlight the precision of the segmentation. Notable artifacts include small areas where the wood remains connected to the truck—likely due to minor segmentation inaccuracies in SAM2—and holes in the truck where the platform was extracted, resulting from missing splat data in occluded regions and the platform’s thin structure.
+	}
+	\label{fig:woodpair}
+\end{figure}
+\FloatBarrier
+\noindent
+\subsection{Multimask Automation}
+This section has explored the challenge of balancing user control with automation in the segmentation process. While the previously described hierarchical method offers extensive flexibility, it also places a considerable burden on the user to maintain logical consistency, particularly when defining complex hierarchies. In certain cases, it may be desirable to reduce user intervention, especially when the relationship between segments is sufficiently straightforward and can be inferred from the context of the object and scene. This motivates the search for a method that requires the user to annotate only a single segment, while automating the determination of hierarchical relationships, thereby simplifying the segmentation process without sacrificing accuracy.
+\\\\
+Once again, the key enabler of this approach is SAM itself. During image segmentation, SAM provides an optional parameter, \texttt{multimask\_output}, which, when set to true, instructs the model to generate multiple segmentation masks instead of a single one. Specifically, it returns three masks, each representing a different level of segmentation granularity (see Figure~\ref{fig:multidemo}). These masks are hierarchically nested, with each smaller mask fully contained within the next larger one, effectively creating a parent-child relationship. Additionally, each mask is accompanied by a confidence score, providing an automated means to evaluate the quality of the segmentation proposals and to filter out suboptimal candidates.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/multidemo.png}
+	\caption{Demonstration of SAM’s multilayer segmentation functionality on the LEGO bulldozer model. A single wheel was selected as the initial segment, resulting in three hierarchical masks: the smallest corresponds to the wheel itself, followed by the caterpillar tracks, and finally the entire bulldozer as the largest segment.
+	}
+	\label{fig:multidemo}
+\end{figure}
+\FloatBarrier
+\noindent
+It is important to note that the \texttt{multimask\_output} functionality is available only for image segmentation, not for video segmentation, which is the mode required for this project. However, video segmentation in SAM2 introduces an alternative feature that had not been utilized previously: in addition to providing prompts in the form of points or bounding boxes on a specific frame, the user can supply a full mask as input for that frame. This capability enables the following pipeline, as implemented in this thesis:
+\\
+The user provides standard prompt points to define a target segment, from which the image segmentation algorithm generates three hierarchical masks. Applying a simple filter based on the quality scores of these masks, only the most confident masks are retained. This produces a local hierarchy of the segment. Each of these confident masks is then used as an input prompt for video segmentation, resulting in corresponding masks for each frame in the video. The output data is then stored using the recursive data structure described in the previous section, with the hierarchical relationships already established by the multimask output. From this point onward, SAGD processes the input exactly as before, requiring no further modifications to the segmentation or rendering pipeline.
+
+
+
 
 
 
