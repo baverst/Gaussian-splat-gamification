@@ -14,6 +14,8 @@
 \begin{document}
 
 \begin{titlepage}
+\pagenumbering{gobble} % suppress page numbers completely
+
 	\centering
 	
 	%opening
@@ -41,16 +43,26 @@ These contributions enhance both rendering fidelity and workflow usability, adva
 \centering
 \tableofcontents
 \end{titlepage}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 \section{Introduction}
 Recent advances in 3D scene representation have shifted from traditional mesh-based models to point-based approaches. Among these, Gaussian splatting \parencite{OriginalSplatting} has emerged as a promising technique for real-time rendering of photorealistic scenes, leveraging a collection of 3D Gaussians to represent surfaces without relying on explicit geometry. This method achieves high visual fidelity while maintaining interactive frame rates, making it an attractive alternative to neural radiance fields (NeRF) and triangle meshes for real-time applications.
 \\\\
-This thesis began not with a formal hypothesis or a narrowly defined research question, but with a practical goal: to explore what it would take to animate a Gaussian Splat inside Unity, even if through improvised or non-standard means, to enable their use in interactive applications. The initial objective was to implement a functioning system, and to let the problems encountered along the way guide the direction of the project.
+This thesis began not with a formal hypothesis or a narrowly defined research question, but with a practical goal: to explore what it would take to animate a Gaussian Splat inside Unity, including alternative or non-standard methods, to enable their use in interactive applications. The initial objective was to develop a functional system, allowing challenges encountered during the process to inform and shape the subsequent research direction.
 \\\\
 This hands-on approach quickly revealed limitations in the widely referenced Unity Gaussian Splatting extension \parencite{Aras} that adopts a per-object rendering pipeline. In this approach, each splat object is sorted and rendered independently, leading to incorrect visual results when multiple splat objects overlap in a scene.
 \\\\
 With the rendering issue addressed, attention shifted to another practical barrier: the manual effort involved in preparing splat data for animation, particularly the segmentation of splats into hierarchical GameObjects. Recognizing that this bottleneck could hinder creative workflows, the project expanded to include the development of a semi-automatic segmentation pipeline aimed at balancing automation with user control.
 \\\\
 The result of this process is a set of improvements that emerged directly from a workflow-oriented, problem-driven journey that reflects the realities of adapting cutting-edge graphics techniques to real-time, interactive settings.
+\\\\
+To formalize the scope of this investigation, this thesis defines the following research question:\\
+Is global per-splat sorting essential to achieving acceptable rendering quality in Gaussian splatting, and if so, can it be effectively implemented in Unity? Furthermore, can semi-automatic segmentation methods (such as SAM, SAM2, and SAGD) reduce manual input requirements while maintaining or enhancing segmentation accuracy?
+\\\\
+The corresponding hypothesis is:
+\\
+While global per-splat sorting may not be strictly necessary to achieve acceptable rendering quality in Gaussian splatting, it can be effectively implemented if required to resolve rendering artifacts that cannot be addressed through simpler workarounds. Additionally, integrating semi-automatic segmentation methods such as SAM, SAM2, and SAGD will reduce manual input requirements while maintaining or improving segmentation accuracy.
 \\\\
 The structure of this thesis reflects that same exploratory trajectory. It begins with a background chapter, introducing Gaussian splatting and its origin, followed by an explanation of the existing Unity extension’s rendering pipeline. From there, each subsequent chapter follows the chronological order in which challenges arose and solutions were developed. First, the rendering issue and its resolution are discussed; next, the focus turns to the segmentation workflow and its implementation. This structure mirrors the iterative and hands-on approach of the project, allowing the reader to follow the evolving problem space and its solutions step by step.
 \section{Background}
@@ -60,16 +72,17 @@ In the field of computer graphics, the efficient rendering of complex 3D scenes 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/TriangleMesh.png}
-	\caption{Example of a triangle mesh, the most commonly used method for representing 3D objects in computer graphics. Image is taken from \cite{Mesh}.}
+	\caption{Example of a triangle mesh, the most commonly used method for representing 3D objects in computer graphics. Source: \cite{Mesh}.}
 	\label{fig:trianglemesh}
 \end{figure}
-\newpage
+\FloatBarrier
+\noindent
 \subsubsection{Neural Radiance Fields}
 One popular approach to addressing these challenges is Neural Radiance Fields (NeRF) \parencite{Nerf}. This method employs a neural network to learn a mapping from 3D position and viewing direction to a density and an RGB color. The network is trained on a video or a collection of images, allowing it to reconstruct a scene by learning the underlying volumetric representation. During rendering, a ray is cast through each pixel of the screen, and multiple points along the ray are sampled. The neural network takes the position of each point and the viewing direction of the ray as input, producing color and density values. These outputs are then aggregated to compute the final color of the pixel, enabling the generation of photorealistic scenes without the need for manually crafted 3D models (see Figure~\ref{fig:nerf}). However, due to the necessity of querying the neural network multiple times per pixel, this approach is computationally expensive and not suitable for real-time rendering.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/Nerf.png}
-	\caption{Rendering a scene using Neural Radiance Fields. Image is taken from \cite{Nerf}.}
+	\caption{Rendering a scene using Neural Radiance Fields. Source: \cite{Nerf}.}
 	\label{fig:nerf}
 \end{figure}
 \subsubsection{Gaussian Splatting}
@@ -222,7 +235,7 @@ The function iterates over all \texttt{GaussianSplatRenderer} objects stored and
 At regular intervals, specifically every set number of frames, the splats undergo sorting. This operation is managed by a custom sorter class, which was initialized during the \texttt{OnEnable} method. The class implements a specialized sorting algorithm known as "Device Radix Sort," leveraging the full potential of the GPU to ensure optimal performance. According to the comments in that class, this algorithm was adapted from another GitHub project \parencite{Sorting}. As with the sorting of the \texttt{GaussianSplatRenderer} objects, the depth of each splat relative to the camera’s coordinate space is used as the key for sorting.
 \\\\
 Similar to the final \texttt{DrawProcedural} invocation of the previous function, a material shader is employed at the end of each iteration of the loop to render the splats. Many of the operations within this loop are dedicated to populating graphics buffers with the necessary data for these shader computations. The most significant step in this process is the invocation of \texttt{CalcViewData}, which dispatches splat-related information to a compute shader. This compute shader determines the screen-space position of each splat using the object's transform matrix, the \texttt{cam.worldToCameraMatrix}, and the \texttt{cam.projectionMatrix}. Additionally, it calculates its independent horizontal and vertical extents, and derives its color and transparency based on the viewing angle and spherical harmonics. The computed results are then stored in a graphics buffer for subsequent use. \\\\
-Finally, \texttt{DrawProcedural} is called, enqueueing the rendering of this data for execution later in the rendering pipeline. As before, this rendering is performed using a material shader, a different one from the material shader used in \texttt{OnPreCullCamera}. Each splat is represented as two triangles, with the vertex shader transforming the computed screen position and stretch extents into appropriate triangle coordinates.
+Finally, \texttt{DrawProcedural} is called, enqueueing the rendering of this data for execution later in the rendering pipeline. This rendering step is also performed using a material shader, distinct from the shader used in \texttt{OnPreCullCamera}. Each splat is represented as two triangles, with the vertex shader transforming the computed screen position and stretch extents into appropriate triangle coordinates.
 \\\\
 As a brief reminder, as stated earlier, this \texttt{DrawProcedural} invocation does not render directly to the camera’s output but instead to the temporary render target \texttt{GaussianSplatRT}. Additionally, due to the sorting performed at the beginning of the loop, splats farther from the camera are rendered before those closer to it, ensuring correct per-object rendering order.\\\\
 With these steps described, the overall structure of the rendering pipeline for the Gaussian Splats becomes clear. The coordination between sorting, compute shaders, and material shaders ensures that the splats are accurately positioned, stretched, and rendered according to the camera’s view.
@@ -240,7 +253,7 @@ To initiate this phase of the research, it was necessary to select a suitable pr
 \end{figure}
 \FloatBarrier
 \noindent
-Obviously, not the entire scene is necessary for these purposes; only the LEGO bulldozer is required. Fortunately, the Unity extension being used includes a tool designed specifically for this type of task: cutouts. Within the GaussianSplatRenderer component of the relevant GameObject in the Unity Editor, a cutout can be added to the Gaussian Splat. This tool creates a cutout GameObject (either a box or an ellipsoid) as a child of the selected object. The cutout can be translated, rotated, and scaled like any other GameObject. Any splats of the selected object outside of the cutout are excluded from rendering. Additionally, there is an invert option that reverses the effect, making only the splats within the cutout invisible. A button allows the Gaussian Splat to be saved as a PLY file, accounting for all cutout modifications. This functionality was used to generate a PLY file and associated asset containing only the bulldozer, omitting the rest of the scene (see Figure~\ref{fig:wholetruck}).
+For these purposes, only the LEGO bulldozer is required, and not the entire scene. Fortunately, the Unity extension being used includes a tool designed specifically for this type of task: cutouts. Within the GaussianSplatRenderer component of the relevant GameObject in the Unity Editor, a cutout can be added to the Gaussian Splat. This tool creates a cutout GameObject (either a box or an ellipsoid) as a child of the selected object. The cutout can be translated, rotated, and scaled like any other GameObject. Any splats of the selected object outside of the cutout are excluded from rendering. Additionally, there is an invert option that reverses the effect, making only the splats within the cutout invisible. A button allows the Gaussian Splat to be saved as a PLY file, accounting for all cutout modifications. This functionality was used to generate a PLY file and associated asset containing only the bulldozer, omitting the rest of the scene (see Figure~\ref{fig:wholetruck}).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/WholeTruck.png}
@@ -259,7 +272,7 @@ To animate the LEGO bulldozer, the next step was to segment it into multiple par
 \end{figure}
 \FloatBarrier
 \noindent
-Fortunately, the error can be resolved by setting the z-value of the wheel GameObject’s position to $0.001$. Nonetheless, the need for this workaround already indicates that something is fundamentally wrong with the rendering process.
+This issue can be mitigated by adjusting the z-value of the wheel GameObject’s position to $0.001$. Nonetheless, the need for this workaround already indicates that something is fundamentally wrong with the rendering process.
 \\\\
 The next objective was to rotate the wheel around its own axis. However, this revealed a new challenge: the center of the wheel’s GameObject was inherited from the original full scene and therefore located far from the actual center of the wheel. In addition, the existing rotation axes were misaligned with the intended axes of rotation (see Figure~\ref{fig:wheel_center}).
 \begin{figure}[h!]
@@ -290,7 +303,7 @@ Further inspection revealed the underlying cause: rotating the wheel around the 
 \end{figure}
 \FloatBarrier
 \noindent
-The only way to eliminate this visual artifact is to align the origin of the Gaussian Splat with the center of the wheel. This requires modifying the underlying splat data in the corresponding .ply file. To achieve this, a small Python script was developed to automatically adjust the position values of each splat.
+A viable approach to eliminating this visual artifact involves aligning the origin of the Gaussian Splat with the geometric center of the wheel. This requires modifying the underlying splat data in the corresponding .ply file. To achieve this, a small Python script was developed to automatically adjust the position values of each splat.
 \\
 Initially, it seemed straightforward to have the script infer the desired center point automatically. Two potential approaches were implemented: calculating the average of the position values of all splats, and calculating the midpoint between the minimum and maximum position values along each axis. However, testing revealed that both methods resulted in a center point that was slightly offset, leading to imperfect alignment (see Figure~\ref{fig:left_av}). While other automatic methods, such as taking the size of the splats into account, could have been explored, they were not pursued. Instead, the decision was made to allow the user to manually input an offset value for greater control, particularly in cases where complex and irregular shapes may have a "desired" center that is difficult to compute automatically. The desired offset can be determined by applying the earlier alignment procedure with the cube and copying the position values of the wheel GameObject relative to its parent. The Python function solely modifies the center point of the GameObject, leaving the alignment of the axes unchanged, which is still achieved through the cube method. The most relevant part of the resulting Python script is provided below. The plyfile library \parencite{Plyfile} was used to load, edit and store the splat data:
 \begin{lstlisting}[tabsize=2,caption=Three potential functions for recentering the Gaussian Splat. The desired function is called on each of the three axes., label=code:re_center,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
@@ -544,7 +557,7 @@ SAGD (Segment Anything via Gaussian Decomposition) closely aligns with the goals
 \\\\
 The core process of SAGD begins with the user providing 2D prompts on one view of the scene. These prompts are mapped to their corresponding 3D Gaussians, which are then reprojected into multiple other views to identify the same splats from different perspectives. For each view, SAM is applied to generate a segmentation mask that reflects the user’s intent. Each Gaussian is then labeled based on a voting mechanism: if its projections consistently fall inside the masks across multiple views, it is included in the segment. To further improve the segmentation, SAGD employs Gaussian Decomposition at the segment boundary. This process splits overlapping splats into two parts—one included in the segment and the other excluded—producing a cleaner and more precise segmentation boundary. The final result is a segmentation of the Gaussian Splat that is both user-guided and geometrically refined.
 \\\\
-Fortunately, the authors of SAGD provide an open-source implementation of their method. However, this implementation does not include its own test data. As a result, it was necessary to identify a suitable pre-trained scene for evaluation. Unlike the previous part of this thesis, this time the implementation required not only a \texttt{.ply} file containing the splats but also detailed information about the camera positions used to generate the Gaussian Splat. Conveniently, several scenes from the original Gaussian Splatting paper were available for download, complete with the required camera information. Unfortunately, the scene with the LEGO bulldozer was not among them. The criteria for selecting a scene remained consistent: it needed to be simple, clear, and easy to segment. Among the available options, the truck scene emerged as the most suitable choice, as illustrated in Figure~\ref{fig:truck_scene}. This scene was also used as an example in the SAGD paper itself.
+The authors of SAGD provide an open-source implementation of their method, which facilitates integration into this research. However, this implementation does not include its own test data. As a result, it was necessary to identify a suitable pre-trained scene for evaluation. Unlike the previous part of this thesis, this time the implementation required not only a \texttt{.ply} file containing the splats but also detailed information about the camera positions used to generate the Gaussian Splat. Conveniently, several scenes from the original Gaussian Splatting paper were available for download, complete with the required camera information. Unfortunately, the scene with the LEGO bulldozer was not among them. The criteria for selecting a scene remained consistent: it needed to be simple, clear, and easy to segment. Among the available options, the truck scene emerged as the most suitable choice, as illustrated in Figure~\ref{fig:truck_scene}. This scene was also used as an example in the SAGD paper itself.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/truckscene.png}
@@ -699,7 +712,7 @@ Once again, the key enabler of this approach is SAM itself. During image segment
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/multidemo.png}
-	\caption{Demonstration of SAM’s multilayer segmentation functionality on the LEGO bulldozer model. A single wheel was selected as the initial segment, resulting in three hierarchical masks: the smallest corresponds to the wheel itself, followed by the caterpillar tracks, and finally the entire bulldozer as the largest segment.
+	\caption{Demonstration of SAM’s multimask segmentation functionality on the LEGO bulldozer model. A single wheel was selected as the initial segment, resulting in three hierarchical masks: the smallest corresponds to the wheel itself, followed by the caterpillar tracks, and finally the entire bulldozer as the largest segment.
 	}
 	\label{fig:multidemo}
 \end{figure}
@@ -708,12 +721,85 @@ Once again, the key enabler of this approach is SAM itself. During image segment
 It is important to note that the \texttt{multimask\_output} functionality is available only for image segmentation, not for video segmentation, which is the mode required for this project. However, video segmentation in SAM2 introduces an alternative feature that had not been utilized previously: in addition to providing prompts in the form of points or bounding boxes on a specific frame, the user can supply a full mask as input for that frame. This capability enables the following pipeline, as implemented in this thesis:
 \\
 The user provides standard prompt points to define a target segment, from which the image segmentation algorithm generates three hierarchical masks. Applying a simple filter based on the quality scores of these masks, only the most confident masks are retained. This produces a local hierarchy of the segment. Each of these confident masks is then used as an input prompt for video segmentation, resulting in corresponding masks for each frame in the video. The output data is then stored using the recursive data structure described in the previous section, with the hierarchical relationships already established by the multimask output. From this point onward, SAGD processes the input exactly as before, requiring no further modifications to the segmentation or rendering pipeline.
+\\\\
+However, during the implementation and experimentation with various \linebreak prompts and configurations, it became apparent that the original SAM provided superior results for image segmentation compared to SAM2. This was particularly evident when using the \texttt{multimask\_output} functionality, as demonstrated in Figure~\ref{fig:sam1better}. Consequently, despite SAM2’s integrated image segmentation capabilities, the pipeline was adjusted to maximize segmentation quality: the user provides prompt points, which are processed by the original SAM image segmentation to generate three hierarchical masks. These masks are then filtered based on confidence scores and subsequently used as input for the SAM2 video segmentation component. The resulting hierarchical masks are then processed by SAGD, which generates the final segmented Gaussian Splat. In effect, this approach integrates three distinct tools—SAM, SAM2, and SAGD—into a single pipeline to achieve optimal results.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/sam1v2.png}
+	\caption{Comparison of multimask output from SAM2 (left column) and original SAM (right column) for the same input prompt. Each row corresponds to one of the three hierarchical masks generated by the respective model. Despite identical input, SAM2 consistently fails to accurately segment the wooden platform as a distinct region, whereas SAM demonstrates clearer separation.
+	}
+	\label{fig:sam1better}
+\end{figure}
+\FloatBarrier
+\noindent
+As with all previous implementations, the new pipeline was tested on the same objects. Notably, this iteration required significantly less user input: due to the enhanced automation provided by the multimask segmentation approach, only a single positive prompt point was necessary to define the wooden platform and its hierarchical relationship with the truck, compared to the seven points required in the previous section. The resulting segmentation is illustrated in Figure~\ref{fig:multipair}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/multipair.png}
+	\caption{Result of the semi-automated multimask segmentation pipeline applied to the wooden platform and truck. The outcome closely resembles the segmentation achieved with full user control. The primary difference is the erroneous inclusion of a portion of the truck's blue frame in the wooden segment. Nonetheless, considering the substantial reduction in user input required, the overall result remains highly effective.
+	}
+	\label{fig:multipair}
+\end{figure}
+\FloatBarrier
+\noindent
+It is important to note that this tool is applicable only under specific criteria and is not intended to replace the simple hierarchical segmentation algorithm. Rather, it serves as a complementary tool, best suited for clear and pronounced segments where its automated approach can be effectively leveraged. In contrast, the hierarchical algorithm remains essential for handling more complex cases that require finer user control. This dual strategy ensures that, in the worst-case scenario, a user-friendly implementation is always available, while in the best case, segmentation can be achieved with minimal user effort.
+\subsection{Full Automation}
+As stated in the related work section, the primary focus of this part has been on user-guided segmentation, rather than fully automated approaches. However, as the developments progressed and the combination of SAM, SAM2, and SAGD matured, it became increasingly compelling to explore the extent to which these tools could be leveraged to approach full automation. If it were possible to identify all potential segments within a single frame, then the multimask output functionality, combined with video segmentation and SAGD, could be employed to propagate these segments throughout the video and generate the complete Gaussian Splat segmentation automatically.
+\\\\
+For the final time, SAM provides a suitable solution through its automatic mask generation functionality. This feature leverages a grid-based approach to systematically generate segmentation masks for the entire image. Specifically, it places a series of positive prompt points across a grid spanning the image, and for each prompt point, it generates a corresponding mask. These masks effectively partition the image into distinct segments, essentially fracturing the scene into its constituent parts (see Figure~\ref{fig:everything}).
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{Images/everything.png}
+	\caption{Segmentation of the LEGO bulldozer using SAM’s automatic mask generation functionality. The image illustrates the resulting distinct masks, each rendered in a different color, effectively partitioning the scene into separate segments.
+	}
+	\label{fig:everything}
+\end{figure}
+\FloatBarrier
+\noindent
+While this automatic mask generation provides an effective means of detecting all segments within a frame, masks as output format present certain challenges. Specifically, the multimask functionality cannot take a mask as input, which is essential for determining the underlying hierarchy and identifying how individual segments combine into larger parent segments. However, the automatic mask generation output includes not only the segmentation masks themselves, but also the specific point prompt that generated each mask. As a result, the masks themselves can be discarded, and what remains is a minimal set of point prompts that each define a unique segment. By applying the algorithm described in the previous section, each of these points can be expanded into a hierarchical set of segments. This approach brings the thesis close to achieving a fully segmented 3D Gaussian Splat with minimal user intervention.
+\\\\
+The primary limitation preventing fully automated segmentation at this stage is that the current processes operate in isolation; they do not interact or merge hierarchies. When multiple segments share overlapping or similar parent regions, many splats are duplicated across different outputs. To address this, it is necessary to consolidate all segments and their hierarchies into a single, cohesive structure. The most effective solution is to discard the parent-child relationships introduced by the multimask segmentation and instead compile all multimasks that exceed a certain quality threshold into a single list. This adjustment is essential because complex interactions between segments can introduce inconsistencies in the hierarchy, particularly when additional overlapping segments were not initially detected.
+\\\\
+Once all masks are consolidated into a list, duplicates can be effectively filtered out. The simplest approach is to iterate through the list and construct a second list of unique masks. To determine whether a mask is unique, it is compared against all masks already present in the unique list. This comparison is based on the Intersection over Union (IoU) metric, which calculates the ratio of the overlapping area between two masks to their combined area. By using IoU, even masks that are nearly identical except for minor pixel differences can be identified as duplicates and removed
+\\\\
+Finally, the parent-child relationships can be re-established from the ground up and stored in a recursive data structure. To construct this structure, the set of unique masks is first sorted from largest to smallest based on their size. The algorithm then iterates through this sorted list, assigning each mask as the child of the smallest mask that fully contains it. If no such enclosing mask exists, the mask is designated as a root segment without a parent. To determine containment, the algorithm calculates the ratio of the overlap area between two masks to the area of the smaller mask, ensuring that minor differences or outlier pixels do not disrupt the hierarchical assignment. At the end of the iteration, a complete recursive hierarchical structure is formed. The same recursive algorithm described in the previous section can then be applied seamlessly, generating video segmentations for each mask and ultimately producing the final Gaussian Splat segmentation.
+\\\\
+A final practical challenge emerged: the data structure was too large to fit within a single pickle dump file. To resolve this, the recursive hierarchical structure was emulated using a folder-based system. Each folder corresponds to a segment, containing a pickle file with its frame masks and a series of subfolders representing its child segments. SAGD processes this structure by traversing the folders and loading each pickle file individually. This approach effectively preserves the hierarchical segmentation while circumventing the limitations of the pickle format.
+\\\\
+With a large number of PLY files now generated for the hierarchical segments, it became necessary to extend the Unity extension by introducing a tool to automatically load these hierarchical PLY files. To enable the Unity code to recognize and reconstruct the hierarchy, the same folder-based approach described previously was adopted: each folder contains a single PLY file and a set of subfolders representing its subsegments. The new tool operates similarly to the existing PLY loader, but with key differences. Specifically, it traverses the entire folder structure, handles multiple PLY files simultaneously, and creates corresponding GameObjects in Unity with the appropriate PLY assets assigned. Moreover, it establishes the correct parent-child relationships among the GameObjects, based on the hierarchy inferred from the folder structure. This design enables the complete hierarchical scene to be loaded into Unity with a single operation.
+\\\\
+As with the previous sections, the final implementation was tested using the established scene, focusing on the first frame as a reference point. The setup remained consistent with earlier experiments, allowing for a direct comparison of the results achieved with the full automation approach. The resulting segmentation is illustrated in Figure~\ref{fig:truckparts} and Figure~\ref{fig:best}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/truckparts.png}
+	\caption{Exploded view of the truck’s segmentation, highlighting separated components for evaluation.}
+	\label{fig:truckparts}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Images/best.png}
+	\caption{A selection of non-truck segments extracted from the scene, illustrating examples of successful segmentation.}
+	\label{fig:best}
+\end{figure}
+\FloatBarrier
+\noindent
+While some segments were successfully extracted, an equal or greater number were found to be incomplete or incorrect, often representing only a small fraction of the intended object. This limitation is likely due to challenges in the voting system used to consolidate video segmentation masks into a single splat representation. Specifically, this system appears to struggle with handling occlusions and off-screen regions, which can lead to incomplete or fragmented segmentations. Despite these challenges, the automation approach remains a notable achievement. It demonstrates the full integration and utilization of SAM and SAM2 capabilities, achieving meaningful segmentation of several objects from an initially unsegmented scene. It is important to emphasize that users seeking more consistent and reliable segmentation results should consider the multimask approach or the recursive hierarchical method. These algorithms are designed to complement each other, offering flexibility depending on the segmentation requirements and complexity of the scene.
+\subsection{Conclusion}
+This section has demonstrated the evolution of segmentation techniques for Gaussian splatting, culminating in a system that balances user-guided input with varying levels of automation. Beginning with manual prompt-based segmentation, the work progressed through hierarchical segmentation using multimask outputs, and finally approached full automation with SAM’s automatic mask generation capabilities. Each stage built upon the previous, incrementally reducing the manual effort required while simultaneously expanding the scope and complexity of segmentable scenes.
+\\
+The segmentation strategies developed throughout this section illustrate both the strengths and limitations of current techniques. While full automation shows promise, it still faces challenges such as managing overlapping segments and inconsistencies in mask hierarchies. However, by offering a range of methods—from manual to semi-automated to fully automated—the pipeline provides a flexible and practical toolkit adaptable to various scene complexities and user needs. The tools and approaches developed here establish a solid foundation for preparing complex splat-based scenes for animation and further processing.
+\section{Future Work}
+While the rendering improvements introduced in this thesis successfully addressed key challenges, there remains potential for further streamlining and optimization. However, as these rendering changes do not present immediate obstacles to the functionality of the system, they have not been identified as a priority for future exploration.\\\\
+In contrast, segmentation continues to be a rich and open area for further research and development. Several promising directions could be pursued. One possibility involves implementing an automated camera system in Unity that dynamically captures multiple perspectives of an object, enabling segmentation of Gaussian splats even in the absence of the original training camera data.\\
+Another avenue lies in refining the current voting system, which consolidates per-frame segmentation results but struggles with occlusion and incomplete visibility. Investigating alternative voting mechanisms or occlusion-aware strategies could significantly enhance segmentation robustness.
+\\\\
+Additionally, there is considerable potential in exploring more advanced, hybrid approaches that integrate both image-based and geometric information. The current pipeline relies heavily on two-dimensional prompting and mask generation, yet the inherent properties of splats—such as position, size, orientation, and color—offer valuable cues that remain underutilized. Developing algorithms that fuse these geometric attributes with traditional image segmentation techniques could unlock more precise and comprehensive segmentation capabilities, further advancing the field.
+\section{Conclusion}
+This thesis has explored the challenges and possibilities of working with Gaussian splats, focusing on two primary aspects: rendering improvements and segmentation strategies. The research question posed whether global per-splat sorting is essential to achieve acceptable rendering quality in Gaussian splatting, and whether it can be effectively implemented in Unity. The corresponding hypothesis suggested that global per-splat sorting might not be strictly necessary but could be implemented if required. The findings of this thesis, however, demonstrate that global per-splat sorting is indeed essential to resolve rendering artifacts, thereby disproving the initial assumption. Nevertheless, the hypothesis regarding implementation was confirmed, as a global per-splat sorting approach was successfully developed and integrated into Unity, achieving the desired improvements in rendering quality.
 
+On the segmentation front, a progressive approach was adopted, beginning with manual prompt-based methods and culminating in a near-fully automated pipeline leveraging the capabilities of SAM, SAM2, and SAGD. The integration of hierarchical and multimask segmentation techniques demonstrated the potential for both fine control and increased efficiency. This supports the hypothesis that semi-automatic segmentation methods can reduce manual input requirements while maintaining, and in certain cases enhancing, segmentation accuracy. However, the results also revealed the inherent complexities and limitations of current systems, particularly in handling occlusion and building robust segment hierarchies.
 
-
-
-
-
+Although challenges remain, the contributions of this thesis provide a strong foundation for future work. By offering both practical tools and conceptual frameworks, it paves the way for continued development in the segmentation and rendering of Gaussian splats, with potential applications in interactive graphics, animation, and beyond.
 \FloatBarrier\addcontentsline{toc}{section}{References}
 \noindent\printbibliography
 \end{document}

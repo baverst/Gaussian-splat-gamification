@@ -1,18 +1,18 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
-[1] Config.pm:311> INFO - Logfile is 'Masterthesis.blg'
-[163] biber-MSWIN64:340> INFO - === 
-[227] Biber.pm:420> INFO - Reading 'Masterthesis.bcf'
-[380] Biber.pm:994> INFO - Found 30 citekeys in bib section 0
-[403] Biber.pm:4463> INFO - Processing section 0
-[422] Biber.pm:4654> INFO - Looking for bibtex file 'references.bib' for section 0
-[536] bibtex.pm:1713> INFO - LaTeX decoding ...
-[588] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[958] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[958] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[958] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
-[958] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[1014] bbl.pm:676> INFO - Writing 'Masterthesis.bbl' with encoding 'UTF-8'
-[1063] bbl.pm:779> INFO - Output to Masterthesis.bbl
-[1064] Biber.pm:131> WARN - legacy month field 'June' in entry 'ArasRecc1' is not an integer - this will probably not sort properly.
-[1064] Biber.pm:131> WARN - legacy month field 'December' in entry 'ArasRecc2' is not an integer - this will probably not sort properly.
-[1064] Biber.pm:133> INFO - WARNINGS: 2
+[0] Config.pm:311> INFO - Logfile is 'Masterthesis.blg'
+[153] biber-MSWIN64:340> INFO - === 
+[208] Biber.pm:420> INFO - Reading 'Masterthesis.bcf'
+[360] Biber.pm:994> INFO - Found 30 citekeys in bib section 0
+[379] Biber.pm:4463> INFO - Processing section 0
+[397] Biber.pm:4654> INFO - Looking for bibtex file 'references.bib' for section 0
+[468] bibtex.pm:1713> INFO - LaTeX decoding ...
+[521] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[915] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[915] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[916] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[916] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[965] bbl.pm:676> INFO - Writing 'Masterthesis.bbl' with encoding 'UTF-8'
+[1014] bbl.pm:779> INFO - Output to Masterthesis.bbl
+[1014] Biber.pm:131> WARN - legacy month field 'June' in entry 'ArasRecc1' is not an integer - this will probably not sort properly.
+[1015] Biber.pm:131> WARN - legacy month field 'December' in entry 'ArasRecc2' is not an integer - this will probably not sort properly.
+[1015] Biber.pm:133> INFO - WARNINGS: 2

@@ -1,16 +1,16 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{}%
-\contentsline {section}{\numberline {2}Background}{2}{}%
-\contentsline {subsection}{\numberline {2.1}From Meshes to Gaussian Splatting}{2}{}%
-\contentsline {subsubsection}{\numberline {2.1.1}Triangle Meshes}{2}{}%
+\contentsline {section}{\numberline {2}Background}{3}{}%
+\contentsline {subsection}{\numberline {2.1}From Meshes to Gaussian Splatting}{3}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}Triangle Meshes}{3}{}%
 \contentsline {subsubsection}{\numberline {2.1.2}Neural Radiance Fields}{4}{}%
-\contentsline {subsubsection}{\numberline {2.1.3}Gaussian Splatting}{4}{}%
-\contentsline {subsection}{\numberline {2.2}Unity Extension}{6}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}Introduction}{6}{}%
+\contentsline {subsubsection}{\numberline {2.1.3}Gaussian Splatting}{5}{}%
+\contentsline {subsection}{\numberline {2.2}Unity Extension}{7}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}Introduction}{7}{}%
 \contentsline {subsubsection}{\numberline {2.2.2}Adding a Gaussian Splat to the Scene}{7}{}%
 \contentsline {subsubsection}{\numberline {2.2.3}Initializing the Rendering Process: The Role of \texttt {OnEnable}}{8}{}%
 \contentsline {subsubsection}{\numberline {2.2.4}The Rendering Pipeline}{10}{}%
-\contentsline {section}{\numberline {3}Part 1: Correcting the Rendering Order}{15}{}%
-\contentsline {subsection}{\numberline {3.1}Introduction}{15}{}%
+\contentsline {section}{\numberline {3}Part 1: Correcting the Rendering Order}{16}{}%
+\contentsline {subsection}{\numberline {3.1}Introduction}{16}{}%
 \contentsline {subsection}{\numberline {3.2}Preparing the scene}{16}{}%
 \contentsline {subsection}{\numberline {3.3}Animating a segment}{18}{}%
 \contentsline {subsection}{\numberline {3.4}Moving the camera}{24}{}%
@@ -24,4 +24,8 @@
 \contentsline {subsection}{\numberline {4.5}SAM2}{48}{}%
 \contentsline {subsection}{\numberline {4.6}Hierarchy}{55}{}%
 \contentsline {subsection}{\numberline {4.7}Multimask Automation}{58}{}%
-\contentsline {section}{References}{60}{}%
+\contentsline {subsection}{\numberline {4.8}Full Automation}{62}{}%
+\contentsline {subsection}{\numberline {4.9}Conclusion}{68}{}%
+\contentsline {section}{\numberline {5}Future Work}{68}{}%
+\contentsline {section}{\numberline {6}Conclusion}{69}{}%
+\contentsline {section}{References}{70}{}%
