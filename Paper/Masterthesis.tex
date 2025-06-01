@@ -444,6 +444,9 @@ To implement this global system, much of the logic previously contained within \
 \begin{lstlisting}[tabsize=2,caption=New RegisterSplat and UnregisterSplat, label=code:register,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
 public void RegisterSplat(GaussianSplatRenderer r)
 {
+	if(r.asset == null)
+	return;
+	
 	if (m_Splats.Count == 0)
 	{
 		m_FrameCounter = 0;
@@ -468,10 +471,10 @@ public void RegisterSplat(GaussianSplatRenderer r)
 
 public void UnregisterSplat(GaussianSplatRenderer r)
 {
-	int splatCount = r.asset.splatCount;
-
 	if (!m_Splats.ContainsKey(r))
 	return;
+	
+	int splatCount = r.asset.splatCount;
 	
 	int removedOffset = m_Splats[r].Item2;
 	m_Splats.Remove(r);
@@ -512,7 +515,7 @@ After the complete implementation of this global sorting and rendering system, w
 \end{figure}
 \FloatBarrier
 \noindent
-After further testing, a final issue was discovered, which fortunately proved to be straightforward to resolve: switching the asset assigned to a 
+After further testing, a final issue was discovered, which proved to be straightforward to resolve: switching the asset assigned to a 
 \linebreak 
 \texttt{GaussianSplatRenderer} caused the editor to crash. This problem arose because changing the asset neither enabled nor disabled the associated GameObject, yet it still altered the number of splats represented by that object.
 \\
@@ -524,6 +527,7 @@ To resolve the resulting issues with the global buffer size and offset managemen
 \begin{lstlisting}[tabsize=2,caption=A small adjustment to UnregisterSplat, label=code:unregister,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
 public void UnregisterSplat(GaussianSplatRenderer r, int splatCount = -1)
 {
+	...
 	if(splatCount == -1){
 		splatCount = r.asset.splatCount;
 	}	

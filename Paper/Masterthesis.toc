@@ -19,16 +19,16 @@
 \contentsline {subsection}{\numberline {3.4}Moving the camera}{24}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Global per-splat sorting}{28}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Conclusion}{36}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Part 2: Hierarchical Segmentation}{36}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Introduction}{36}{subsection.4.1}%
+\contentsline {section}{\numberline {4}Part 2: Hierarchical Segmentation}{37}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{37}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Relevant work}{38}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}SAM}{40}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}SAGD}{41}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}SAM2}{47}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Hierarchy}{54}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}Multimask Automation}{57}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}Full Automation}{61}{subsection.4.8}%
-\contentsline {subsection}{\numberline {4.9}Conclusion}{67}{subsection.4.9}%
-\contentsline {section}{\numberline {5}Future Work}{67}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{68}{section.6}%
-\contentsline {section}{References}{69}{section.6}%
+\contentsline {subsection}{\numberline {4.5}SAM2}{48}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Hierarchy}{55}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Multimask Automation}{58}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Full Automation}{62}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Conclusion}{68}{subsection.4.9}%
+\contentsline {section}{\numberline {5}Future Work}{68}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{69}{section.6}%
+\contentsline {section}{References}{70}{section.6}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2025.2.14)  1 JUN 2025 23:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2025.2.14)  1 JUN 2025 23:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -747,7 +747,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.32 ...\numberline {5}Future Work}{67}{section.5}
+l.32 ...\numberline {5}Future Work}{68}{section.5}
                                                   % [1])
 \tf@toc=\write4
 \openout4 = `Masterthesis.toc'.
@@ -1104,147 +1104,159 @@ s trans-ferred to the
 [32]
 
 [33]
-<Images/finalrender.png, id=715, 976.39781pt x 271.0125pt>
+<Images/finalrender.png, id=717, 976.39781pt x 271.0125pt>
 File: Images/finalrender.png Graphic file (type png)
 <use Images/finalrender.png>
-Package pdftex.def Info: Images/finalrender.png  used on input line 509.
+Package pdftex.def Info: Images/finalrender.png  used on input line 512.
 (pdftex.def)             Requested size: 390.0pt x 108.25006pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 504--513
+Underfull \hbox (badness 10000) in paragraph at lines 507--516
 
  []
 
 
-Underfull \hbox (badness 3838) in paragraph at lines 514--524
-\OT1/cmr/m/n/12 be straight-for-ward to re-solve: switch-ing the as-set as-sign
-ed to a
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 517--527
+\OT1/cmr/m/n/12 for-ward to re-solve: switch-ing the as-set as-signed to a
  []
 
 
-Overfull \hbox (2.13483pt too wide) in paragraph at lines 514--524
+Overfull \hbox (2.13483pt too wide) in paragraph at lines 517--527
 \OT1/cmr/m/n/12 cause chang-ing the as-set nei-ther en-abled nor dis-abled the 
 as-so-ci-ated GameOb-
  []
 
 
-Underfull \hbox (badness 1460) in paragraph at lines 514--524
+Underfull \hbox (badness 1460) in paragraph at lines 517--527
 \OT1/cmr/m/n/12 ment, the sim-plest so-lu-tion is to call \OT1/cmtt/m/n/12 Unre
 gisterSplat \OT1/cmr/m/n/12 fol-lowed by
  []
 
 
 
-[34 <./Images/finalrender.png>]
-
-[35]
-Underfull \hbox (badness 4467) in paragraph at lines 537--547
+[35 <./Images/finalrender.png>]
+Underfull \hbox (badness 4467) in paragraph at lines 541--551
 \OT1/cmr/m/n/12 due to the shift from \OT1/cmtt/m/n/12 GaussianSplatRenderer \O
 T1/cmr/m/n/12 to the cen-tral-ized
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 537--547
+Underfull \hbox (badness 10000) in paragraph at lines 541--551
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 537--547
+Underfull \hbox (badness 10000) in paragraph at lines 541--551
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 537--547
+Underfull \hbox (badness 10000) in paragraph at lines 541--551
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 537--547
+Underfull \hbox (badness 10000) in paragraph at lines 541--551
 
  []
 
 
 
 [36]
-Underfull \hbox (badness 10000) in paragraph at lines 548--561
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 548--561
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 548--561
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 548--561
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 548--561
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 548--561
-
- []
-
-
 
 [37]
+Underfull \hbox (badness 10000) in paragraph at lines 552--565
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 552--565
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 552--565
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 552--565
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 552--565
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 552--565
+
+ []
+
+
 
 [38]
 
 [39]
-<Images/samdemo.png, id=788, 694.09312pt x 234.1247pt>
+<Images/samdemo.png, id=785, 694.09312pt x 234.1247pt>
 File: Images/samdemo.png Graphic file (type png)
 <use Images/samdemo.png>
-Package pdftex.def Info: Images/samdemo.png  used on input line 565.
+Package pdftex.def Info: Images/samdemo.png  used on input line 569.
 (pdftex.def)             Requested size: 390.0pt x 131.55548pt.
 
 
-[40 <./Images/samdemo.png>]
-<Images/truckscene.png, id=797, 597.432pt x 260.172pt>
+[40]
+<Images/truckscene.png, id=800, 597.432pt x 260.172pt>
 File: Images/truckscene.png Graphic file (type png)
 <use Images/truckscene.png>
-Package pdftex.def Info: Images/truckscene.png  used on input line 580.
+Package pdftex.def Info: Images/truckscene.png  used on input line 584.
 (pdftex.def)             Requested size: 390.0pt x 169.84421pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 573--584
+Underfull \hbox (badness 10000) in paragraph at lines 577--588
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 573--584
+Underfull \hbox (badness 10000) in paragraph at lines 577--588
 
  []
 
 
-Overfull \hbox (3.98769pt too wide) in paragraph at lines 573--584
+Overfull \hbox (3.98769pt too wide) in paragraph at lines 577--588
 \OT1/cmr/m/n/12 The au-thors of SAGD pro-vide an open-source im-ple-men-ta-tion
  of their method,
  []
 
 
 
-[41]
-<Images/goodsagd.png, id=803, 572.1375pt x 256.70906pt>
+[41 <./Images/samdemo.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[42]
+<Images/goodsagd.png, id=812, 572.1375pt x 256.70906pt>
 File: Images/goodsagd.png Graphic file (type png)
 <use Images/goodsagd.png>
-Package pdftex.def Info: Images/goodsagd.png  used on input line 589.
+Package pdftex.def Info: Images/goodsagd.png  used on input line 593.
 (pdftex.def)             Requested size: 390.0pt x 174.9868pt.
 
 
-[42 <./Images/truckscene.png>]
-<Images/badsagd.png, id=811, 372.64218pt x 206.27063pt>
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[43 <./Images/truckscene.png>]
+<Images/badsagd.png, id=820, 372.64218pt x 206.27063pt>
 File: Images/badsagd.png Graphic file (type png)
 <use Images/badsagd.png>
-Package pdftex.def Info: Images/badsagd.png  used on input line 598.
+Package pdftex.def Info: Images/badsagd.png  used on input line 602.
 (pdftex.def)             Requested size: 390.0pt x 215.88551pt.
 
 
@@ -1252,18 +1264,18 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[43 <./Images/goodsagd.png>]
+[44 <./Images/goodsagd.png>]
 
-[44 <./Images/badsagd.png>]
-<Images/nodecomp.png, id=827, 234.8775pt x 124.0635pt>
+[45 <./Images/badsagd.png>]
+<Images/nodecomp.png, id=835, 234.8775pt x 124.0635pt>
 File: Images/nodecomp.png Graphic file (type png)
 <use Images/nodecomp.png>
-Package pdftex.def Info: Images/nodecomp.png  used on input line 612.
+Package pdftex.def Info: Images/nodecomp.png  used on input line 616.
 (pdftex.def)             Requested size: 350.99762pt x 185.40002pt.
-<Images/withdecomp.png, id=828, 232.4685pt x 127.677pt>
+<Images/withdecomp.png, id=836, 232.4685pt x 127.677pt>
 File: Images/withdecomp.png Graphic file (type png)
 <use Images/withdecomp.png>
-Package pdftex.def Info: Images/withdecomp.png  used on input line 618.
+Package pdftex.def Info: Images/withdecomp.png  used on input line 622.
 (pdftex.def)             Requested size: 350.99762pt x 192.80083pt.
 
 
@@ -1274,67 +1286,67 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[45]
+[46]
 
-[46 <./Images/nodecomp.png> <./Images/withdecomp.png>]
-<Images/children.png, id=844, 852.18375pt x 466.74374pt>
+[47 <./Images/nodecomp.png> <./Images/withdecomp.png>]
+<Images/children.png, id=852, 852.18375pt x 466.74374pt>
 File: Images/children.png Graphic file (type png)
 <use Images/children.png>
-Package pdftex.def Info: Images/children.png  used on input line 632.
+Package pdftex.def Info: Images/children.png  used on input line 636.
 (pdftex.def)             Requested size: 390.0pt x 213.60794pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 626--636
+Underfull \hbox (badness 10000) in paragraph at lines 630--640
 
  []
 
 
 
-[47
+[48
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 637--643
+Underfull \hbox (badness 10000) in paragraph at lines 641--647
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 637--643
+Underfull \hbox (badness 10000) in paragraph at lines 641--647
 
  []
 
 
 
-[48 <./Images/children.png>]
-<Images/sam2struggle.png, id=857, 1225.57875pt x 662.475pt>
+[49 <./Images/children.png>]
+<Images/sam2struggle.png, id=865, 1225.57875pt x 662.475pt>
 File: Images/sam2struggle.png Graphic file (type png)
 <use Images/sam2struggle.png>
-Package pdftex.def Info: Images/sam2struggle.png  used on input line 649.
+Package pdftex.def Info: Images/sam2struggle.png  used on input line 653.
 (pdftex.def)             Requested size: 390.0pt x 210.80353pt.
-<Images/sam2adapt.png, id=858, 715.92468pt x 132.495pt>
+<Images/sam2adapt.png, id=866, 715.92468pt x 132.495pt>
 File: Images/sam2adapt.png Graphic file (type png)
 <use Images/sam2adapt.png>
-Package pdftex.def Info: Images/sam2adapt.png  used on input line 655.
+Package pdftex.def Info: Images/sam2adapt.png  used on input line 659.
 (pdftex.def)             Requested size: 390.0pt x 72.17699pt.
 
 
-[49]
+[50]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[50 <./Images/sam2struggle.png>]
-<Images/sam2whole.png, id=871, 1251.17438pt x 566.115pt>
+[51 <./Images/sam2struggle.png>]
+<Images/sam2whole.png, id=879, 1251.17438pt x 566.115pt>
 File: Images/sam2whole.png Graphic file (type png)
 <use Images/sam2whole.png>
-Package pdftex.def Info: Images/sam2whole.png  used on input line 666.
+Package pdftex.def Info: Images/sam2whole.png  used on input line 670.
 (pdftex.def)             Requested size: 390.0pt x 176.4613pt.
-<Images/sam2wood.png, id=874, 1251.17438pt x 566.115pt>
+<Images/sam2wood.png, id=882, 1251.17438pt x 566.115pt>
 File: Images/sam2wood.png Graphic file (type png)
 <use Images/sam2wood.png>
-Package pdftex.def Info: Images/sam2wood.png  used on input line 672.
+Package pdftex.def Info: Images/sam2wood.png  used on input line 676.
 (pdftex.def)             Requested size: 390.0pt x 176.4613pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 660--676
+Underfull \hbox (badness 10000) in paragraph at lines 664--680
 
  []
 
@@ -1346,99 +1358,99 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[51 <./Images/sam2adapt.png>]
-<Images/sagdwoodply.png, id=884, 232.4685pt x 102.98476pt>
+[52 <./Images/sam2adapt.png>]
+<Images/sagdwoodply.png, id=893, 232.4685pt x 102.98476pt>
 File: Images/sagdwoodply.png Graphic file (type png)
 <use Images/sagdwoodply.png>
-Package pdftex.def Info: Images/sagdwoodply.png  used on input line 682.
+Package pdftex.def Info: Images/sagdwoodply.png  used on input line 686.
 (pdftex.def)             Requested size: 390.0pt x 172.79317pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 677--687
+Underfull \hbox (badness 10000) in paragraph at lines 681--691
 
  []
 
 
 
-[52 <./Images/sam2whole.png> <./Images/sam2wood.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 690--695
+[53 <./Images/sam2whole.png> <./Images/sam2wood.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 694--699
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 690--695
+Underfull \hbox (badness 10000) in paragraph at lines 694--699
 
  []
 
 
 
-[53 <./Images/sagdwoodply.png>]
-<Images/woodpair.png, id=897, 752.8125pt x 209.28188pt>
+[54 <./Images/sagdwoodply.png>]
+<Images/woodpair.png, id=905, 752.8125pt x 209.28188pt>
 File: Images/woodpair.png Graphic file (type png)
 <use Images/woodpair.png>
-Package pdftex.def Info: Images/woodpair.png  used on input line 718.
+Package pdftex.def Info: Images/woodpair.png  used on input line 722.
 (pdftex.def)             Requested size: 390.0pt x 108.42163pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 707--723
+Underfull \hbox (badness 10000) in paragraph at lines 711--727
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 707--723
+Underfull \hbox (badness 10000) in paragraph at lines 711--727
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 707--723
+Underfull \hbox (badness 10000) in paragraph at lines 711--727
 
  []
 
 
-
-[54]
 
 [55]
-<Images/multidemo.png, id=918, 658.25925pt x 375.20175pt>
+
+[56]
+<Images/multidemo.png, id=926, 658.25925pt x 375.20175pt>
 File: Images/multidemo.png Graphic file (type png)
 <use Images/multidemo.png>
-Package pdftex.def Info: Images/multidemo.png  used on input line 731.
+Package pdftex.def Info: Images/multidemo.png  used on input line 735.
 (pdftex.def)             Requested size: 390.0pt x 222.29457pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 726--736
+Underfull \hbox (badness 10000) in paragraph at lines 730--740
 
  []
 
 
 
-[56 <./Images/woodpair.png>]
+[57 <./Images/woodpair.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[57]
-<Images/sam1v2.png, id=930, 986.9372pt x 657.2053pt>
+[58]
+<Images/sam1v2.png, id=939, 986.9372pt x 657.2053pt>
 File: Images/sam1v2.png Graphic file (type png)
 <use Images/sam1v2.png>
-Package pdftex.def Info: Images/sam1v2.png  used on input line 745.
+Package pdftex.def Info: Images/sam1v2.png  used on input line 749.
 (pdftex.def)             Requested size: 390.0pt x 259.70857pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 737--750
+Underfull \hbox (badness 10000) in paragraph at lines 741--754
 
  []
 
 
 
-[58 <./Images/multidemo.png>]
+[59 <./Images/multidemo.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[59]
-<Images/multipair.png, id=943, 701.62125pt x 197.23688pt>
+[60]
+<Images/multipair.png, id=951, 701.62125pt x 197.23688pt>
 File: Images/multipair.png Graphic file (type png)
 <use Images/multipair.png>
-Package pdftex.def Info: Images/multipair.png  used on input line 755.
+Package pdftex.def Info: Images/multipair.png  used on input line 759.
 (pdftex.def)             Requested size: 390.0pt x 109.63628pt.
 
 
@@ -1446,124 +1458,124 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[60 <./Images/sam1v2.png>]
-<Images/everything.png, id=950, 356.532pt x 286.06876pt>
+[61 <./Images/sam1v2.png>]
+<Images/everything.png, id=958, 356.532pt x 286.06876pt>
 File: Images/everything.png Graphic file (type png)
 <use Images/everything.png>
-Package pdftex.def Info: Images/everything.png  used on input line 769.
+Package pdftex.def Info: Images/everything.png  used on input line 773.
 (pdftex.def)             Requested size: 234.00238pt x 187.76271pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 764--774
+Underfull \hbox (badness 10000) in paragraph at lines 768--778
 
  []
 
 
 
-[61 <./Images/multipair.png>]
-<Images/truckparts.png, id=957, 407.72325pt x 226.446pt>
+[62 <./Images/multipair.png>]
+<Images/truckparts.png, id=965, 407.72325pt x 226.446pt>
 File: Images/truckparts.png Graphic file (type png)
 <use Images/truckparts.png>
-Package pdftex.def Info: Images/truckparts.png  used on input line 791.
+Package pdftex.def Info: Images/truckparts.png  used on input line 795.
 (pdftex.def)             Requested size: 390.0pt x 216.60132pt.
-<Images/best.png, id=958, 335.45325pt x 155.3805pt>
+<Images/best.png, id=966, 335.45325pt x 155.3805pt>
 File: Images/best.png Graphic file (type png)
 <use Images/best.png>
-Package pdftex.def Info: Images/best.png  used on input line 797.
+Package pdftex.def Info: Images/best.png  used on input line 801.
 (pdftex.def)             Requested size: 390.0pt x 180.654pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 775--801
+Underfull \hbox (badness 10000) in paragraph at lines 779--805
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 775--801
+Underfull \hbox (badness 10000) in paragraph at lines 779--805
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 775--801
+Underfull \hbox (badness 10000) in paragraph at lines 779--805
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 775--801
+Underfull \hbox (badness 10000) in paragraph at lines 779--805
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 775--801
+Underfull \hbox (badness 10000) in paragraph at lines 779--805
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 775--801
+Underfull \hbox (badness 10000) in paragraph at lines 779--805
 
  []
 
 
 
-[62 <./Images/everything.png>]
-
-[63]
+[63 <./Images/everything.png>]
 
 [64]
+
+[65]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[65 <./Images/truckparts.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 802--806
+[66 <./Images/truckparts.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 806--810
 
  []
 
 
 
-[66 <./Images/best.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 811--817
+[67 <./Images/best.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 815--821
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 811--817
+Underfull \hbox (badness 10000) in paragraph at lines 815--821
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 811--817
-
- []
-
-
-
-[67]
-Underfull \hbox (badness 10000) in paragraph at lines 818--823
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 818--823
+Underfull \hbox (badness 10000) in paragraph at lines 815--821
 
  []
 
 
 
-[68] (Masterthesis.bbl
+[68]
+Underfull \hbox (badness 10000) in paragraph at lines 822--827
 
-[69]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 822--827
+
+ []
+
+
+
+[69] (Masterthesis.bbl
+
+[70]
 Underfull \hbox (badness 1629) in paragraph at lines 66--70
 \OT1/cmr/m/n/12 3d with ai tools. Ac-cessed: 2025-02-16. [On-
  []
 
 
 
-[70]
-
 [71]
 
-[72])
+[72]
 
-[73] (Masterthesis.aux)
+[73])
+
+[74] (Masterthesis.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1572,9 +1584,9 @@ Package rerunfilecheck Info: File `Masterthesis.out' has not changed.
 (rerunfilecheck)             Checksum: E81E00D315E5D11E7607BE0E7B1840DF;4613.
  ) 
 Here is how much of TeX's memory you used:
- 13756 strings out of 473530
- 219282 string characters out of 5714794
- 862627 words of memory out of 5000000
+ 13761 strings out of 473530
+ 219345 string characters out of 5714794
+ 863627 words of memory out of 5000000
  36427 multiletter control sequences out of 15000+600000
  564888 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1593,9 +1605,9 @@ C:/Users/verst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmt
 i12.pfb><C:/Users/verst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmtt10.pfb><C:/Users/verst/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmtt12.pfb>
-Output written on Masterthesis.pdf (88 pages, 21638341 bytes).
+Output written on Masterthesis.pdf (89 pages, 21639869 bytes).
 PDF statistics:
- 1177 PDF objects out of 1200 (max. 8388607)
- 388 named destinations out of 1000 (max. 500000)
+ 1186 PDF objects out of 1200 (max. 8388607)
+ 393 named destinations out of 1000 (max. 500000)
  499 words of extra memory for PDF output out of 10000 (max. 10000000)
 
