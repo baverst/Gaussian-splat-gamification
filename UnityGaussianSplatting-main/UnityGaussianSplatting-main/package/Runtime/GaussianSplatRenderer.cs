@@ -39,7 +39,7 @@ namespace GaussianSplatting.Runtime
         
         public void RegisterSplat(GaussianSplatRenderer r)
         {
-            if(r.m_Asset == null)
+            if(r.asset == null)
                 return;
             if (m_Splats.Count == 0)
             {
