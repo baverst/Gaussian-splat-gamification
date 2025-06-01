@@ -1,33 +1,34 @@
 \documentclass[12pt]{article}
 \usepackage{placeins}
-
+\usepackage{pdfpages}
+\usepackage[dutch,english]{babel}
 \usepackage{listings}
 \renewcommand{\lstlistingname}{Code}
 \usepackage{xcolor}
 \lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
 \usepackage{graphicx}
-\usepackage[style=authoryear]{biblatex}
+
 \usepackage{setspace}
-\addbibresource{references.bib}
+\usepackage{hyperref}
+
+
 \onehalfspacing
 
 \begin{document}
-
-\begin{titlepage}
-\pagenumbering{gobble} % suppress page numbers completely
-
-	\centering
-	
-	%opening
-	\title{Multi-Splat Representations \\ {\large Segmentation and Object Manipulation in Gaussian Splatting}}
-	
-	\author{Bavo Verstraeten}
-	
-	
-	
-	\maketitle
-\end{titlepage}
-	
+\includepdf[pages=1]{titelblad.pdf}
+\pagenumbering{gobble}
+\newpage
+\selectlanguage{dutch}
+\section*{Samenvatting}
+Gaussian splatting is een innovatieve techniek voor het real-time renderen van complexe scènes. Deze masterproef verbetert de bruikbaarheid en nauwkeurigheid van Gaussian splats in de Unity-engine door een bestaande open-source Unity-extensie uit te breiden.
+\\\\
+De studie richt zich op twee centrale uitdagingen. Allereerst leidde de oorspronkelijke Unity-extensie tot visuele artefacten bij overlappende \linebreak splat-objecten, omdat de sortering en rendering per GameObject gebeurde. Dit probleem werd opgelost door de renderingspipeline aan te passen, zodat een globale sortering per splat wordt uitgevoerd. Hierdoor wordt de correcte dieptevolgorde in de volledige scène gegarandeerd.
+\\\\
+Ten tweede vereist de voorbereiding van splats voor animatie in Unity traditioneel handmatige en foutgevoelige segmentatie. Om dit proces te vergemakkelijken, werd een semi-automatische segmentatie-pipeline ontwikkeld door de tools SAM, SAM2 en SAGD te combineren. Deze aanpak automatiseert een groot deel van het segmentatieproces, terwijl gebruikerscontrole voor verfijning en correctie behouden blijft. Dit resulteert in hiërarchisch opgebouwde GameObjects, gebaseerd op splat-data.
+\\\\
+Deze bijdragen verbeteren zowel de visuele kwaliteit van de rendering als de efficiëntie van de workflow, en bevorderen de integratie van Gaussian splatting in real-time interactieve toepassingen.
+\newpage
+\selectlanguage{english}
 \begin{abstract}
 Gaussian splatting is a novel technique for real-time rendering of complex scenes. This thesis improves the usability and accuracy of Gaussian splats in the Unity engine by extending an existing open-source Unity extension.
 \\\\
@@ -38,7 +39,23 @@ Second, the preparation of splats for animation in Unity traditionally requires 
 These contributions enhance both rendering fidelity and workflow usability, advancing the integration of Gaussian splatting into real-time interactive applications.
 
 \end{abstract}
-
+\newpage
+\includepdf[pages={1-4}]{enext.pdf}
+\newpage
+\includepdf[pages={1-4}]{nlext.pdf}
+\section*{Acknowledgments}
+I would like to express my sincere gratitude to my supervisors, Prof. dr. Peter Lambert and Prof. dr. ir. Glenn Van Wallendael, for their invaluable guidance and feedback throughout this thesis. Their consistent support and expertise were instrumental in its completion.
+\\
+A special thanks goes to Bert Ramlot, whose regular presence and insights during meetings were incredibly helpful.
+\\
+I am especially grateful for the frequent meetings—often on a weekly \linebreak basis—which kept me focused and provided crucial direction. Without this support, the project would not have reached this stage.
+\\
+Finally, I wish to thank my family and friends for their ongoing encouragement and understanding during this challenging but rewarding process.
+\newpage
+\section*{Toelating tot bruikleen}
+De auteur geeft de toelating deze masterproef voor consultatie beschikbaar te stellen en delen van de masterproef te kopiëren voor persoonlijk gebruik. Elk ander gebruik valt onder de bepalingen van het auteursrecht, in het bijzonder met betrekking tot de verplichting de bron uitdrukkelijk te vermelden bij het aanhalen van resultaten uit deze masterproef.
+\\\\
+Bavo Verstraeten, 1 juni 2025
 \begin{titlepage}
 \centering
 \tableofcontents
@@ -47,11 +64,11 @@ These contributions enhance both rendering fidelity and workflow usability, adva
 \setcounter{page}{1}
 
 \section{Introduction}
-Recent advances in 3D scene representation have shifted from traditional mesh-based models to point-based approaches. Among these, Gaussian splatting \parencite{OriginalSplatting} has emerged as a promising technique for real-time rendering of photorealistic scenes, leveraging a collection of 3D Gaussians to represent surfaces without relying on explicit geometry. This method achieves high visual fidelity while maintaining interactive frame rates, making it an attractive alternative to neural radiance fields (NeRF) and triangle meshes for real-time applications.
+Recent advances in 3D scene representation have shifted from traditional mesh-based models to point-based approaches. Among these, Gaussian splatting \cite{OriginalSplatting} has emerged as a promising technique for real-time rendering of photorealistic scenes, leveraging a collection of 3D Gaussians to represent surfaces without relying on explicit geometry. This method achieves high visual fidelity while maintaining interactive frame rates, making it an attractive alternative to neural radiance fields (NeRF) and triangle meshes for real-time applications.
 \\\\
 This thesis began not with a formal hypothesis or a narrowly defined research question, but with a practical goal: to explore what it would take to animate a Gaussian Splat inside Unity, including alternative or non-standard methods, to enable their use in interactive applications. The initial objective was to develop a functional system, allowing challenges encountered during the process to inform and shape the subsequent research direction.
 \\\\
-This hands-on approach quickly revealed limitations in the widely referenced Unity Gaussian Splatting extension \parencite{Aras} that adopts a per-object rendering pipeline. In this approach, each splat object is sorted and rendered independently, leading to incorrect visual results when multiple splat objects overlap in a scene.
+This hands-on approach quickly revealed limitations in the widely referenced Unity Gaussian Splatting extension \cite{Aras} that adopts a per-object rendering pipeline. In this approach, each splat object is sorted and rendered independently, leading to incorrect visual results when multiple splat objects overlap in a scene.
 \\\\
 With the rendering issue addressed, attention shifted to another practical barrier: the manual effort involved in preparing splat data for animation, particularly the segmentation of splats into hierarchical GameObjects. Recognizing that this bottleneck could hinder creative workflows, the project expanded to include the development of a semi-automatic segmentation pipeline aimed at balancing automation with user control.
 \\\\
@@ -78,7 +95,7 @@ In the field of computer graphics, the efficient rendering of complex 3D scenes 
 \FloatBarrier
 \noindent
 \subsubsection{Neural Radiance Fields}
-One popular approach to addressing these challenges is Neural Radiance Fields (NeRF) \parencite{Nerf}. This method employs a neural network to learn a mapping from 3D position and viewing direction to a density and an RGB color. The network is trained on a video or a collection of images, allowing it to reconstruct a scene by learning the underlying volumetric representation. During rendering, a ray is cast through each pixel of the screen, and multiple points along the ray are sampled. The neural network takes the position of each point and the viewing direction of the ray as input, producing color and density values. These outputs are then aggregated to compute the final color of the pixel, enabling the generation of photorealistic scenes without the need for manually crafted 3D models (see Figure~\ref{fig:nerf}). However, due to the necessity of querying the neural network multiple times per pixel, this approach is computationally expensive and not suitable for real-time rendering.
+One popular approach to addressing these challenges is Neural Radiance Fields (NeRF) \cite{Nerf}. This method employs a neural network to learn a mapping from 3D position and viewing direction to a density and an RGB color. The network is trained on a video or a collection of images, allowing it to reconstruct a scene by learning the underlying volumetric representation. During rendering, a ray is cast through each pixel of the screen, and multiple points along the ray are sampled. The neural network takes the position of each point and the viewing direction of the ray as input, producing color and density values. These outputs are then aggregated to compute the final color of the pixel, enabling the generation of photorealistic scenes without the need for manually crafted 3D models (see Figure~\ref{fig:nerf}). However, due to the necessity of querying the neural network multiple times per pixel, this approach is computationally expensive and not suitable for real-time rendering.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/Nerf.png}
@@ -86,11 +103,11 @@ One popular approach to addressing these challenges is Neural Radiance Fields (N
 	\label{fig:nerf}
 \end{figure}
 \subsubsection{Gaussian Splatting}
-In 2023, a method was introduced that retained the advantages of Neural Radiance Fields, while achieving real-time processing: Gaussian Splatting \parencite{OriginalSplatting}. Like Neural Radiance Fields, Gaussian Splatting uses a video or a collection of images as input to automatically generate the 3D scene data. However, rather than relying on a neural network to represent the data, the scene is represented as a collection of numerous small 3D Gaussians (see Figure~\ref{fig:Form}).
+In 2023, a method was introduced that retained the advantages of Neural Radiance Fields, while achieving real-time processing: Gaussian Splatting \cite{OriginalSplatting}. Like Neural Radiance Fields, Gaussian Splatting uses a video or a collection of images as input to automatically generate the 3D scene data. However, rather than relying on a neural network to represent the data, the scene is represented as a collection of numerous small 3D Gaussians (see Figure~\ref{fig:Form}).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/GaussianForm.png}
-	\caption{Illustration of Gaussian functions in different dimensions, shown left to right: 1D Gaussian \parencite{1DGaussian}, 2D Gaussian \parencite{2DGaussian}, and 3D Gaussian \parencite{3DGaussian}.}
+	\caption{Illustration of Gaussian functions in different dimensions, shown left to right: 1D Gaussian \cite{1DGaussian}, 2D Gaussian \cite{2DGaussian}, and 3D Gaussian \cite{3DGaussian}.}
 	\label{fig:Form}
 \end{figure}
 \newpage  \noindent
@@ -106,7 +123,7 @@ Furthermore, state-of-the-art triangle mesh rendering also relies on rasterizati
 \subsection{Unity Extension}
 \label{sec:pipeline_overview}
 \subsubsection{Introduction}
-When adapting this technique to interactive applications —such as games—several engines come to mind, including Unity, Godot, and Unreal Engine. Among these, Unity was chosen due to prior experience with the engine. Additionally, a widely referenced GitHub project \parencite{Aras} implementing Gaussian Splatting in Unity provides a strong foundation for further research. This project stands out not only for its recognition within the community \parencite{ArasRecc1,ArasRecc2}, but also for its developer, Aras Pranckevičius, a former Unity engineer with 15 years of experience working on the engine. His expertise suggests that the rendering pipeline adaptations are both well-optimized and efficiently integrated, making this implementation a suitable choice for exploration and development.
+When adapting this technique to interactive applications —such as games—several engines come to mind, including Unity, Godot, and Unreal Engine. Among these, Unity was chosen due to prior experience with the engine. Additionally, a widely referenced GitHub project \cite{Aras} implementing Gaussian Splatting in Unity provides a strong foundation for further research. This project stands out not only for its recognition within the community \cite{ArasRecc1,ArasRecc2}, but also for its developer, Aras Pranckevičius, a former Unity engineer with 15 years of experience working on the engine. His expertise suggests that the rendering pipeline adaptations are both well-optimized and efficiently integrated, making this implementation a suitable choice for exploration and development.
 \\\\
 Before examining the objectives of this thesis and the adaptations made to the selected implementation, it is essential to first outline the relevant aspects of its rendering pipeline. The discussion will focus solely on components that directly influence the rendering process. Certain aspects, such as the compression and storage of Gaussian Splats in files, among others, fall outside the scope of this explanation and will not be covered.
 \subsubsection{Adding a Gaussian Splat to the Scene}
@@ -232,7 +249,7 @@ public Material SortAndRenderSplats(Camera cam, CommandBuffer cmb)
 \end{lstlisting}
 This code block is extensive and encompasses multiple operations. To facilitate a clearer understanding, it will be analyzed step by step, broken down into its fundamental components. Additionally, certain sections of the code are dedicated to debugging or timing purposes, which are not essential for understanding the main rendering pipeline.\\\\
 The function iterates over all \texttt{GaussianSplatRenderer} objects stored and ordered in the \texttt{m\textunderscore ActiveSplats} list by \texttt{GatherSplatsForCamera}. It is important to emphasize that within this function, all subsequent operations are performed on a single \texttt{GaussianSplatRenderer} object at a time, as each iteration of the loop processes one individual \texttt{GaussianSplatRenderer}.\\\\
-At regular intervals, specifically every set number of frames, the splats undergo sorting. This operation is managed by a custom sorter class, which was initialized during the \texttt{OnEnable} method. The class implements a specialized sorting algorithm known as "Device Radix Sort," leveraging the full potential of the GPU to ensure optimal performance. According to the comments in that class, this algorithm was adapted from another GitHub project \parencite{Sorting}. As with the sorting of the \texttt{GaussianSplatRenderer} objects, the depth of each splat relative to the camera’s coordinate space is used as the key for sorting.
+At regular intervals, specifically every set number of frames, the splats undergo sorting. This operation is managed by a custom sorter class, which was initialized during the \texttt{OnEnable} method. The class implements a specialized sorting algorithm known as "Device Radix Sort", leveraging the full potential of the GPU to ensure optimal performance. According to the comments in that class, this algorithm was adapted from another GitHub project \cite{Sorting}. As with the sorting of the \texttt{GaussianSplatRenderer} objects, the depth of each splat relative to the camera’s coordinate space is used as the key for sorting.
 \\\\
 Similar to the final \texttt{DrawProcedural} invocation of the previous function, a material shader is employed at the end of each iteration of the loop to render the splats. Many of the operations within this loop are dedicated to populating graphics buffers with the necessary data for these shader computations. The most significant step in this process is the invocation of \texttt{CalcViewData}, which dispatches splat-related information to a compute shader. This compute shader determines the screen-space position of each splat using the object's transform matrix, the \texttt{cam.worldToCameraMatrix}, and the \texttt{cam.projectionMatrix}. Additionally, it calculates its independent horizontal and vertical extents, and derives its color and transparency based on the viewing angle and spherical harmonics. The computed results are then stored in a graphics buffer for subsequent use. \\\\
 Finally, \texttt{DrawProcedural} is called, enqueueing the rendering of this data for execution later in the rendering pipeline. This rendering step is also performed using a material shader, distinct from the shader used in \texttt{OnPreCullCamera}. Each splat is represented as two triangles, with the vertex shader transforming the computed screen position and stretch extents into appropriate triangle coordinates.
@@ -305,7 +322,7 @@ Further inspection revealed the underlying cause: rotating the wheel around the 
 \noindent
 A viable approach to eliminating this visual artifact involves aligning the origin of the Gaussian Splat with the geometric center of the wheel. This requires modifying the underlying splat data in the corresponding .ply file. To achieve this, a small Python script was developed to automatically adjust the position values of each splat.
 \\
-Initially, it seemed straightforward to have the script infer the desired center point automatically. Two potential approaches were implemented: calculating the average of the position values of all splats, and calculating the midpoint between the minimum and maximum position values along each axis. However, testing revealed that both methods resulted in a center point that was slightly offset, leading to imperfect alignment (see Figure~\ref{fig:left_av}). While other automatic methods, such as taking the size of the splats into account, could have been explored, they were not pursued. Instead, the decision was made to allow the user to manually input an offset value for greater control, particularly in cases where complex and irregular shapes may have a "desired" center that is difficult to compute automatically. The desired offset can be determined by applying the earlier alignment procedure with the cube and copying the position values of the wheel GameObject relative to its parent. The Python function solely modifies the center point of the GameObject, leaving the alignment of the axes unchanged, which is still achieved through the cube method. The most relevant part of the resulting Python script is provided below. The plyfile library \parencite{Plyfile} was used to load, edit and store the splat data:
+Initially, it seemed straightforward to have the script infer the desired center point automatically. Two potential approaches were implemented: calculating the average of the position values of all splats, and calculating the midpoint between the minimum and maximum position values along each axis. However, testing revealed that both methods resulted in a center point that was slightly offset, leading to imperfect alignment (see Figure~\ref{fig:left_av}). While other automatic methods, such as taking the size of the splats into account, could have been explored, they were not pursued. Instead, the decision was made to allow the user to manually input an offset value for greater control, particularly in cases where complex and irregular shapes may have a "desired" center that is difficult to compute automatically. The desired offset can be determined by applying the earlier alignment procedure with the cube and copying the position values of the wheel GameObject relative to its parent. The Python function solely modifies the center point of the GameObject, leaving the alignment of the axes unchanged, which is still achieved through the cube method. The most relevant part of the resulting Python script is provided below. The plyfile library \cite{Plyfile} was used to load, edit and store the splat data:
 \begin{lstlisting}[tabsize=2,caption=Three potential functions for recentering the Gaussian Splat. The desired function is called on each of the three axes., label=code:re_center,breaklines=true,breakatwhitespace=true,basicstyle=\ttfamily\footnotesize]
 def recenter_axis_average(ply_content, axis):
 	axis_poses = ply_content.elements[0].data[axis]
@@ -417,7 +434,7 @@ To evaluate whether the current rendering solution was adequate enough to justif
 After careful evaluation, it was concluded that the visual artifacts introduced by the current rendering approach are too disruptive to be ignored. This is particularly evident in interactive environments, such as games, where objects are frequently in motion and subject to continuous rotation. In such contexts, the visual inconsistencies become highly noticeable, making it worthwhile to invest further effort into resolving the issue.
 \\\\
 Up to this point, most of the proposed solutions have relied on workaround-based approaches—methods that attempt to circumvent the core issue rather than address it directly. While such strategies have proven effective for simpler configurations, they fall short when applied to more complex geometries. The fundamental limitation lies in the renderer’s architecture: it operates on a per-GameObject basis, where entire GameObjects are first sorted relative to the camera, and only then are the splats within each GameObject sorted and rendered. This structure inherently fails in cases where different parts of a child object must appear both in front of and behind its parent. No amount of adjustment or approximation can resolve this limitation cleanly. A proper solution therefore requires a shift from per-GameObject sorting to fully global per-splat sorting—ensuring that every splat is sorted and rendered based solely on its position in space, regardless of GameObject hierarchy.\\\\
-Since the core rendering system is now being modified directly, it is essential to first understand how the existing renderer functions. A detailed explanation of the current rendering pipeline is provided in Section~\ref{sec:pipeline_overview}.
+Since the core rendering system is now being modified directly, it is essential to first understand how the existing renderer functions. A detailed explanation of the current rendering pipeline is provided in Section~\hyperref[sec:pipeline_overview]{Section~\ref*{sec:pipeline_overview}}.
 \\\\
 To clearly present the implemented solution, it is helpful to begin by outlining the desired end result. The current rendering pipeline operates on a per-GameObject basis due to its underlying architecture. Each GameObject is processed independently, with its splat data prepared and stored in a separate graphics buffer. This buffer is generated by a compute shader dispatched specifically for that GameObject, since the shader requires access to the GameObject's local data and transform in order to populate the buffer correctly. Once populated, the buffer is passed to a \texttt{DrawProcedural} call to handle sorting and rendering of the splats contained within.\\
 Ideally, the renderer would instead issue a single \texttt{DrawProcedural} call that processes a unified graphics buffer containing the data for all Gaussian splats in the scene. This would enable sorting and rendering on a per-splat level, thereby resolving the compositing issues observed with overlapping objects. However, constructing such a unified buffer in an efficient manner—without incurring significant runtime overhead or increased memory usage—is a non-trivial challenge.
@@ -528,21 +545,21 @@ Upon careful reflection, it became evident that the primary bottleneck lies in a
 \\\\
 As previously described, this process relies on so-called “cutouts”. In summary, cutouts are defined regions—either cuboid or ellipsoidal—that exclude either all splats inside or all splats outside of them. Extracting precise details from complex objects often requires numerous small cutouts, resulting in a cumbersome and time-consuming workflow that must be repeated for each sub-object. Moreover, this method does not permit the splitting of individual splats. This limitation has a more significant impact than one might initially expect: the interiors of objects are not captured in training images, leading to chaotic and oversized splats. When attempting to isolate a sub-segment, particularly at connection points with neighboring segments, this often results in large splats either missing or protruding awkwardly, as they cannot be bisected using this method.
 \subsection{Relevant work}
-Gaussian splatting is a rapidly evolving and highly promising field, with numerous research papers being published each month across a wide range of specialized topics. These include areas such as automatic meshing \parencite{automesh}, compression \parencite{compression}, physics \parencite{physics}, texturing \parencite{texture}, and many others. Unsurprisingly, segmentation has also emerged as a major area of focus within this landscape, with over 30 published papers already exploring various use cases and requirements.
+Gaussian splatting is a rapidly evolving and highly promising field, with numerous research papers being published each month across a wide range of specialized topics. These include areas such as automatic meshing \cite{automesh}, compression \cite{compression}, physics \cite{physics}, texturing \cite{texture}, and many others. Unsurprisingly, segmentation has also emerged as a major area of focus within this landscape, with over 30 published papers already exploring various use cases and requirements.
 \\\\
 The existing literature on segmentation can broadly be categorized into two groups. The first group focuses on the fundamental task of simple segmentation, aiming to extract objects or sub-objects from larger scenes. The second group extends this concept to semantic linking, where the goal is to associate each identified object with descriptive labels or to enable object generation based on textual prompts. This latter category is often referred to as "open-vocabulary detection."
 \\\\
-While open-vocabulary detection techniques offer an interesting approach to user-friendly interaction, they are not the focus of this thesis. Although such methods could allow users to extract segments by describing them with natural language, incorporating these techniques would introduce a different direction for the work and require additional tools and methods. Moreover, open-vocabulary detection adds an extra layer on top of the core segmentation challenge, increasing overall complexity without directly addressing the underlying issue of precise geometric segmentation. For readers interested in exploring open-vocabulary detection methods, several representative works are available in the literature \parencite{vocab1, vocab2, vocab3}.
+While open-vocabulary detection techniques offer an interesting approach to user-friendly interaction, they are not the focus of this thesis. Although such methods could allow users to extract segments by describing them with natural language, incorporating these techniques would introduce a different direction for the work and require additional tools and methods. Moreover, open-vocabulary detection adds an extra layer on top of the core segmentation challenge, increasing overall complexity without directly addressing the underlying issue of precise geometric segmentation. For readers interested in exploring open-vocabulary detection methods, several representative works are available in the literature \cite{vocab1, vocab2, vocab3}.
 \\\\
-Another group of important papers, though not directly relevant to the objectives of this thesis, focuses on dynamic splats \parencite{dyn1,dyn2}. These approaches extend Gaussian splatting into the temporal domain, resulting in 4D splats where the fourth dimension represents time. Effectively, they model scenes as Gaussian splats evolving over video frames. However, since this thesis operates exclusively with static 3D splats, these dynamic approaches fall outside the scope of this work.
+Another group of important papers, though not directly relevant to the objectives of this thesis, focuses on dynamic splats \cite{dyn1,dyn2}. These approaches extend Gaussian splatting into the temporal domain, resulting in 4D splats where the fourth dimension represents time. Effectively, they model scenes as Gaussian splats evolving over video frames. However, since this thesis operates exclusively with static 3D splats, these dynamic approaches fall outside the scope of this work.
 \\\\
-Finally, some papers focus on fully automatic segmentation, which requires no user input \parencite{automatic}. While these approaches are powerful, they present challenges for use in games or animation, where the segmentation of objects is not always straightforward. It is not predetermined which parts of a model should be isolated as distinct segments, and this decision can vary based on artistic or functional requirements. Therefore, it is crucial that the user retains the ability to provide guidance, enabling the segmentation tool to extract precisely the parts needed for the intended application.
+Finally, some papers focus on fully automatic segmentation, which requires no user input \cite{automatic}. While these approaches are powerful, they present challenges for use in games or animation, where the segmentation of objects is not always straightforward. It is not predetermined which parts of a model should be isolated as distinct segments, and this decision can vary based on artistic or functional requirements. Therefore, it is crucial that the user retains the ability to provide guidance, enabling the segmentation tool to extract precisely the parts needed for the intended application.
 \\\\
-Two early and influential papers laid the foundation for segmentation in Gaussian splatting. SAGA \parencite{saga} introduced a method to transfer segmentation from 2D images to 3D splats, allowing parts of a scene to be separated based on image data. Gaussian Grouping \parencite{grouping}, in contrast, focused on assigning identity information to splats to group them into segments for later processing.
+Two early and influential papers laid the foundation for segmentation in Gaussian splatting. SAGA \cite{saga} introduced a method to transfer segmentation from 2D images to 3D splats, allowing parts of a scene to be separated based on image data. Gaussian Grouping \cite{grouping}, in contrast, focused on assigning identity information to splats to group them into segments for later processing.
 \\\\
-Numerous valuable papers have built upon the foundations established by SAGA and Gaussian Grouping. In particular, SAGA introduced the concept of using image masks as user input for segmentation. Each of these papers introduces useful advancements, and any one of them could have been selected as the basis for the continuation of this thesis \parencite{other1,other2,other3,other4}. However, one paper stood out as particularly well-suited to the objectives of this work: SAGD \parencite{SAGD}. This paper offers the added benefit of Gaussian Decomposition, which addresses a key challenge in segmentation. Specifically, at the boundary of a segment, where splats may overlap or extend beyond the desired cutoff, SAGD splits these splats into two. This results in a smoother and more precise boundary, eliminating the issues of missing or protruding splats. As discussed earlier, this capability is particularly relevant for the use case of this thesis, where cutting away sub-segments from a larger object often introduces chaotic and oversized splats along the boundary.
+Numerous valuable papers have built upon the foundations established by SAGA and Gaussian Grouping. In particular, SAGA introduced the concept of using image masks as user input for segmentation. Each of these papers introduces useful advancements, and any one of them could have been selected as the basis for the continuation of this thesis \cite{other1,other2,other3,other4}. However, one paper stood out as particularly well-suited to the objectives of this work: SAGD \cite{SAGD}. This paper offers the added benefit of Gaussian Decomposition, which addresses a key challenge in segmentation. Specifically, at the boundary of a segment, where splats may overlap or extend beyond the desired cutoff, SAGD splits these splats into two. This results in a smoother and more precise boundary, eliminating the issues of missing or protruding splats. As discussed earlier, this capability is particularly relevant for the use case of this thesis, where cutting away sub-segments from a larger object often introduces chaotic and oversized splats along the boundary.
 \subsection{SAM}
-As described in the previous section, many of the papers relevant to this work, including SAGD, utilize image masks as user input. In most cases, these masks are generated by the Segment Anything Model (SAM) \parencite{SAM}. SAM allows the user to provide positive and negative point prompts on the image, which guide the mask generation process. Additionally, bounding boxes can be used to further refine the selection. The result is a segmentation mask that includes all positive points, excludes negative points, and selects a coherent and visually meaningful region (see Figure~\ref{fig:samdemo}).
+As described in the previous section, many of the papers relevant to this work, including SAGD, utilize image masks as user input. In most cases, these masks are generated by the Segment Anything Model (SAM) \cite{SAM}. SAM allows the user to provide positive and negative point prompts on the image, which guide the mask generation process. Additionally, bounding boxes can be used to further refine the selection. The result is a segmentation mask that includes all positive points, excludes negative points, and selects a coherent and visually meaningful region (see Figure~\ref{fig:samdemo}).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/samdemo.png}
@@ -604,12 +621,12 @@ Before exploring alternative methods of generating masks from other camera stand
 \end{figure}
 \FloatBarrier
 \noindent
-The absence of the front of the truck in the segmentation is an undesirable outcome. While this issue is correctable, it will be addressed after the challenges identified earlier are resolved. Regarding the Gaussian Decomposition process, it performs its intended role of cleaning up boundary splats. The errors introduced are likely due to a combination of factors: imperfect initial segmentation data and the need for further fine-tuning of the decomposition frequency (as decomposition is not applied to every frame). However, refining this frequency is not a primary focus of this thesis.
+ Regarding the Gaussian Decomposition process, it performs its intended role of cleaning up boundary splats. The errors introduced are likely due to a combination of factors: imperfect initial segmentation data and the need for further fine-tuning of the decomposition frequency (as decomposition is not applied to every frame). However, refining this frequency is not a primary focus of this thesis.
 \subsection{SAM2}
 Throughout this section, it has been emphasized that an ideal implementation would accept a single SAM mask as input and automatically generate corresponding masks from different camera angles. This approach strikes an optimal balance between user control and automation: it enables the user to define a precise sub-object, while eliminating the need to manually create multiple masks from different perspectives—a process that would be nearly as cumbersome as the original method of extracting segments.
 \\\\
 To reiterate, the ideal algorithm would transform a single SAM mask into multiple masks from different angles, without encountering the same issues as the original SAGD projection approach. This approach would enable the user to define just one mask while allowing SAGD to propagate it into a complete segmentation across the Gaussian Splat. This process would ultimately result in a perfectly smooth separation of the subsegment from the rest of the scene.\\
-During the exploration of methods to generate these additional 2D masks, a promising development was discovered through the SAM documentation: SAM2 \parencite{SAM2}. This extension of SAM introduces video segmentation capabilities. Its input structure is similar to that of image segmentation, with the key difference being that prompts can be placed on specific frames, guiding segmentation in those particular frames. SAM2 can then generalize these prompts to produce a segmentation mask for every frame in the video (see Figure~\ref{fig:children}).
+During the exploration of methods to generate these additional 2D masks, a promising development was discovered through the SAM documentation: SAM2 \cite{SAM2}. This extension of SAM introduces video segmentation capabilities. Its input structure is similar to that of image segmentation, with the key difference being that prompts can be placed on specific frames, guiding segmentation in those particular frames. SAM2 can then generalize these prompts to produce a segmentation mask for every frame in the video (see Figure~\ref{fig:children}).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{Images/children.png}
@@ -783,6 +800,8 @@ As with the previous sections, the final implementation was tested using the est
 \end{figure}
 \FloatBarrier
 \noindent
+A notable observation in the segmented scene is the presence of large splats protruding from the wheels. This is due to an out-of-memory error encountered when applying Gaussian Decomposition across the entire scene. While this indicates a limitation in its scalability for complex environments, it highlights an area for potential optimization in future work.
+\\\\
 While some segments were successfully extracted, an equal or greater number were found to be incomplete or incorrect, often representing only a small fraction of the intended object. This limitation is likely due to challenges in the voting system used to consolidate video segmentation masks into a single splat representation. Specifically, this system appears to struggle with handling occlusions and off-screen regions, which can lead to incomplete or fragmented segmentations. Despite these challenges, the automation approach remains a notable achievement. It demonstrates the full integration and utilization of SAM and SAM2 capabilities, achieving meaningful segmentation of several objects from an initially unsegmented scene. It is important to emphasize that users seeking more consistent and reliable segmentation results should consider the multimask approach or the recursive hierarchical method. These algorithms are designed to complement each other, offering flexibility depending on the segmentation requirements and complexity of the scene.
 \subsection{Conclusion}
 This section has demonstrated the evolution of segmentation techniques for Gaussian splatting, culminating in a system that balances user-guided input with varying levels of automation. Beginning with manual prompt-based segmentation, the work progressed through hierarchical segmentation using multimask outputs, and finally approached full automation with SAM’s automatic mask generation capabilities. Each stage built upon the previous, incrementally reducing the manual effort required while simultaneously expanding the scope and complexity of segmentable scenes.
@@ -801,5 +820,7 @@ On the segmentation front, a progressive approach was adopted, beginning with ma
 
 Although challenges remain, the contributions of this thesis provide a strong foundation for future work. By offering both practical tools and conceptual frameworks, it paves the way for continued development in the segmentation and rendering of Gaussian splats, with potential applications in interactive graphics, animation, and beyond.
 \FloatBarrier\addcontentsline{toc}{section}{References}
-\noindent\printbibliography
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
 \end{document}

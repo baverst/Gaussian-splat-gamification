@@ -1,292 +1,204 @@
 \relax 
-\abx@aux@refcontext{nyt/global//global/global/global}
-\abx@aux@cite{0}{OriginalSplatting}
-\abx@aux@segm{0}{0}{OriginalSplatting}
-\abx@aux@cite{0}{Aras}
-\abx@aux@segm{0}{0}{Aras}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
-\abx@aux@page{1}{1}
-\abx@aux@page{2}{1}
-\abx@aux@cite{0}{Mesh}
-\abx@aux@segm{0}{0}{Mesh}
-\abx@aux@cite{0}{Mesh}
-\abx@aux@segm{0}{0}{Mesh}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}From Meshes to Gaussian Splatting}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Triangle Meshes}{3}{}\protected@file@percent }
-\abx@aux@cite{0}{Nerf}
-\abx@aux@segm{0}{0}{Nerf}
-\abx@aux@cite{0}{Nerf}
-\abx@aux@segm{0}{0}{Nerf}
-\abx@aux@cite{0}{Nerf}
-\abx@aux@segm{0}{0}{Nerf}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Example of a triangle mesh, the most commonly used method for representing 3D objects in computer graphics. Source: \blx@tocontentsinit {0}\cite {Mesh}.}}{4}{}\protected@file@percent }
-\newlabel{fig:trianglemesh}{{1}{4}{}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}Neural Radiance Fields}{4}{}\protected@file@percent }
-\abx@aux@page{5}{4}
-\abx@aux@cite{0}{OriginalSplatting}
-\abx@aux@segm{0}{0}{OriginalSplatting}
-\abx@aux@cite{0}{1DGaussian}
-\abx@aux@segm{0}{0}{1DGaussian}
-\abx@aux@cite{0}{2DGaussian}
-\abx@aux@segm{0}{0}{2DGaussian}
-\abx@aux@cite{0}{3DGaussian}
-\abx@aux@segm{0}{0}{3DGaussian}
-\abx@aux@cite{0}{1DGaussian}
-\abx@aux@segm{0}{0}{1DGaussian}
-\abx@aux@cite{0}{2DGaussian}
-\abx@aux@segm{0}{0}{2DGaussian}
-\abx@aux@cite{0}{3DGaussian}
-\abx@aux@segm{0}{0}{3DGaussian}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Rendering a scene using Neural Radiance Fields. Source: \blx@tocontentsinit {0}\cite {Nerf}.}}{5}{}\protected@file@percent }
-\newlabel{fig:nerf}{{2}{5}{}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.3}Gaussian Splatting}{5}{}\protected@file@percent }
-\abx@aux@page{8}{5}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Illustration of Gaussian functions in different dimensions, shown left to right: 1D Gaussian \blx@tocontentsinit {0}\parencite {1DGaussian}, 2D Gaussian \blx@tocontentsinit {0}\parencite {2DGaussian}, and 3D Gaussian \blx@tocontentsinit {0}\parencite {3DGaussian}.}}{6}{}\protected@file@percent }
-\newlabel{fig:Form}{{3}{6}{}{figure.3}{}}
-\abx@aux@cite{0}{Aras}
-\abx@aux@segm{0}{0}{Aras}
-\abx@aux@cite{0}{ArasRecc1}
-\abx@aux@segm{0}{0}{ArasRecc1}
-\abx@aux@cite{0}{ArasRecc2}
-\abx@aux@segm{0}{0}{ArasRecc2}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Unity Extension}{7}{}\protected@file@percent }
-\newlabel{sec:pipeline_overview}{{2.2}{7}{}{subsection.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Introduction}{7}{}\protected@file@percent }
-\abx@aux@page{15}{7}
-\abx@aux@page{16}{7}
-\abx@aux@page{17}{7}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Adding a Gaussian Splat to the Scene}{7}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The Unity Editor extension included in the project for converting PLY files into the required compressed format.}}{8}{}\protected@file@percent }
-\newlabel{fig:creator}{{4}{8}{}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Initializing the Rendering Process: The Role of \texttt  {OnEnable}}{8}{}\protected@file@percent }
-\newlabel{code:rendereronenable}{{1}{9}{}{lstlisting.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}\texttt  {onEnable} of \texttt  {GaussianSplatRenderer}}{9}{}\protected@file@percent }
-\newlabel{code:systemregister}{{2}{9}{}{lstlisting.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}\texttt  {RegisterSplat} of \texttt  {GaussianSplatRenderSystem}}{9}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}The Rendering Pipeline}{10}{}\protected@file@percent }
-\newlabel{code:systemprecull}{{3}{10}{}{lstlisting.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}\texttt  {OnPreCullCamera} of \texttt  {GaussianSplatRenderSystem}}{10}{}\protected@file@percent }
-\newlabel{code:systemsortrender}{{4}{12}{}{lstlisting.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}\texttt  {SortAndRenderSplats} of \texttt  {GaussianSplatRenderSystem}}{12}{}\protected@file@percent }
-\abx@aux@cite{0}{Sorting}
-\abx@aux@segm{0}{0}{Sorting}
-\abx@aux@page{18}{15}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Part 1: Correcting the Rendering Order}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Introduction}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Preparing the scene}{16}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The Kitchen scene from the official Gaussian Splatting dataset, featuring a small LEGO bulldozer. This object was selected for its compact structure and clearly defined components, making it well-suited for segmentation and animation experiments.}}{17}{}\protected@file@percent }
-\newlabel{fig:kitchen}{{5}{17}{}{figure.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The LEGO bulldozer extracted from the Kitchen scene using the cutout tool of the Unity extension for Gaussian splatting. This tool isolates the bulldozer by excluding all other parts of the scene.}}{18}{}\protected@file@percent }
-\newlabel{fig:wholetruck}{{6}{18}{}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Animating a segment}{18}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A rendering error when loading the separate wheel-GameObject.}}{19}{}\protected@file@percent }
-\newlabel{fig:firstwheel}{{7}{19}{}{figure.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The center of the wheel’s GameObject is positioned far from the geometric center of the wheel, with misaligned axes of rotation. This misalignment complicates direct rotation around the wheel’s local axis.}}{20}{}\protected@file@percent }
-\newlabel{fig:wheel_center}{{8}{20}{}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces A cube GameObject is assigned as the parent of the wheel GameObject. The wheel is repositioned and rotated so that its center and axes align with those of the cube. This configuration enables rotation around the intended axis.}}{21}{}\protected@file@percent }
-\newlabel{fig:wheel_cube}{{9}{21}{}{figure.9}{}}
-\abx@aux@cite{0}{Plyfile}
-\abx@aux@segm{0}{0}{Plyfile}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Visualization of the rendering issue caused by rotation around its axis. The same wheel is shown at 0°, 90°, 180°, and 270° of rotation. Depending on the rotation angle, the wheel is rendered either behind or in front of the bulldozer due to improper depth sorting based on the rotated center of the Gaussian Splat.}}{22}{}\protected@file@percent }
-\newlabel{fig:wheel_rotations}{{10}{22}{}{figure.10}{}}
-\abx@aux@page{19}{23}
-\newlabel{code:re_center}{{5}{23}{}{lstlisting.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}Three potential functions for recentering the Gaussian Splat. The desired function is called on each of the three axes.}{23}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Automatically recentering based on the average of the position values results in a slight offset. Recentering using the midpoint of the bounding box yields a similar misalignment.}}{23}{}\protected@file@percent }
-\newlabel{fig:left_av}{{11}{23}{}{figure.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Moving the camera}{24}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Demonstration of incorrect rendering order under camera transformation. Each column corresponds to a fixed camera rotation, while each row corresponds to a fixed camera position. The observed rendering order remains the same across rows within each column, indicating that the order is determined solely by camera rotation. Correct behavior would require the rendering order to change across rows (i.e., with camera position).}}{24}{}\protected@file@percent }
-\newlabel{fig:camera_change}{{12}{24}{}{figure.12}{}}
-\newlabel{code:sort_original}{{6}{25}{}{lstlisting.6}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}The sort key used to determine the rendering order}{25}{}\protected@file@percent }
-\newlabel{code:sort_pos}{{7}{26}{}{lstlisting.7}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}The newly implemented sort key to determine the rendering order}{26}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces When the wheel should be rendered behind the bulldozer, but the camera is positioned near the threshold where the rendering order switches, the wheel is incorrectly rendered in front of the bulldozer. The left and right images have identical camera rotation, with only a minimal difference in camera position.}}{26}{}\protected@file@percent }
-\newlabel{fig:wheel_almost}{{13}{26}{}{figure.13}{}}
-\newlabel{code:sort_ratio}{{8}{27}{}{lstlisting.8}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}The final implemention of the sort key}{27}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The camera is positioned at the critical point where the wheel should transition from being rendered behind the bulldozer to being rendered in front of it. The left and right images have identical camera rotations, with only a minimal change in camera position. As shown, the wheel now renders correctly across this boundary case.}}{28}{}\protected@file@percent }
-\newlabel{fig:wheel_done}{{14}{28}{}{figure.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Global per-splat sorting}{28}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Regardless of the camera position, a visual artifact always occurs. When the arm is rendered behind the bulldozer (left), significant portions of its joints are lost. Conversely, when the bulldozer is rendered behind the arm, its front section is improperly occluded (right). The two images were captured with identical camera rotations and only a small difference in camera position.}}{29}{}\protected@file@percent }
-\newlabel{fig:arm}{{15}{29}{}{figure.15}{}}
-\newlabel{code:register}{{9}{32}{}{lstlisting.9}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}New RegisterSplat and UnregisterSplat}{32}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces The final rendering result after implementing global per-splat sorting. Notably, both wheels at the back, the arm, and the handle are all represented as separate GameObjects, yet are rendered correctly.}}{34}{}\protected@file@percent }
-\newlabel{fig:finalrender}{{16}{34}{}{figure.16}{}}
-\newlabel{code:unregister}{{10}{35}{}{lstlisting.10}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}A small adjustment to UnregisterSplat}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Conclusion}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Part 2: Hierarchical Segmentation}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Introduction}{36}{}\protected@file@percent }
-\abx@aux@cite{0}{automesh}
-\abx@aux@segm{0}{0}{automesh}
-\abx@aux@cite{0}{compression}
-\abx@aux@segm{0}{0}{compression}
-\abx@aux@cite{0}{physics}
-\abx@aux@segm{0}{0}{physics}
-\abx@aux@cite{0}{texture}
-\abx@aux@segm{0}{0}{texture}
-\abx@aux@cite{0}{vocab1}
-\abx@aux@segm{0}{0}{vocab1}
-\abx@aux@cite{0}{vocab2}
-\abx@aux@segm{0}{0}{vocab2}
-\abx@aux@cite{0}{vocab3}
-\abx@aux@segm{0}{0}{vocab3}
-\abx@aux@cite{0}{dyn1}
-\abx@aux@segm{0}{0}{dyn1}
-\abx@aux@cite{0}{dyn2}
-\abx@aux@segm{0}{0}{dyn2}
-\abx@aux@cite{0}{automatic}
-\abx@aux@segm{0}{0}{automatic}
-\abx@aux@cite{0}{saga}
-\abx@aux@segm{0}{0}{saga}
-\abx@aux@cite{0}{grouping}
-\abx@aux@segm{0}{0}{grouping}
-\abx@aux@cite{0}{other1}
-\abx@aux@segm{0}{0}{other1}
-\abx@aux@cite{0}{other2}
-\abx@aux@segm{0}{0}{other2}
-\abx@aux@cite{0}{other3}
-\abx@aux@segm{0}{0}{other3}
-\abx@aux@cite{0}{other4}
-\abx@aux@segm{0}{0}{other4}
-\abx@aux@cite{0}{SAGD}
-\abx@aux@segm{0}{0}{SAGD}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Relevant work}{38}{}\protected@file@percent }
-\abx@aux@page{20}{38}
-\abx@aux@page{21}{38}
-\abx@aux@page{22}{38}
-\abx@aux@page{23}{38}
-\abx@aux@page{24}{38}
-\abx@aux@page{25}{38}
-\abx@aux@page{26}{38}
-\abx@aux@page{27}{39}
-\abx@aux@page{28}{39}
-\abx@aux@page{29}{39}
-\abx@aux@page{30}{39}
-\abx@aux@page{31}{39}
-\abx@aux@page{32}{39}
-\abx@aux@page{33}{39}
-\abx@aux@page{34}{39}
-\abx@aux@page{35}{39}
-\abx@aux@cite{0}{SAM}
-\abx@aux@segm{0}{0}{SAM}
-\abx@aux@page{36}{40}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}SAM}{40}{}\protected@file@percent }
-\abx@aux@page{37}{40}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Illustration of SAM segmentation with point prompts. From left to right: the original LEGO bulldozer; SAM segmentation with a single positive point on the rear wheel, selecting the entire bulldozer; and SAM segmentation after adding a negative point on another part, isolating only the wheel.}}{41}{}\protected@file@percent }
-\newlabel{fig:samdemo}{{17}{41}{}{figure.17}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}SAGD}{41}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces The truck scene, a pre-trained Gaussian Splat model used for segmentation testing. Rendered in Unity.}}{43}{}\protected@file@percent }
-\newlabel{fig:truck_scene}{{18}{43}{}{figure.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Testing the SAGD implementation. Top: input image with two positive points provided to SAM and the corresponding segmentation mask. Bottom: three different camera viewpoints, each displaying the projected prompt-points and the mask generated by SAGD for that camera position, all correctly reflecting the intended segmentation.}}{44}{}\protected@file@percent }
-\newlabel{fig:goodsagd}{{19}{44}{}{figure.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Testing the SAGD implementation. Top Left: input image with two positive points provided to SAM and the corresponding segmentation mask. The other three: three different camera viewpoints, each displaying the projected prompt-points and the mask generated by SAGD for that camera position. Notable issues with the segmentation are visible.}}{45}{}\protected@file@percent }
-\newlabel{fig:issues}{{20}{45}{}{figure.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Result of applying SAGD on the example from the paper, without using Gaussian Decomposition. The segmentation is relatively clean, except for a missing portion at the front of the object.}}{47}{}\protected@file@percent }
-\newlabel{fig:sagdwithout}{{21}{47}{}{figure.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Result of applying SAGD on the example from the paper, with Gaussian Decomposition applied. The splats extending beyond the segment boundary at the bottom have been effectively removed. However, some additional minor errors have been introduced, such as a hole appearing in the black square behind the rear wheel.}}{47}{}\protected@file@percent }
-\newlabel{fig:sagdwith}{{22}{47}{}{figure.22}{}}
-\abx@aux@cite{0}{SAM2}
-\abx@aux@segm{0}{0}{SAM2}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}SAM2}{48}{}\protected@file@percent }
-\abx@aux@page{38}{48}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Result of SAM2 on a sample video provided by the SAM2 repository. Top-left: input frame with a single positive prompt point and the generated segmentation mask. The remaining images show the masks generated by SAM2 on other frames of the video, illustrating the model's ability to propagate the segmentation across frames. Note that in the top-right frame, the pants are almost entirely obstructed, yet the model still returns the correct mask—highlighting a clear improvement over the occlusion issues encountered in the original SAGD algorithm.}}{49}{}\protected@file@percent }
-\newlabel{fig:children}{{23}{49}{}{figure.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Progress of prompting the first frame in SAM2 to segment the wooden platform. Top-left: initial mask generated with two positive points. Subsequent images illustrate the addition of negative points, progressively refining the mask. The final frame (bottom-right) shows a mask that, while not perfect, achieves a satisfactory result across the video.}}{51}{}\protected@file@percent }
-\newlabel{fig:sam2struggle}{{24}{51}{}{figure.24}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Segmentation of the entire truck using SAM2. Left: initial mask generated with only two positive points. Middle: a frame where the front of the truck is excluded from the mask due to its absence in some frames. Right: adding a single additional positive point to the problematic frame effectively resolves the issue.}}{52}{}\protected@file@percent }
-\newlabel{fig:sam2adapt}{{25}{52}{}{figure.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Replication of the experiment from Figure~\ref {fig:goodsagd}, using SAM2 instead of projection.}}{53}{}\protected@file@percent }
-\newlabel{fig:sam2whole}{{26}{53}{}{figure.26}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Replication of the experiment from Figure~\ref {fig:issues}, using SAM2 instead of projection.}}{53}{}\protected@file@percent }
-\newlabel{fig:sam2wood}{{27}{53}{}{figure.27}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Resulting Gaussian Splat of the wooden platform, generated using SAM2-based masks as input for the SAGD pipeline. The extracted segment accurately captures the platform’s structure while excluding surrounding elements, illustrating the reliability of SAM2-generated masks for segmentation tasks. }}{54}{}\protected@file@percent }
-\newlabel{fig:sagdwoodply}{{28}{54}{}{figure.28}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Hierarchy}{55}{}\protected@file@percent }
-\newlabel{code:recursivedata}{{11}{55}{}{lstlisting.11}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}Definition of the recursive data structure used to represent hierarchical segmentation prompts and their relationships in SAM2}{55}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces Hierarchical segmentation of the truck and wooden platform. Left: both segments are shown in their original positions, appearing as a single cohesive object. Right: the wooden platform has been translated slightly to visually demonstrate its separation from the truck and to highlight the precision of the segmentation. Notable artifacts include small areas where the wood remains connected to the truck—likely due to minor segmentation inaccuracies in SAM2—and holes in the truck where the platform was extracted, resulting from missing splat data in occluded regions and the platform’s thin structure. }}{57}{}\protected@file@percent }
-\newlabel{fig:woodpair}{{29}{57}{}{figure.29}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Multimask Automation}{58}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces Demonstration of SAM’s multimask segmentation functionality on the LEGO bulldozer model. A single wheel was selected as the initial segment, resulting in three hierarchical masks: the smallest corresponds to the wheel itself, followed by the caterpillar tracks, and finally the entire bulldozer as the largest segment. }}{59}{}\protected@file@percent }
-\newlabel{fig:multidemo}{{30}{59}{}{figure.30}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces Comparison of multimask output from SAM2 (left column) and original SAM (right column) for the same input prompt. Each row corresponds to one of the three hierarchical masks generated by the respective model. Despite identical input, SAM2 consistently fails to accurately segment the wooden platform as a distinct region, whereas SAM demonstrates clearer separation. }}{61}{}\protected@file@percent }
-\newlabel{fig:sam1better}{{31}{61}{}{figure.31}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces Result of the semi-automated multimask segmentation pipeline applied to the wooden platform and truck. The outcome closely resembles the segmentation achieved with full user control. The primary difference is the erroneous inclusion of a portion of the truck's blue frame in the wooden segment. Nonetheless, considering the substantial reduction in user input required, the overall result remains highly effective. }}{62}{}\protected@file@percent }
-\newlabel{fig:multipair}{{32}{62}{}{figure.32}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Full Automation}{62}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces Segmentation of the LEGO bulldozer using SAM’s automatic mask generation functionality. The image illustrates the resulting distinct masks, each rendered in a different color, effectively partitioning the scene into separate segments. }}{63}{}\protected@file@percent }
-\newlabel{fig:everything}{{33}{63}{}{figure.33}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {34}{\ignorespaces Exploded view of the truck’s segmentation, highlighting separated components for evaluation.}}{66}{}\protected@file@percent }
-\newlabel{fig:truckparts}{{34}{66}{}{figure.34}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {35}{\ignorespaces A selection of non-truck segments extracted from the scene, illustrating examples of successful segmentation.}}{67}{}\protected@file@percent }
-\newlabel{fig:best}{{35}{67}{}{figure.35}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.9}Conclusion}{68}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Future Work}{68}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{69}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{70}{}\protected@file@percent }
-\abx@aux@page{39}{70}
-\abx@aux@page{40}{70}
-\abx@aux@page{41}{70}
-\abx@aux@page{42}{70}
-\abx@aux@page{43}{71}
-\abx@aux@page{44}{71}
-\abx@aux@page{45}{71}
-\abx@aux@page{46}{71}
-\abx@aux@page{47}{71}
-\abx@aux@page{48}{71}
-\abx@aux@page{49}{71}
-\abx@aux@page{50}{71}
-\abx@aux@page{51}{71}
-\abx@aux@page{52}{71}
-\abx@aux@page{53}{72}
-\abx@aux@page{54}{72}
-\abx@aux@page{55}{72}
-\abx@aux@page{56}{72}
-\abx@aux@page{57}{72}
-\abx@aux@page{58}{72}
-\abx@aux@page{59}{72}
-\abx@aux@page{60}{72}
-\abx@aux@page{61}{72}
-\abx@aux@page{62}{72}
-\abx@aux@page{63}{73}
-\abx@aux@page{64}{73}
-\abx@aux@page{65}{73}
-\abx@aux@page{66}{73}
-\abx@aux@page{67}{73}
-\abx@aux@page{68}{73}
-\abx@aux@read@bbl@mdfivesum{3D949032577F5CFE79CE540894F2DC31}
-\abx@aux@defaultrefcontext{0}{saga}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{texture}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{automatic}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{physics}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{automesh}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{vocab2}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{SAGD}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{dyn2}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{3DGaussian}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{other4}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{OriginalSplatting}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{SAM}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{other1}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{dyn1}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{vocab3}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{other2}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{Nerf}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{compression}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{1DGaussian}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{Aras}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{Plyfile}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{SAM2}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{ArasRecc2}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{2DGaussian}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{ArasRecc1}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{Mesh}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{vocab1}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{other3}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{Sorting}{nyt/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{grouping}{nyt/global//global/global/global}
-\gdef \@abspage@last{77}
+\providecommand \babel@aux [2]{\global \let \babel@toc \@gobbletwo }
+\@nameuse{bbl@beforestart}
+\catcode `"\active 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\babel@aux{english}{}
+\babel@aux{dutch}{}
+\babel@aux{english}{}
+\citation{OriginalSplatting}
+\citation{Aras}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{Mesh}
+\citation{Mesh}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{3}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}From Meshes to Gaussian Splatting}{3}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Triangle Meshes}{3}{subsubsection.2.1.1}\protected@file@percent }
+\citation{Nerf}
+\citation{Nerf}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Example of a triangle mesh, the most commonly used method for representing 3D objects in computer graphics. Source: \cite  {Mesh}.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:trianglemesh}{{1}{4}{Example of a triangle mesh, the most commonly used method for representing 3D objects in computer graphics. Source: \cite {Mesh}}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}Neural Radiance Fields}{4}{subsubsection.2.1.2}\protected@file@percent }
+\citation{OriginalSplatting}
+\citation{1DGaussian}
+\citation{2DGaussian}
+\citation{3DGaussian}
+\citation{1DGaussian}
+\citation{2DGaussian}
+\citation{3DGaussian}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Rendering a scene using Neural Radiance Fields. Source: \cite  {Nerf}.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:nerf}{{2}{5}{Rendering a scene using Neural Radiance Fields. Source: \cite {Nerf}}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.3}Gaussian Splatting}{5}{subsubsection.2.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Illustration of Gaussian functions in different dimensions, shown left to right: 1D Gaussian \cite  {1DGaussian}, 2D Gaussian \cite  {2DGaussian}, and 3D Gaussian \cite  {3DGaussian}.}}{5}{figure.3}\protected@file@percent }
+\newlabel{fig:Form}{{3}{5}{Illustration of Gaussian functions in different dimensions, shown left to right: 1D Gaussian \cite {1DGaussian}, 2D Gaussian \cite {2DGaussian}, and 3D Gaussian \cite {3DGaussian}}{figure.3}{}}
+\citation{Aras}
+\citation{ArasRecc1}
+\citation{ArasRecc2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Unity Extension}{6}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:pipeline_overview}{{2.2}{6}{Unity Extension}{subsection.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Introduction}{6}{subsubsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Adding a Gaussian Splat to the Scene}{7}{subsubsection.2.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The Unity Editor extension included in the project for converting PLY files into the required compressed format.}}{8}{figure.4}\protected@file@percent }
+\newlabel{fig:creator}{{4}{8}{The Unity Editor extension included in the project for converting PLY files into the required compressed format}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Initializing the Rendering Process: The Role of \texttt  {OnEnable}}{8}{subsubsection.2.2.3}\protected@file@percent }
+\newlabel{code:rendereronenable}{{1}{8}{\texttt {onEnable} of \texttt {GaussianSplatRenderer}}{lstlisting.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}\texttt  {onEnable} of \texttt  {GaussianSplatRenderer}}{8}{lstlisting.1}\protected@file@percent }
+\newlabel{code:systemregister}{{2}{9}{\texttt {RegisterSplat} of \texttt {GaussianSplatRenderSystem}}{lstlisting.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}\texttt  {RegisterSplat} of \texttt  {GaussianSplatRenderSystem}}{9}{lstlisting.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}The Rendering Pipeline}{10}{subsubsection.2.2.4}\protected@file@percent }
+\newlabel{code:systemprecull}{{3}{10}{\texttt {OnPreCullCamera} of \texttt {GaussianSplatRenderSystem}}{lstlisting.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}\texttt  {OnPreCullCamera} of \texttt  {GaussianSplatRenderSystem}}{10}{lstlisting.3}\protected@file@percent }
+\newlabel{code:systemsortrender}{{4}{12}{\texttt {SortAndRenderSplats} of \texttt {GaussianSplatRenderSystem}}{lstlisting.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}\texttt  {SortAndRenderSplats} of \texttt  {GaussianSplatRenderSystem}}{12}{lstlisting.4}\protected@file@percent }
+\citation{Sorting}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Part 1: Correcting the Rendering Order}{15}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Introduction}{15}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Preparing the scene}{16}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The Kitchen scene from the official Gaussian Splatting dataset, featuring a small LEGO bulldozer. This object was selected for its compact structure and clearly defined components, making it well-suited for segmentation and animation experiments.}}{17}{figure.5}\protected@file@percent }
+\newlabel{fig:kitchen}{{5}{17}{The Kitchen scene from the official Gaussian Splatting dataset, featuring a small LEGO bulldozer. This object was selected for its compact structure and clearly defined components, making it well-suited for segmentation and animation experiments}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The LEGO bulldozer extracted from the Kitchen scene using the cutout tool of the Unity extension for Gaussian splatting. This tool isolates the bulldozer by excluding all other parts of the scene.}}{18}{figure.6}\protected@file@percent }
+\newlabel{fig:wholetruck}{{6}{18}{The LEGO bulldozer extracted from the Kitchen scene using the cutout tool of the Unity extension for Gaussian splatting. This tool isolates the bulldozer by excluding all other parts of the scene}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Animating a segment}{18}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A rendering error when loading the separate wheel-GameObject.}}{19}{figure.7}\protected@file@percent }
+\newlabel{fig:firstwheel}{{7}{19}{A rendering error when loading the separate wheel-GameObject}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The center of the wheel’s GameObject is positioned far from the geometric center of the wheel, with misaligned axes of rotation. This misalignment complicates direct rotation around the wheel’s local axis.}}{20}{figure.8}\protected@file@percent }
+\newlabel{fig:wheel_center}{{8}{20}{The center of the wheel’s GameObject is positioned far from the geometric center of the wheel, with misaligned axes of rotation. This misalignment complicates direct rotation around the wheel’s local axis}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces A cube GameObject is assigned as the parent of the wheel GameObject. The wheel is repositioned and rotated so that its center and axes align with those of the cube. This configuration enables rotation around the intended axis.}}{21}{figure.9}\protected@file@percent }
+\newlabel{fig:wheel_cube}{{9}{21}{A cube GameObject is assigned as the parent of the wheel GameObject. The wheel is repositioned and rotated so that its center and axes align with those of the cube. This configuration enables rotation around the intended axis}{figure.9}{}}
+\citation{Plyfile}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Visualization of the rendering issue caused by rotation around its axis. The same wheel is shown at 0°, 90°, 180°, and 270° of rotation. Depending on the rotation angle, the wheel is rendered either behind or in front of the bulldozer due to improper depth sorting based on the rotated center of the Gaussian Splat.}}{22}{figure.10}\protected@file@percent }
+\newlabel{fig:wheel_rotations}{{10}{22}{Visualization of the rendering issue caused by rotation around its axis. The same wheel is shown at 0°, 90°, 180°, and 270° of rotation. Depending on the rotation angle, the wheel is rendered either behind or in front of the bulldozer due to improper depth sorting based on the rotated center of the Gaussian Splat}{figure.10}{}}
+\newlabel{code:re_center}{{5}{23}{Three potential functions for recentering the Gaussian Splat. The desired function is called on each of the three axes}{lstlisting.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}Three potential functions for recentering the Gaussian Splat. The desired function is called on each of the three axes.}{23}{lstlisting.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Automatically recentering based on the average of the position values results in a slight offset. Recentering using the midpoint of the bounding box yields a similar misalignment.}}{23}{figure.11}\protected@file@percent }
+\newlabel{fig:left_av}{{11}{23}{Automatically recentering based on the average of the position values results in a slight offset. Recentering using the midpoint of the bounding box yields a similar misalignment}{figure.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Moving the camera}{24}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Demonstration of incorrect rendering order under camera transformation. Each column corresponds to a fixed camera rotation, while each row corresponds to a fixed camera position. The observed rendering order remains the same across rows within each column, indicating that the order is determined solely by camera rotation. Correct behavior would require the rendering order to change across rows (i.e., with camera position).}}{24}{figure.12}\protected@file@percent }
+\newlabel{fig:camera_change}{{12}{24}{Demonstration of incorrect rendering order under camera transformation. Each column corresponds to a fixed camera rotation, while each row corresponds to a fixed camera position. The observed rendering order remains the same across rows within each column, indicating that the order is determined solely by camera rotation. Correct behavior would require the rendering order to change across rows (i.e., with camera position)}{figure.12}{}}
+\newlabel{code:sort_original}{{6}{25}{The sort key used to determine the rendering order}{lstlisting.6}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}The sort key used to determine the rendering order}{25}{lstlisting.6}\protected@file@percent }
+\newlabel{code:sort_pos}{{7}{26}{The newly implemented sort key to determine the rendering order}{lstlisting.7}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}The newly implemented sort key to determine the rendering order}{26}{lstlisting.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces When the wheel should be rendered behind the bulldozer, but the camera is positioned near the threshold where the rendering order switches, the wheel is incorrectly rendered in front of the bulldozer. The left and right images have identical camera rotation, with only a minimal difference in camera position.}}{26}{figure.13}\protected@file@percent }
+\newlabel{fig:wheel_almost}{{13}{26}{When the wheel should be rendered behind the bulldozer, but the camera is positioned near the threshold where the rendering order switches, the wheel is incorrectly rendered in front of the bulldozer. The left and right images have identical camera rotation, with only a minimal difference in camera position}{figure.13}{}}
+\newlabel{code:sort_ratio}{{8}{27}{The final implemention of the sort key}{lstlisting.8}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}The final implemention of the sort key}{27}{lstlisting.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The camera is positioned at the critical point where the wheel should transition from being rendered behind the bulldozer to being rendered in front of it. The left and right images have identical camera rotations, with only a minimal change in camera position. As shown, the wheel now renders correctly across this boundary case.}}{28}{figure.14}\protected@file@percent }
+\newlabel{fig:wheel_done}{{14}{28}{The camera is positioned at the critical point where the wheel should transition from being rendered behind the bulldozer to being rendered in front of it. The left and right images have identical camera rotations, with only a minimal change in camera position. As shown, the wheel now renders correctly across this boundary case}{figure.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Global per-splat sorting}{28}{subsection.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Regardless of the camera position, a visual artifact always occurs. When the arm is rendered behind the bulldozer (left), significant portions of its joints are lost. Conversely, when the bulldozer is rendered behind the arm, its front section is improperly occluded (right). The two images were captured with identical camera rotations and only a small difference in camera position.}}{29}{figure.15}\protected@file@percent }
+\newlabel{fig:arm}{{15}{29}{Regardless of the camera position, a visual artifact always occurs. When the arm is rendered behind the bulldozer (left), significant portions of its joints are lost. Conversely, when the bulldozer is rendered behind the arm, its front section is improperly occluded (right). The two images were captured with identical camera rotations and only a small difference in camera position}{figure.15}{}}
+\newlabel{code:register}{{9}{32}{New RegisterSplat and UnregisterSplat}{lstlisting.9}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}New RegisterSplat and UnregisterSplat}{32}{lstlisting.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces The final rendering result after implementing global per-splat sorting. Notably, both wheels at the back, the arm, and the handle are all represented as separate GameObjects, yet are rendered correctly.}}{34}{figure.16}\protected@file@percent }
+\newlabel{fig:finalrender}{{16}{34}{The final rendering result after implementing global per-splat sorting. Notably, both wheels at the back, the arm, and the handle are all represented as separate GameObjects, yet are rendered correctly}{figure.16}{}}
+\newlabel{code:unregister}{{10}{35}{A small adjustment to UnregisterSplat}{lstlisting.10}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}A small adjustment to UnregisterSplat}{35}{lstlisting.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Conclusion}{36}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Part 2: Hierarchical Segmentation}{36}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Introduction}{36}{subsection.4.1}\protected@file@percent }
+\citation{automesh}
+\citation{compression}
+\citation{physics}
+\citation{texture}
+\citation{vocab1}
+\citation{vocab2}
+\citation{vocab3}
+\citation{dyn1}
+\citation{dyn2}
+\citation{automatic}
+\citation{saga}
+\citation{grouping}
+\citation{other1}
+\citation{other2}
+\citation{other3}
+\citation{other4}
+\citation{SAGD}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Relevant work}{38}{subsection.4.2}\protected@file@percent }
+\citation{SAM}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}SAM}{40}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Illustration of SAM segmentation with point prompts. From left to right: the original LEGO bulldozer; SAM segmentation with a single positive point on the rear wheel, selecting the entire bulldozer; and SAM segmentation after adding a negative point on another part, isolating only the wheel.}}{40}{figure.17}\protected@file@percent }
+\newlabel{fig:samdemo}{{17}{40}{Illustration of SAM segmentation with point prompts. From left to right: the original LEGO bulldozer; SAM segmentation with a single positive point on the rear wheel, selecting the entire bulldozer; and SAM segmentation after adding a negative point on another part, isolating only the wheel}{figure.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}SAGD}{41}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces The truck scene, a pre-trained Gaussian Splat model used for segmentation testing. Rendered in Unity.}}{42}{figure.18}\protected@file@percent }
+\newlabel{fig:truck_scene}{{18}{42}{The truck scene, a pre-trained Gaussian Splat model used for segmentation testing. Rendered in Unity}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Testing the SAGD implementation. Top: input image with two positive points provided to SAM and the corresponding segmentation mask. Bottom: three different camera viewpoints, each displaying the projected prompt-points and the mask generated by SAGD for that camera position, all correctly reflecting the intended segmentation.}}{43}{figure.19}\protected@file@percent }
+\newlabel{fig:goodsagd}{{19}{43}{Testing the SAGD implementation. Top: input image with two positive points provided to SAM and the corresponding segmentation mask. Bottom: three different camera viewpoints, each displaying the projected prompt-points and the mask generated by SAGD for that camera position, all correctly reflecting the intended segmentation}{figure.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Testing the SAGD implementation. Top Left: input image with two positive points provided to SAM and the corresponding segmentation mask. The other three: three different camera viewpoints, each displaying the projected prompt-points and the mask generated by SAGD for that camera position. Notable issues with the segmentation are visible.}}{44}{figure.20}\protected@file@percent }
+\newlabel{fig:issues}{{20}{44}{Testing the SAGD implementation. Top Left: input image with two positive points provided to SAM and the corresponding segmentation mask. The other three: three different camera viewpoints, each displaying the projected prompt-points and the mask generated by SAGD for that camera position. Notable issues with the segmentation are visible}{figure.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Result of applying SAGD on the example from the paper, without using Gaussian Decomposition. The segmentation is relatively clean, except for a missing portion at the front of the object.}}{46}{figure.21}\protected@file@percent }
+\newlabel{fig:sagdwithout}{{21}{46}{Result of applying SAGD on the example from the paper, without using Gaussian Decomposition. The segmentation is relatively clean, except for a missing portion at the front of the object}{figure.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Result of applying SAGD on the example from the paper, with Gaussian Decomposition applied. The splats extending beyond the segment boundary at the bottom have been effectively removed. However, some additional minor errors have been introduced, such as a hole appearing in the black square behind the rear wheel.}}{46}{figure.22}\protected@file@percent }
+\newlabel{fig:sagdwith}{{22}{46}{Result of applying SAGD on the example from the paper, with Gaussian Decomposition applied. The splats extending beyond the segment boundary at the bottom have been effectively removed. However, some additional minor errors have been introduced, such as a hole appearing in the black square behind the rear wheel}{figure.22}{}}
+\citation{SAM2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}SAM2}{47}{subsection.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Result of SAM2 on a sample video provided by the SAM2 repository. Top-left: input frame with a single positive prompt point and the generated segmentation mask. The remaining images show the masks generated by SAM2 on other frames of the video, illustrating the model's ability to propagate the segmentation across frames. Note that in the top-right frame, the pants are almost entirely obstructed, yet the model still returns the correct mask—highlighting a clear improvement over the occlusion issues encountered in the original SAGD algorithm.}}{48}{figure.23}\protected@file@percent }
+\newlabel{fig:children}{{23}{48}{Result of SAM2 on a sample video provided by the SAM2 repository. Top-left: input frame with a single positive prompt point and the generated segmentation mask. The remaining images show the masks generated by SAM2 on other frames of the video, illustrating the model's ability to propagate the segmentation across frames. Note that in the top-right frame, the pants are almost entirely obstructed, yet the model still returns the correct mask—highlighting a clear improvement over the occlusion issues encountered in the original SAGD algorithm}{figure.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Progress of prompting the first frame in SAM2 to segment the wooden platform. Top-left: initial mask generated with two positive points. Subsequent images illustrate the addition of negative points, progressively refining the mask. The final frame (bottom-right) shows a mask that, while not perfect, achieves a satisfactory result across the video.}}{50}{figure.24}\protected@file@percent }
+\newlabel{fig:sam2struggle}{{24}{50}{Progress of prompting the first frame in SAM2 to segment the wooden platform. Top-left: initial mask generated with two positive points. Subsequent images illustrate the addition of negative points, progressively refining the mask. The final frame (bottom-right) shows a mask that, while not perfect, achieves a satisfactory result across the video}{figure.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Segmentation of the entire truck using SAM2. Left: initial mask generated with only two positive points. Middle: a frame where the front of the truck is excluded from the mask due to its absence in some frames. Right: adding a single additional positive point to the problematic frame effectively resolves the issue.}}{51}{figure.25}\protected@file@percent }
+\newlabel{fig:sam2adapt}{{25}{51}{Segmentation of the entire truck using SAM2. Left: initial mask generated with only two positive points. Middle: a frame where the front of the truck is excluded from the mask due to its absence in some frames. Right: adding a single additional positive point to the problematic frame effectively resolves the issue}{figure.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Replication of the experiment from Figure~\ref {fig:goodsagd}, using SAM2 instead of projection.}}{52}{figure.26}\protected@file@percent }
+\newlabel{fig:sam2whole}{{26}{52}{Replication of the experiment from Figure~\ref {fig:goodsagd}, using SAM2 instead of projection}{figure.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Replication of the experiment from Figure~\ref {fig:issues}, using SAM2 instead of projection.}}{52}{figure.27}\protected@file@percent }
+\newlabel{fig:sam2wood}{{27}{52}{Replication of the experiment from Figure~\ref {fig:issues}, using SAM2 instead of projection}{figure.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Resulting Gaussian Splat of the wooden platform, generated using SAM2-based masks as input for the SAGD pipeline. The extracted segment accurately captures the platform’s structure while excluding surrounding elements, illustrating the reliability of SAM2-generated masks for segmentation tasks. }}{53}{figure.28}\protected@file@percent }
+\newlabel{fig:sagdwoodply}{{28}{53}{Resulting Gaussian Splat of the wooden platform, generated using SAM2-based masks as input for the SAGD pipeline. The extracted segment accurately captures the platform’s structure while excluding surrounding elements, illustrating the reliability of SAM2-generated masks for segmentation tasks}{figure.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Hierarchy}{54}{subsection.4.6}\protected@file@percent }
+\newlabel{code:recursivedata}{{11}{54}{Definition of the recursive data structure used to represent hierarchical segmentation prompts and their relationships in SAM2}{lstlisting.11}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}Definition of the recursive data structure used to represent hierarchical segmentation prompts and their relationships in SAM2}{54}{lstlisting.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces Hierarchical segmentation of the truck and wooden platform. Left: both segments are shown in their original positions, appearing as a single cohesive object. Right: the wooden platform has been translated slightly to visually demonstrate its separation from the truck and to highlight the precision of the segmentation. Notable artifacts include small areas where the wood remains connected to the truck—likely due to minor segmentation inaccuracies in SAM2—and holes in the truck where the platform was extracted, resulting from missing splat data in occluded regions and the platform’s thin structure. }}{56}{figure.29}\protected@file@percent }
+\newlabel{fig:woodpair}{{29}{56}{Hierarchical segmentation of the truck and wooden platform. Left: both segments are shown in their original positions, appearing as a single cohesive object. Right: the wooden platform has been translated slightly to visually demonstrate its separation from the truck and to highlight the precision of the segmentation. Notable artifacts include small areas where the wood remains connected to the truck—likely due to minor segmentation inaccuracies in SAM2—and holes in the truck where the platform was extracted, resulting from missing splat data in occluded regions and the platform’s thin structure}{figure.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Multimask Automation}{57}{subsection.4.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces Demonstration of SAM’s multimask segmentation functionality on the LEGO bulldozer model. A single wheel was selected as the initial segment, resulting in three hierarchical masks: the smallest corresponds to the wheel itself, followed by the caterpillar tracks, and finally the entire bulldozer as the largest segment. }}{58}{figure.30}\protected@file@percent }
+\newlabel{fig:multidemo}{{30}{58}{Demonstration of SAM’s multimask segmentation functionality on the LEGO bulldozer model. A single wheel was selected as the initial segment, resulting in three hierarchical masks: the smallest corresponds to the wheel itself, followed by the caterpillar tracks, and finally the entire bulldozer as the largest segment}{figure.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces Comparison of multimask output from SAM2 (left column) and original SAM (right column) for the same input prompt. Each row corresponds to one of the three hierarchical masks generated by the respective model. Despite identical input, SAM2 consistently fails to accurately segment the wooden platform as a distinct region, whereas SAM demonstrates clearer separation. }}{60}{figure.31}\protected@file@percent }
+\newlabel{fig:sam1better}{{31}{60}{Comparison of multimask output from SAM2 (left column) and original SAM (right column) for the same input prompt. Each row corresponds to one of the three hierarchical masks generated by the respective model. Despite identical input, SAM2 consistently fails to accurately segment the wooden platform as a distinct region, whereas SAM demonstrates clearer separation}{figure.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces Result of the semi-automated multimask segmentation pipeline applied to the wooden platform and truck. The outcome closely resembles the segmentation achieved with full user control. The primary difference is the erroneous inclusion of a portion of the truck's blue frame in the wooden segment. Nonetheless, considering the substantial reduction in user input required, the overall result remains highly effective. }}{61}{figure.32}\protected@file@percent }
+\newlabel{fig:multipair}{{32}{61}{Result of the semi-automated multimask segmentation pipeline applied to the wooden platform and truck. The outcome closely resembles the segmentation achieved with full user control. The primary difference is the erroneous inclusion of a portion of the truck's blue frame in the wooden segment. Nonetheless, considering the substantial reduction in user input required, the overall result remains highly effective}{figure.32}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Full Automation}{61}{subsection.4.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces Segmentation of the LEGO bulldozer using SAM’s automatic mask generation functionality. The image illustrates the resulting distinct masks, each rendered in a different color, effectively partitioning the scene into separate segments. }}{62}{figure.33}\protected@file@percent }
+\newlabel{fig:everything}{{33}{62}{Segmentation of the LEGO bulldozer using SAM’s automatic mask generation functionality. The image illustrates the resulting distinct masks, each rendered in a different color, effectively partitioning the scene into separate segments}{figure.33}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {34}{\ignorespaces Exploded view of the truck’s segmentation, highlighting separated components for evaluation.}}{65}{figure.34}\protected@file@percent }
+\newlabel{fig:truckparts}{{34}{65}{Exploded view of the truck’s segmentation, highlighting separated components for evaluation}{figure.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {35}{\ignorespaces A selection of non-truck segments extracted from the scene, illustrating examples of successful segmentation.}}{66}{figure.35}\protected@file@percent }
+\newlabel{fig:best}{{35}{66}{A selection of non-truck segments extracted from the scene, illustrating examples of successful segmentation}{figure.35}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9}Conclusion}{67}{subsection.4.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Future Work}{67}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{68}{section.6}\protected@file@percent }
+\bibstyle{IEEEtran}
+\bibdata{references}
+\bibcite{OriginalSplatting}{1}
+\bibcite{Aras}{2}
+\bibcite{Mesh}{3}
+\@writefile{toc}{\contentsline {section}{References}{69}{section.6}\protected@file@percent }
+\bibcite{Nerf}{4}
+\bibcite{1DGaussian}{5}
+\bibcite{2DGaussian}{6}
+\bibcite{3DGaussian}{7}
+\bibcite{ArasRecc1}{8}
+\bibcite{ArasRecc2}{9}
+\bibcite{Sorting}{10}
+\bibcite{Plyfile}{11}
+\bibcite{automesh}{12}
+\bibcite{compression}{13}
+\bibcite{physics}{14}
+\bibcite{texture}{15}
+\bibcite{vocab1}{16}
+\bibcite{vocab2}{17}
+\bibcite{vocab3}{18}
+\bibcite{dyn1}{19}
+\bibcite{dyn2}{20}
+\bibcite{automatic}{21}
+\bibcite{saga}{22}
+\bibcite{grouping}{23}
+\bibcite{other1}{24}
+\bibcite{other2}{25}
+\bibcite{other3}{26}
+\bibcite{other4}{27}
+\bibcite{SAGD}{28}
+\bibcite{SAM}{29}
+\bibcite{SAM2}{30}
+\gdef \@abspage@last{88}
