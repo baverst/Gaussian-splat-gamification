@@ -19,7 +19,11 @@ sam.to(device=device)
 
 mask_generator = SamAutomaticMaskGenerator(sam)
 
+## INSERT VIDEO DIRECTORY HERE #####################################################################
+
+# `video_dir` a directory of JPEG frames with filenames like `<frame_index>.jpg`
 video_dir = "../../../Downloads/tandt_db/tandt/truck/images"
+####################################################################################################
 
 # scan all the JPEG frame names in this directory
 frame_names = [
@@ -56,9 +60,7 @@ import cv2
 
 
 
-image = cv2.imread("../../../Downloads/tandt_db/tandt/truck/images/000001.jpg")
 allsubmasks = []
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 i = 0
 for mask in masks:
     i += 1
@@ -145,17 +147,6 @@ elif device.type == "mps":
         "give numerically different outputs and sometimes degraded performance on MPS. "
         "See e.g. https://github.com/pytorch/pytorch/issues/84936 for a discussion."
     )
-
-
-# `video_dir` a directory of JPEG frames with filenames like `<frame_index>.jpg`
-video_dir = "../../../Downloads/tandt_db/tandt/truck/images"
-
-# scan all the JPEG frame names in this directory
-frame_names = [
-    p for p in os.listdir(video_dir)
-    if os.path.splitext(p)[-1] in [".jpg", ".jpeg", ".JPG", ".JPEG"]
-]
-frame_names.sort(key=lambda p: int(os.path.splitext(p)[0]))
 
 
 inference_state = predictor.init_state(video_path=video_dir)

@@ -24,12 +24,25 @@ predictor = build_sam2_video_predictor(model_cfg, sam2_checkpoint, device=device
 SamOnePredictor = SamPredictor(sam)
 
 import cv2
+## INSERT VIDEO DIRECTORY HERE #####################################################################
 
-input_point = np.array([[413.015625, 400.96875]]
-
-)
+# `video_dir` a directory of JPEG frames with filenames like `<frame_index>.jpg`
+video_dir = "../../../Downloads/tandt_db/tandt/truck/images"
+## INSERT PROMPT HERE ##############################################################################
+input_point = np.array([[375, 250]])
 input_label = np.array([1])
-image = cv2.imread("../../../Downloads/tandt_db/tandt/truck/images/000001.jpg")
+input_frame = 0
+####################################################################################################
+
+# scan all the JPEG frame names in this directory
+frame_names = [
+    p for p in os.listdir(video_dir)
+    if os.path.splitext(p)[-1] in [".jpg", ".jpeg", ".JPG", ".JPEG"]
+]
+frame_names.sort(key=lambda p: int(os.path.splitext(p)[0]))
+
+
+image = cv2.imread(os.path.join(video_dir, frame_names[input_frame]))
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 SamOnePredictor.set_image(image)
 masks, scores, logits = SamOnePredictor.predict(
@@ -37,7 +50,7 @@ masks, scores, logits = SamOnePredictor.predict(
     point_labels=input_label,
     multimask_output=True,
 )
-masks = masks[scores > 0.9]
+masks = masks[scores > 0.95]
 
 
 # select the device for computation
@@ -62,17 +75,6 @@ elif device.type == "mps":
         "give numerically different outputs and sometimes degraded performance on MPS. "
         "See e.g. https://github.com/pytorch/pytorch/issues/84936 for a discussion."
     )
-
-
-# `video_dir` a directory of JPEG frames with filenames like `<frame_index>.jpg`
-video_dir = "../../../Downloads/tandt_db/tandt/truck/images"
-
-# scan all the JPEG frame names in this directory
-frame_names = [
-    p for p in os.listdir(video_dir)
-    if os.path.splitext(p)[-1] in [".jpg", ".jpeg", ".JPG", ".JPEG"]
-]
-frame_names.sort(key=lambda p: int(os.path.splitext(p)[0]))
 
 
 inference_state = predictor.init_state(video_path=video_dir)
