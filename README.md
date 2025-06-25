@@ -33,9 +33,9 @@ environment-powershell.yml # Windows-based Python environment
 
 This project uses multiple Conda environments across both WSL and Windows PowerShell.
 
-### 1. Clone the repository (with submodules)
+### 1. Clone the repository on Powershell (with submodules)
 
-```bash
+```powershell
 git clone --recurse-submodules https://github.com/baverst/Gaussian-splat-gamification.git
 cd Gaussian-splat-gamification
 ```
@@ -54,6 +54,11 @@ conda activate powershell-env
 ```bash
 conda env create -f environment-wsl.yml
 conda activate wsl-env
+cd sam2/checkpoints/
+sudo apt install dos2unix
+dos2unix download_ckpts.sh
+./download_ckpts.sh
+cd ../..
 ```
 
 Additionally, to use SAM, you need a model checkpoint (e.g., [`sam_vit_h.pth`](https://github.com/facebookresearch/segment-anything/tree/dca509fe793f601edb92606367a655c15ac00fdf#model-checkpoints), ~2.38GB). Place the model checkpoint in /SAGS/gaussiansplatting/dependencies/sam_ckpt/. 
