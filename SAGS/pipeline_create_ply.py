@@ -47,8 +47,15 @@ parser.add_argument("--quiet", action="store_true")
 parser.add_argument("--threshold", default=0.7, type=float, help='threshold of label voting')
 parser.add_argument("--gd_interval", default=20, type=int, help='interval of performing gaussian decomposition')
 
+## INSERT DIRECTORIES HERE #####################################################################
+
 ## choose your trained 3D-GS model path
 model_path = r"C:\Users\verst\Downloads\tandt_db\tandt\truck"
+
+folder_path = r"C:\Users\verst\Downloads\tandt_db\tandt\truck\images"
+####################################################################################################
+
+
 args = get_combined_args(parser, model_path)
 
 # Initialize system state (RNG)
@@ -72,7 +79,6 @@ xyz = gaussians.get_xyz
 from PIL import Image
 import numpy as np
 
-folder_path = r"C:\Users\verst\Downloads\tandt_db\tandt\truck\images"
 image_files = sorted(os.listdir(folder_path), key=lambda x: int(x.split('.')[0]))
 
 first_image = Image.open(os.path.join(folder_path, image_files[0]))
@@ -342,6 +348,6 @@ def load_all_roots(path):
     root_files = [f for f in os.listdir(path) if f.startswith("root_") and not "_sub" in f and f.endswith(".pkl")]
     root_files.sort(key=lambda x : int(re.match(r"root_(\d+)\.pkl", x).group(1)))
     return [load_segment_recursive(path, os.path.splitext(f)[0]) for f in root_files]
-loaded_video_masks = load_all_roots("../sam2/notebooks/video_mask_tree/")
+loaded_video_masks = load_all_roots("../sam2/video_mask_tree/")
 
 process_loaded_prompt(loaded_video_masks, save_path)

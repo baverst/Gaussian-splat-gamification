@@ -47,8 +47,15 @@ parser.add_argument("--quiet", action="store_true")
 parser.add_argument("--threshold", default=0.7, type=float, help='threshold of label voting')
 parser.add_argument("--gd_interval", default=20, type=int, help='interval of performing gaussian decomposition')
 
+## INSERT DIRECTORIES HERE #####################################################################
+
 ## choose your trained 3D-GS model path
 model_path = r"C:\Users\verst\Downloads\tandt_db\tandt\truck"
+
+folder_path = r"C:\Users\verst\Downloads\tandt_db\tandt\truck\images"
+####################################################################################################
+
+
 args = get_combined_args(parser, model_path)
 
 # Initialize system state (RNG)
@@ -72,7 +79,6 @@ xyz = gaussians.get_xyz
 from PIL import Image
 import numpy as np
 
-folder_path = r"C:\Users\verst\Downloads\tandt_db\tandt\truck\images"
 image_files = sorted(os.listdir(folder_path), key=lambda x: int(x.split('.')[0]))
 
 first_image = Image.open(os.path.join(folder_path, image_files[0]))
