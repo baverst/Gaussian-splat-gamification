@@ -47,7 +47,31 @@ cd Gaussian-splat-gamification
 ```powershell
 conda env create -f environment-powershell.yml
 conda activate powershell-env
+
+cd .\SAGS\gaussiansplatting\submodules\
+
+git clone --recursive https://github.com/ashawkey/diff-gaussian-rasterization
+pip install ./diff-gaussian-rasterization
+
+pip install ./simple-knn
+
+cd ../dependencies/sam_ckpt/segment-anything
+
+# Installing Grounding-DINO
+git clone https://github.com/IDEA-Research/GroundingDINO.git
+
+# Major issues with path length being to large
+$orig = Resolve-Path "."
+Copy-Item GroundingDINO "$env:USERPROFILE\GroundingDINO_temp" -Recurse
+cd "$env:USERPROFILE\GroundingDINO_temp"
+pip install -e "$orig\GroundingDino"
+cd "$orig\GroundingDino"
+Remove-Item "$env:USERPROFILE\GroundingDINO_temp" -Recurse -Force
+mkdir weights;
 ```
+Additionally, install [the weights ](https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth) (~661 MB) and copy the file to \SAGS\gaussiansplatting\dependencies\sam_ckpt\segment-anything\GroundingDINO\weights\
+
+Finally, to use SAM, you need a model checkpoint (e.g., [`sam_vit_h.pth`](https://github.com/facebookresearch/segment-anything/tree/dca509fe793f601edb92606367a655c15ac00fdf#model-checkpoints), ~2.38GB). Place the model checkpoint in /SAGS/gaussiansplatting/dependencies/sam_ckpt/. 
 
 #### On WSL (Linux):
 
@@ -60,9 +84,6 @@ dos2unix download_ckpts.sh
 ./download_ckpts.sh
 cd ../..
 ```
-
-Additionally, to use SAM, you need a model checkpoint (e.g., [`sam_vit_h.pth`](https://github.com/facebookresearch/segment-anything/tree/dca509fe793f601edb92606367a655c15ac00fdf#model-checkpoints), ~2.38GB). Place the model checkpoint in /SAGS/gaussiansplatting/dependencies/sam_ckpt/. 
-
 ---
 
 ## Usage
