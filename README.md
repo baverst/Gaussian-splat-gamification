@@ -85,7 +85,7 @@ dos2unix download_ckpts.sh
 cd ../..
 ```
 ---
-
+The datasets can be found found at [the github of the original Gaussian Splatting paper](https://github.com/graphdeco-inria/gaussian-splatting). The "T&T+DB COLMAP (650MB)" and the "Pre-trained Models (14 GB)" were both used in this research.
 ## Usage
 
 
